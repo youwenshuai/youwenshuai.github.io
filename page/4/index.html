@@ -15,13 +15,11 @@
 <link rel="stylesheet" href="/css/style.css">
 
     <link rel="shortcut icon" href="/images/logo.svg">
-    
-<link rel="stylesheet" href="/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.3"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
@@ -29,6 +27,8 @@
 
 <body>
 <div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
     
 
     
@@ -66,14 +66,6 @@
                     
                         <li class="menu-item">
                             <a class=""
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
                                href="/tags"
                             >
                                 TAGS
@@ -106,11 +98,6 @@
                 <li class="drawer-menu-item flex-center">
                     <a class="active"
                        href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">ARCHIVES</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
@@ -184,7 +171,7 @@
                         1、备份数据：
 mysqldump -u root -p wso2esbdb &gt; &#x2F;opt&#x2F;wso2eabdb.sql
 2、将数据文件传输至备份数据库
-scp  wso2eabdb.sql &#x72;&#x6f;&#x6f...
+scp  wso2eabdb.sql &#114;&#111;&#x6f...
                     
                 </div>
 
@@ -215,7 +202,7 @@ scp  wso2eabdb.sql &#x72;&#x6f;&#x6f...
                         环境搭好
 182  183
 182用户授权
-mysql&gt;grant all on . to &#x75;&#x73;&#x65;&#x72;&#x40;&#49;&#57;&#x32;&#x2e;&#49;&#x36;&#56;&#46;&#4...
+mysql&gt;grant all on . to &#x75;&#115;&#x65;&#114;&#64;&#x31;&#57;&#50;&#46;&#49;&#54;&#x38;&#x2e;&#x3...
                     
                 </div>
 
@@ -421,15 +408,14 @@ tar xf redis-4.0....
                 
 
                 <h3 class="home-article-title">
-                    <a href="/2024/03/06/redis%E8%AF%A6%E8%A7%A3/">
-                        redis详解
+                    <a href="/2024/03/06/rsync/">
+                        文件同步工具rsync实战
                     </a>
                 </h3>
 
                 <div class="home-article-content markdown-body">
                     
-                        1、什么是Redis？
-Redis本质上是一个Key-Value类型的内存数据库，很像memcached，整个数据库统统加载在内存当中进行操作，定期通过异步操作把数据库数据flush到硬盘上进行保存。因为是纯内存操作，Redis的性能非常出色，每秒可...
+                        rsync服务端12345678910111213141516171819202122#cat /etc/rsyncd.confmotd file = /etc/rsyncd.motdtransfer logging = yeslog file = ...
                     
                 </div>
 
@@ -440,7 +426,7 @@ Redis本质上是一个Key-Value类型的内存数据库，很像memcached，整
         
     </div>
 
-    <a href="/2024/03/06/redis%E8%AF%A6%E8%A7%A3/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+    <a href="/2024/03/06/rsync/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
@@ -477,7 +463,7 @@ Redis本质上是一个Key-Value类型的内存数据库，很像memcached，整
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>&nbsp;-&nbsp;
+              <span>2021</span>&nbsp;-&nbsp;
             
             2024&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">浑水摸鱼喵</a>
         </div>
@@ -517,10 +503,6 @@ Redis本质上是一个Key-Value类型的内存数据库，很像memcached，整
         
 
         
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="fas fa-arrow-up"></i>
-            </li>
-        
 
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
@@ -531,6 +513,11 @@ Redis本质上是一个Key-Value类型的内存数据库，很像memcached，整
         <li class="tools-item tool-toggle-show flex-center">
             <i class="fas fa-cog fa-spin"></i>
         </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
         
     </ul>
 </div>
@@ -551,22 +538,16 @@ Redis本质上是一个Key-Value类型的内存数据库，很像memcached，整
 
 
 
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/main.js"></script>
-
-<script src="/js/header-shrink.js"></script>
-
-<script src="/js/back2top.js"></script>
-
-<script src="/js/dark-light-toggle.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
 
 
 
 
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
 
 
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
 
 
 <div class="post-scripts">

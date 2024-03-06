@@ -17,13 +17,11 @@
 <link rel="stylesheet" href="/css/style.css">
 
     <link rel="shortcut icon" href="/images/logo.svg">
-    
-<link rel="stylesheet" href="/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.3"};
     KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
   </script>
 <meta name="generator" content="Hexo 5.4.2"></head>
@@ -31,6 +29,8 @@
 
 <body>
 <div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
     
 
     
@@ -68,14 +68,6 @@
                     
                         <li class="menu-item">
                             <a class=""
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
                                href="/tags"
                             >
                                 TAGS
@@ -108,11 +100,6 @@
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">ARCHIVES</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
@@ -304,7 +291,7 @@
 <p>State or Province Name (full name) []:beijing            </p>
 <p>Locality Name (eg, city) [Default City]:beijing            </p>
 <p>Common Name (eg, your name or your server’s hostname) []:docker.registry.com            	  	 </p>
-<p>Email Address []:<a class="link"   href="mailto:&#51;&#55;&#x36;&#x32;&#56;&#x34;&#51;&#57;&#x33;&#x40;&#x71;&#113;&#x2e;&#99;&#111;&#109;" >&#51;&#55;&#x36;&#x32;&#56;&#x34;&#51;&#57;&#x33;&#x40;&#x71;&#113;&#x2e;&#99;&#111;&#109;<i class="fas fa-external-link-alt"></i></a>            </p>
+<p>Email Address []:<a class="link"   href="mailto:&#x33;&#x37;&#54;&#x32;&#x38;&#52;&#x33;&#x39;&#51;&#64;&#113;&#113;&#46;&#99;&#111;&#x6d;" >&#x33;&#x37;&#54;&#x32;&#x38;&#52;&#x33;&#x39;&#51;&#64;&#113;&#113;&#46;&#99;&#111;&#x6d;<i class="fas fa-external-link-alt"></i></a>            </p>
 <p>其他项填写默认即可           </p>
 <p>[root@docker certs]# ll           总用量 8          </p>
 <p> -rw-r–r– 1 root root 2122 1月  21 14:30 domain.crt          </p>
@@ -402,13 +389,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2024/03/06/k8s%E9%83%A8%E7%BD%B2tomcat/"
+                           href="/2024/03/06/k8s%E8%AF%81%E4%B9%A6%E7%BB%AD%E8%AE%A2/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">k8s部署tomcat</span>
+                                <span class="post-nav-title-item">k8s集群证书续订</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -418,10 +405,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2024/03/06/k8s%E9%97%AE%E9%A2%98/"
+                           href="/2024/03/06/k8s%E9%83%A8%E7%BD%B2tomcat/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">k8s常见问题</span>
+                                <span class="post-nav-title-item">k8s部署tomcat</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -449,7 +436,7 @@
         <div class="copyright-info info-item">
             &copy;
             
-              <span>2020</span>&nbsp;-&nbsp;
+              <span>2021</span>&nbsp;-&nbsp;
             
             2024&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">浑水摸鱼喵</a>
         </div>
@@ -469,6 +456,10 @@
             <div class="post-tools-container">
     <ul class="tools-list">
         <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
         
 
         <!-- go comment -->
@@ -502,10 +493,6 @@
         
 
         
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="fas fa-arrow-up"></i>
-            </li>
-        
 
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
@@ -517,11 +504,24 @@
             <i class="fas fa-cog fa-spin"></i>
         </li>
         
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
     </ul>
 </div>
 
     </div>
 
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#K8S%E9%9B%86%E7%BE%A4%E5%92%8Cdocker%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">K8S集群和docker安装步骤：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">1.1.</span> <span class="nav-text">关闭防火墙</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E9%97%ADswap"><span class="nav-number">1.2.</span> <span class="nav-text">关闭swap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A6%81%E7%94%A8SELinux"><span class="nav-number">1.3.</span> <span class="nav-text">禁用SELinux</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4%E3%80%81%E4%BF%AE%E6%94%B9%E7%9B%B8%E5%85%B3%E5%86%85%E6%A0%B8%E5%8F%82%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">4、修改相关内核参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%A7%84%E5%88%92"><span class="nav-number">1.5.</span> <span class="nav-text">服务器规划</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B9%8B%E9%97%B4%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%EF%BC%88%E5%8F%AF%E7%9C%81%E7%95%A5%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">服务器之间免密登录（可省略）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Kubernetes%E3%80%81etcd%E5%92%8Cflannel"><span class="nav-number">2.</span> <span class="nav-text">安装Kubernetes、etcd和flannel</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEkubernets%E5%92%8Cdocker%E7%9A%84yum%E6%BA%90%EF%BC%88%E5%9C%A8master%E5%92%8Cwork%E8%8A%82%E7%82%B9%E5%90%8C%E6%97%B6%E9%85%8D%E7%BD%AE%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">配置kubernets和docker的yum源（在master和work节点同时配置）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96kubernetes%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">初始化kubernetes的配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0flannel%E7%BD%91%E7%BB%9C%E9%99%84%E4%BB%B6%EF%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">添加flannel网络附件：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0calico%E7%BD%91%E7%BB%9C%E6%8F%92%E4%BB%B6%EF%BC%9A"><span class="nav-number">2.4.</span> <span class="nav-text">添加calico网络插件：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96work%E8%8A%82%E7%82%B9"><span class="nav-number">2.5.</span> <span class="nav-text">初始化work节点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%90%84%E4%B8%AA%E8%8A%82%E7%82%B9%E5%BE%97pod%E7%8A%B6%E6%80%81"><span class="nav-number">2.6.</span> <span class="nav-text">查看各个节点得pod状态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2coredns%E7%BB%84%E4%BB%B6"><span class="nav-number">2.7.</span> <span class="nav-text">部署coredns组件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#kubernetes%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2dashboard%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.8.</span> <span class="nav-text">kubernetes图形化界面dashboard的安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#kubernetes%E7%9A%84%E6%B5%8B%E8%AF%95%EF%BC%88kubectl%E5%91%BD%E4%BB%A4%E8%A6%81%E8%B0%83%E7%94%A8kube-apiserve%EF%BC%8C%E5%9B%A0%E6%AD%A4%E5%8F%AA%E8%83%BD%E5%9C%A8master%E4%B8%8A%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="nav-number">2.9.</span> <span class="nav-text">kubernetes的测试（kubectl命令要调用kube-apiserve，因此只能在master上执行）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#docker%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">docker私有仓库搭建步骤：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%89%E5%8F%96%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F"><span class="nav-number">3.1.</span> <span class="nav-text">拉取仓库镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E8%AE%A4%E8%AF%81certificate"><span class="nav-number">3.2.</span> <span class="nav-text">生成认证certificate</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F"><span class="nav-number">3.3.</span> <span class="nav-text">启动仓库镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%E6%B5%8B%E8%AF%95"><span class="nav-number">3.4.</span> <span class="nav-text">docker镜像仓库测试</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kubernetes%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.</span> <span class="nav-text">Kubernetes介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Master-Node%EF%BC%88%E4%B8%BB%E8%8A%82%E7%82%B9%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">Master Node（主节点）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Worker-Node%EF%BC%88%E4%BB%8E%E8%8A%82%E7%82%B9%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">Worker Node（从节点）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7kubectl"><span class="nav-number">4.3.</span> <span class="nav-text">客户端工具kubectl</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%99%84%E5%8A%A0%E9%A1%B9%E5%92%8C%E5%85%B6%E4%BB%96%E4%BE%9D%E8%B5%96"><span class="nav-number">4.4.</span> <span class="nav-text">附加项和其他依赖</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
     
 
     <div class="image-viewer-container">
@@ -535,25 +535,21 @@
 
 
 
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/main.js"></script>
-
-<script src="/js/header-shrink.js"></script>
-
-<script src="/js/back2top.js"></script>
-
-<script src="/js/dark-light-toggle.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
 
 
 
 
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
 
 
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
 
 
 <div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/toc.js"></script>
     
 </div>
 
