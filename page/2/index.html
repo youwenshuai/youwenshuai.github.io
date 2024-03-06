@@ -1,33 +1,569 @@
-extends _partials/layout.pug
-include _mixin/card.pug
-include _mixin/postmeta.pug
-include _mixin/segment.pug
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="浑水摸鱼喵">
+    
+    <title>
+        
+        道可道，非常道
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-block content
-    div(class="index wrap")
-        if page.current === 1
-            if page.sticky.length > 0
-                h2(class="divider")
-                    != __('index.sticky')
-                - var sticky = page.sticky.toArray()
-                div(class="segments sticky")
-                    each post in sticky
-                        +SMRender(post, false)
-            if page.catlist.length > 0
-                h2(class="divider")
-                    != __('index.category')
-                div(class="cards")
-                    each cat in page.catlist
-                        +CardRender(cat)
-        - var pagePosts = page?.posts?.length
-        if pagePosts > 0
-            - var posts = page.posts.toArray()
-            if page.current === 1
-                h2(class="divider")
-                    != __('index.posts')
-            div(class="segments posts")
-                each post in posts
-                    +SMRender(post, true)
-    include _partials/pagination.pug
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                道可道，非常道
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="home-content-container fade-in-down-animation">
+    <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2024/03/06/docker%E9%83%A8%E7%BD%B2jenkins/">
+                        docker离线部署jenkins
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        docker pull tomcat
+docker images
+docker run -p 8080:8080 --name mytomcat tomcat
+docker exec -it mytomcat bash
+docker cp jenki...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 06 2024 15:19:25 GMT+0800">2024-03-06</span></span>
+        
+        
+    </div>
+
+    <a href="/2024/03/06/docker%E9%83%A8%E7%BD%B2jenkins/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2024/03/06/gitlab%E9%83%A8%E7%BD%B2/">
+                        gitlab部署
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        配置阿里云的yum源12345678910111213141516yum install curl policycoreutils openssh-server openssh-clients postfix  -ysystemctl start p...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 06 2024 15:19:25 GMT+0800">2024-03-06</span></span>
+        
+        
+    </div>
+
+    <a href="/2024/03/06/gitlab%E9%83%A8%E7%BD%B2/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2024/03/06/gluster%E4%BF%AE%E5%A4%8Dbrick/">
+                        gluster修复brick方法
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859挂载fatab###CC01重启...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 06 2024 15:19:25 GMT+0800">2024-03-06</span></span>
+        
+        
+    </div>
+
+    <a href="/2024/03/06/gluster%E4%BF%AE%E5%A4%8Dbrick/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2024/03/06/harbor%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/">
+                        docker私有仓库harbor搭建
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        下载https://github.com/goharbor/harbor/releases
+安装1234567#yum -y install epel-release #yum -y install docker-compose#tar xf har...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 06 2024 15:19:25 GMT+0800">2024-03-06</span></span>
+        
+        
+    </div>
+
+    <a href="/2024/03/06/harbor%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2024/03/06/htpasswd%E5%88%9B%E5%BB%BA%E5%AF%86%E7%A0%81%E6%96%87%E4%BB%B6/">
+                        htpasswd创建密码文件
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        htpasswdhtpasswd指令用来创建和更新用于基本认证的用户认证密码文件。htpasswd指令必须对密码文件有读写权限，否则会返回错误码。
+   此命令的适用范围：RedHat、RHEL、Ubuntu、CentOS、Fedora。
+语法htp...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 06 2024 15:19:25 GMT+0800">2024-03-06</span></span>
+        
+        
+    </div>
+
+    <a href="/2024/03/06/htpasswd%E5%88%9B%E5%BB%BA%E5%AF%86%E7%A0%81%E6%96%87%E4%BB%B6/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2024/03/06/inode%E8%8A%82%E7%82%B9%E6%95%B0%E8%BF%87%E9%AB%98%E9%97%AE%E9%A2%98/">
+                        inode节点数过高解决
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        查看哪个盘占用最多1df -ih
+
+进入目录看那个目录最多1ll -R / |wc -l
+
+
+
+
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 06 2024 15:19:25 GMT+0800">2024-03-06</span></span>
+        
+        
+    </div>
+
+    <a href="/2024/03/06/inode%E8%8A%82%E7%82%B9%E6%95%B0%E8%BF%87%E9%AB%98%E9%97%AE%E9%A2%98/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2024/03/06/jdk/">
+                        jdk的安装（java环境的安装）
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        12345678910111213tar xf jdk-8u131-linux-x64.tar.gzmv jdk1.8.0_121/  /opt/jdk1.8rpm -qa | grep jdkrpm -e --nodeps  java-1.7.0-...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 06 2024 15:19:25 GMT+0800">2024-03-06</span></span>
+        
+        
+    </div>
+
+    <a href="/2024/03/06/jdk/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2024/03/06/jenkins%E9%83%A8%E7%BD%B2/">
+                        jenkins部署
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        java安装12345678910yum -y install javajava -versionopenjdk version &quot;11-ea&quot; 2018-09-25OpenJDK Runtime Environment (bui...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 06 2024 15:19:25 GMT+0800">2024-03-06</span></span>
+        
+        
+    </div>
+
+    <a href="/2024/03/06/jenkins%E9%83%A8%E7%BD%B2/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2024/03/06/jumpserver/">
+                        开源堡垒机jumpserver部署
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        123456789101112131415161718192021222324252627282930313233343536373839yum -y install git python-pip mysql-devel gcc automake a...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 06 2024 15:19:25 GMT+0800">2024-03-06</span></span>
+        
+        
+    </div>
+
+    <a href="/2024/03/06/jumpserver/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
+                    <a href="/2024/03/06/jvm%E7%9B%91%E6%8E%A7/">
+                        jvm监控项
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        
+获取tomcat的最大线程数。java -jar cmdline-jmxclient-0.10.3.jar - 192.168.1.100:12345  ‘Catalina:name&#x3D;”http-bio-8080”,type&#x3D;T...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Mar 06 2024 15:19:25 GMT+0800">2024-03-06</span></span>
+        
+        
+    </div>
+
+    <a href="/2024/03/06/jvm%E7%9B%91%E6%8E%A7/">Read more&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+    </ul>
+
+    <div class="home-paginator">
+        <div class="paginator">
+    
+        <a class="prev btn"
+           href="/"
+        >Prev</a>
+    
+
+    
+        <a class="next btn"
+           href="/page/3/"
+        >Next</a>
+    
+</div>
+
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2024&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">浑水摸鱼喵</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

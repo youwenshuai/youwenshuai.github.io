@@ -1,36 +1,376 @@
-extends _partials/layout.pug
-include _mixin/sidebar.pug
-include _mixin/comment.pug
-include _mixin/postmeta.pug
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="浑水摸鱼喵">
+    
+    <title>
+        
+            zabbix自定义键值 |
+        
+        道可道，非常道
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-block title
-    - var page_title = page.title
-    if page.categories && page.categories.length
-        - var cat_list = ''
-        - var comma = ''
-        each cat in page.categories.toArray()
-            - var cat_list = cat.name + comma + cat_list
-            - var comma = ' - '
-        if cat_list.length !== 0
-            - var page_title = page.title + ' - ' + cat_list
-    != `${page_title}`
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
 
-block header
-    h1(itemprop="name headline")
-        if page.link
-            - var postTitleIcon = '<i class="ic i-link-alt"></i>'
-            - var postText = page.title || page.link
-            != _url(page.link, postText + postTitleIcon, {class: 'link external', itemprop: 'url'})
-        else
-            != page.title
-    +PMRender(page, true)
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
-block content
-    div(class="article wrap")
-        +BCRender(page, true)
-        != partial('_partials/post/post.pug', {post: page})
-    != partial('_partials/post/nav.pug', {post: page})
-    +CommentRender
 
-block sidebar
-    +sidebarRender(true)
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                道可道，非常道
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">zabbix自定义键值</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">浑水摸鱼喵</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2024-03-06 15:19:25
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E7%9B%91%E6%8E%A7/">监控</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h4 id="1-redis-监控"><a href="#1-redis-监控" class="headerlink" title="1.redis 监控"></a><strong>1.redis 监控</strong></h4><p>实施：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">mkdir /opt/zabbix_agentd/scripts/</span><br><span class="line">touch  /opt/zabbix_agentd/scripts/data_dir.sh</span><br><span class="line">chmod +x /opt/zabbix_agentd/scripts/data_dir.sh</span><br><span class="line">vi /opt/zabbix_agentd/etc/zabbix_agentd.conf</span><br><span class="line">UserParameter=redis.data,/opt/zabbix_agentd/scripts/data_dir.sh</span><br><span class="line">vi /opt/zabbix_agentd/scripts/data_dir.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">data_size=`du -s /opt/redis/data`</span><br><span class="line"><span class="built_in">echo</span> $(<span class="built_in">echo</span> <span class="variable">$data_size</span> |awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span>)<span class="string">&quot;000&quot;</span></span><br><span class="line">pkill -9 zabbix</span><br><span class="line">/opt/zabbix_agentd/sbin/zabbix_agentd -c /opt/zabbix_agentd/etc/zabbix_agentd.conf</span><br><span class="line">1.get_redis_clients.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">client_num=`<span class="built_in">echo</span> <span class="string">&#x27;info &#x27;</span>|redis-cli -a cctv.com |grep <span class="string">&#x27;connected_clients&#x27;</span> |awk -F<span class="string">&#x27;:&#x27;</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$client_num</span>&quot;</span></span><br><span class="line">2.get_redis_copy_aof.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">replication_status=(<span class="string">&quot;`echo &#x27;info &#x27;|redis-cli -a cctv.com |grep &#x27;aof_enabled&#x27; |awk -F&#x27;:&#x27; &#x27;&#123;print <span class="variable">$2</span>&#125;&#x27;`&quot;</span>)</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$replication_status</span></span><br><span class="line">3.get_redis_data_mem.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;info &#x27;</span>|redis-cli -a cctv.com|grep -w <span class="string">&quot;used_memory_rss&quot;</span> |awk -F<span class="string">&#x27;:&#x27;</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span></span><br><span class="line">4.get_redis_hisrory_max_mem.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;info &#x27;</span>|redis-cli -a cctv.com|grep -w <span class="string">&#x27;used_memory_peak&#x27;</span> |awk -F<span class="string">&#x27;:&#x27;</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span></span><br><span class="line">5.get_redis_mem_rate.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;info &#x27;</span>|redis-cli -a cctv.com|grep mem_fragmentation_ratio |awk -F<span class="string">&#x27;:&#x27;</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span></span><br><span class="line">6.get_redis_mem_total.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;info &#x27;</span>|redis-cli -a cctv.com|grep -w <span class="string">&#x27;used_memory_rss&#x27;</span>|awk -F<span class="string">&#x27;:&#x27;</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|awk -F<span class="string">&#x27; &#x27;</span> <span class="string">&#x27;&#123;print $1&#125;&#x27;</span></span><br><span class="line">7.get_redis_status.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">redis_status=`/bin/<span class="built_in">echo</span> <span class="string">&#x27;ping&#x27;</span>|redis-cli -a cctv.com`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$redis_status</span> == PONG ];<span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;1&quot;</span></span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">8.get_redis_version.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">redis_status=`/bin/<span class="built_in">echo</span> <span class="string">&#x27;ping&#x27;</span>|redis-cli -a cctv.com`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$redis_status</span> == PONG ];<span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;1&quot;</span></span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">9.get_set_redis_mem_total.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">total_mem=`cat /opt/redis/etc/redis.conf |grep <span class="string">&#x27;maxmemory&#x27;</span> |grep -v <span class="string">&#x27;^#&#x27;</span> |awk -F<span class="string">&#x27; &#x27;</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>`</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$total_mem</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-mysql-监控"><a href="#2-mysql-监控" class="headerlink" title="2.mysql 监控"></a><strong>2.mysql 监控</strong></h4><p>实施：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">yum -y install php php-mysql</span><br><span class="line">rpm -ivh percona-zabbix-templates-1.1.8-1.noarch.rpm</span><br><span class="line">cp /var/lib/zabbix/percona/templates/userparameter_percona_mysql.conf /opt/zabbix_agentd/etc/zabbix_agentd.conf.d</span><br><span class="line">cat zabbix_agentd.conf</span><br><span class="line">Include=/opt/zabbix_agentd/etc/zabbix_agentd.conf.d</span><br><span class="line"><span class="built_in">cd</span> /var/lib/zabbix/percona/scripts/</span><br><span class="line">cat ss_get_mysql_stats.php  <span class="comment">#数据库连接</span></span><br><span class="line"><span class="variable">$mysql_user</span> = <span class="string">&#x27;root&#x27;</span>;</span><br><span class="line"><span class="variable">$mysql_pass</span> = <span class="string">&#x27;password&#x27;</span>;</span><br><span class="line">cat get_mysql_stats_wrapper.sh </span><br><span class="line">HOST=101.129.224.207</span><br><span class="line">RES=`/opt/mysql/bin/mysql -e <span class="string">&#x27;SHOW SLAVE STATUS\G&#x27;</span> | egrep <span class="string">&#x27;(Slave_IO_Running|Slave_SQL_Running):&#x27;</span> | awk -F: <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | tr <span class="string">&#x27;\n&#x27;</span> <span class="string">&#x27;,&#x27;</span>`</span><br><span class="line">pkill -9 zabbix</span><br><span class="line">/opt/zabbix_agentd/sbin/zabbix_agentd -c /opt/zabbix_agentd/etc/zabbix_agentd.conf</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-keepalived-状态监控"><a href="#3-keepalived-状态监控" class="headerlink" title="3.keepalived 状态监控"></a><strong>3.keepalived 状态监控</strong></h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">mkdir /opt/zabbix_agentd/script</span><br><span class="line">cat chk_keepalived_status.sh </span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">keep_status=$(<span class="built_in">echo</span> <span class="string">&quot;`/etc/init.d/keepalived status`&quot;</span> | awk  <span class="string">&#x27;&#123;print $5&#125;&#x27;</span>)</span><br><span class="line">result=0</span><br><span class="line"><span class="keyword">if</span> [[ `<span class="built_in">echo</span> <span class="variable">$LANG</span>` == <span class="string">&#x27;en_US.UTF-8&#x27;</span> ]];<span class="keyword">then</span></span><br><span class="line">        <span class="keyword">if</span> [[ <span class="variable">$keep_status</span> == <span class="string">&#x27;running...&#x27;</span> ]];<span class="keyword">then</span></span><br><span class="line">                result=1</span><br><span class="line">                <span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                result=0</span><br><span class="line">                <span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        <span class="keyword">if</span> [[ `/etc/init.d/keepalived status|awk <span class="string">&#x27;&#123;print $4&#125;&#x27;</span>` == <span class="string">&#x27;正在运行...&#x27;</span> ]];<span class="keyword">then</span></span><br><span class="line">                result=1</span><br><span class="line">                <span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                result=0</span><br><span class="line">                <span class="built_in">echo</span> <span class="variable">$result</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">pkill -9 zabbix</span><br><span class="line">/opt/zabbix_agentd/sbin/zabbix_agentd -c /opt/zabbix_agentd/etc/zabbix_agentd.conf</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-LVS状态监控"><a href="#4-LVS状态监控" class="headerlink" title="4.LVS状态监控"></a><strong>4.LVS状态监控</strong></h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">1.get_keepalived_status.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">num=`/bin/ps -ef |grep keepalived |grep -v <span class="string">&quot;grep&quot;</span> |wc -l`</span><br><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$num</span>&quot;</span> == 5 ];<span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;1&quot;</span></span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">2.get_lvs_bit_sec.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">tail -1 /proc/net/ip_vs_stats | /usr/bin/awk <span class="string">&#x27;&#123;print strtonum(&quot;0x&quot;$1),strtonum(&quot;0x&quot;$2), strtonum(&quot;0x&quot;$3),strtonum(&quot;0x&quot;$4), strtonum(&quot;0x&quot;$5)&#125;&#x27;</span>|awk <span class="string">&#x27;&#123;print $4&#125;&#x27;</span></span><br><span class="line">3.get_lvs_conns_sec.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">cat /proc/net/ip_vs_conn |wc -l</span><br><span class="line">4.get_lvs_keepalived_vip_status.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">KEEPALIVE_CONF_DIR=/etc/keepalived/keepalived.conf</span><br><span class="line">IP_LIST=(<span class="string">&quot;`cat <span class="variable">$KEEPALIVE_CONF_DIR</span> |grep virtual_server |awk -F&#x27; &#x27; &#x27;&#123;print <span class="variable">$2</span>&#125;&#x27;|sort |uniq`&quot;</span>)</span><br><span class="line">n=0</span><br><span class="line"><span class="keyword">for</span> ip <span class="keyword">in</span> <span class="variable">$&#123;IP_LIST[@]&#125;</span>;<span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="string">&#x27;`/sbin/ip addr |grep &#x27;</span><span class="variable">$ip</span><span class="string">&#x27;|wc -l`&#x27;</span> == 1 ];<span class="keyword">then</span></span><br><span class="line">                <span class="built_in">let</span> n=n+1</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                n=0 </span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="keyword">if</span> [ `cat <span class="variable">$KEEPALIVE_CONF_DIR</span> |grep virtual_server |awk -F<span class="string">&#x27; &#x27;</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|sort |uniq |wc -l` == <span class="string">&quot;<span class="variable">$n</span>&quot;</span> ];<span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;1&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">5.get_lvs_packets_sec.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">tail -1 /proc/net/ip_vs_stats | /usr/bin/awk <span class="string">&#x27;&#123;print strtonum(&quot;0x&quot;$1),strtonum(&quot;0x&quot;$2), strtonum(&quot;0x&quot;$3), strtonum(&quot;0x&quot;$4),strtonum(&quot;0x&quot;$5)&#125;&#x27;</span>|awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2024/03/06/zabbix_server/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">安装zabbix server</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2024/03/06/%E5%8A%A0%E9%80%9Fssh%E7%99%BB%E9%99%86/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">配置ssh加速登陆</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2024&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">浑水摸鱼喵</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

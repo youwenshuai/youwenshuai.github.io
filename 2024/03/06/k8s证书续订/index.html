@@ -1,36 +1,427 @@
-extends _partials/layout.pug
-include _mixin/sidebar.pug
-include _mixin/comment.pug
-include _mixin/postmeta.pug
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="浑水摸鱼喵">
+    
+    <title>
+        
+            k8s集群证书续订 |
+        
+        道可道，非常道
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-block title
-    - var page_title = page.title
-    if page.categories && page.categories.length
-        - var cat_list = ''
-        - var comma = ''
-        each cat in page.categories.toArray()
-            - var cat_list = cat.name + comma + cat_list
-            - var comma = ' - '
-        if cat_list.length !== 0
-            - var page_title = page.title + ' - ' + cat_list
-    != `${page_title}`
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
 
-block header
-    h1(itemprop="name headline")
-        if page.link
-            - var postTitleIcon = '<i class="ic i-link-alt"></i>'
-            - var postText = page.title || page.link
-            != _url(page.link, postText + postTitleIcon, {class: 'link external', itemprop: 'url'})
-        else
-            != page.title
-    +PMRender(page, true)
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
-block content
-    div(class="article wrap")
-        +BCRender(page, true)
-        != partial('_partials/post/post.pug', {post: page})
-    != partial('_partials/post/nav.pug', {post: page})
-    +CommentRender
 
-block sidebar
-    +sidebarRender(true)
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                道可道，非常道
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">k8s集群证书续订</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">浑水摸鱼喵</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2024-03-06 15:19:25
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/kubernetes/">kubernetes</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h3 id="一、kubernetes-集群证书过期更新"><a href="#一、kubernetes-集群证书过期更新" class="headerlink" title="一、kubernetes 集群证书过期更新"></a>一、kubernetes 集群证书过期更新</h3><h4 id="1、kubernetes证书结构"><a href="#1、kubernetes证书结构" class="headerlink" title="1、kubernetes证书结构"></a>1、kubernetes证书结构</h4><p>​		官方推荐一年只能至少用kubeadm upgrade更新一次kubernetes系统，更新时也会自动更新证书，不过，在线上生产环境无法连接外网的情况下更新kubernetes不太现实。我们可以在证书过期之前，使用kubeadm alpha里的certs 和 kubeconfig命令，同时配合kubelet证书自动轮换机制来解决这个问题。</p>
+<p>使用kubeadm创建完kubernetes集群之后，默认会在&#x2F;etc&#x2F;kubernetes&#x2F;pki 目录存放集群中需要的证书文件，整体结构如下图所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 pki]# tree</span><br><span class="line">|-- apiserver.crt</span><br><span class="line">|--	apiserver-etcd-client.crt</span><br><span class="line">|--	apiserver-etcd-client.key</span><br><span class="line">|-- apiserver.key</span><br><span class="line">|-- apiserver-kubelet-client.crt</span><br><span class="line">|-- apiserver-kubelet-client.key</span><br><span class="line">|-- ca.crt</span><br><span class="line">|-- ca.key</span><br><span class="line">|-- etcd</span><br><span class="line">|   |-- ca.crt</span><br><span class="line">|   |-- ca.key</span><br><span class="line">|   |-- healthcheck-client.crt</span><br><span class="line">|   |-- healthcheck-client.key</span><br><span class="line">|   |-- peer.crt</span><br><span class="line">|   |-- peer.key</span><br><span class="line">|   |-- server.crt</span><br><span class="line">|   |-- server.key</span><br><span class="line">|-- font-proxy-ca.crt</span><br><span class="line">|-- font-proxy-ca.key</span><br><span class="line">|-- font-proxy-client.crt</span><br><span class="line">|-- font-proxy-client.key</span><br><span class="line">|-- sa.key</span><br><span class="line">|-- sa.pub</span><br></pre></td></tr></table></figure>
+
+<h5 id="1、kubernetes-集群跟证书"><a href="#1、kubernetes-集群跟证书" class="headerlink" title="1、kubernetes 集群跟证书"></a>1、kubernetes 集群跟证书</h5><p>&#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;ca.crt</p>
+<p>&#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;ca.key</p>
+<p>​		由此根证书签发的证书有:</p>
+<p>​		1、kube-apiserver组件持有的服务端证书</p>
+<p>​				&#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;apiserver.crt</p>
+<p>​				&#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;apiserver.key</p>
+<p>​		2、kubelet组件持有的客户端证书</p>
+<p>​				&#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;apiserver-kubelet-client.crt</p>
+<p>​			    &#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;apiserver-kubelet-client.key</p>
+<h5 id="2、汇聚层（aggregator）根证书"><a href="#2、汇聚层（aggregator）根证书" class="headerlink" title="2、汇聚层（aggregator）根证书"></a>2、汇聚层（aggregator）根证书</h5><p>​		&#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;front-proxy-ca.crt</p>
+<pre><code>    /etc/kubernetes/pki/front-proxy-ca.key
+</code></pre>
+<p>​		由此根证书签发的证书有:</p>
+<p>​		1、代理端使用的客户端证书，用作代用户与kube-apisever 认证</p>
+<p>​		&#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;font-proxy-client.crt</p>
+<p>​		&#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;font-proxy-client.key</p>
+<h5 id="3、etcd集群根证书"><a href="#3、etcd集群根证书" class="headerlink" title="3、etcd集群根证书"></a>3、etcd集群根证书</h5><p>​		&#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;etcd&#x2F;ca.crt</p>
+<p>​		&#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;etcd&#x2F;ca.key</p>
+<pre><code>     由此根证书签发机构签发的证书有:
+ 
+     1、etcd server 持有的服务端证书
+</code></pre>
+<p>​		&#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;etcd&#x2F;server.crt</p>
+<p>​		&#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;etcd&#x2F;server.key</p>
+<pre><code>     2、peer 集群中节点互相通信使用的客户端证书
+</code></pre>
+<p>​		&#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;etcd&#x2F;peer.crt</p>
+<pre><code>    /etc/kubernetes/pki/etcd/peer.key
+ 
+     3、pod 中定义 Liveness 探针使用的客户端证书
+ 
+   /etc/kubernetes/pki/etcd/healthcheck-client.crt
+</code></pre>
+<p>​       &#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;etcd&#x2F;healthcheck-client.key</p>
+<pre><code>    4、配置在 kube-apiserver 中用来与 etcd server 做双向认证的客户端证书
+ 
+  /etc/kubernetes/pki/apiserver-etcd-client.crt
+ 
+ /etc/kubernetes/pki/apiserver-etcd-client.key
+</code></pre>
+<h5 id="4、Server-Account秘钥"><a href="#4、Server-Account秘钥" class="headerlink" title="4、Server Account秘钥"></a>4、Server Account秘钥</h5><p>​	 &#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;sa.key</p>
+<p>​     &#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;sa.pub </p>
+<p>​		这组的密钥对仅提供给 kube-controller-manager 使用，kube-controller-manager 通过sa.key 对 token 进行签名, apiserver 通过公钥 sa.pub 进行签名的验证。</p>
+<p>​	k8s相关组件启动参数</p>
+<p>​	kubeadm创建的集群，kube-proxy、flannel、coreDNS是以pod的形式单独运行的。在pod中直接使用service account 与 kube-apiserver进行认证，此时就不需要再单独为kube-proxy创建证书。</p>
+<h3 id="二、kubenetes证书续订"><a href="#二、kubenetes证书续订" class="headerlink" title="二、kubenetes证书续订"></a>二、kubenetes证书续订</h3><h4 id="1、kubeadm命令读取集群配置"><a href="#1、kubeadm命令读取集群配置" class="headerlink" title="1、kubeadm命令读取集群配置"></a>1、kubeadm命令读取集群配置</h4><p>​			默认的kubeadm安装k8s 集群时，会从外网拉取镜像。在kubeadm命令升级master证书时，也会默认从互联网读取一个stable.txt的文件。由于公司的实际情况，这个问题得解决。解决这个问题得方法就是生成一个集群配置的yaml文件。然后运行命令时指定这个yaml文件即可。</p>
+<p>​		kubeadm config view &gt; kubeadm-config.yaml</p>
+<h4 id="2、证书续订"><a href="#2、证书续订" class="headerlink" title="2、证书续订"></a>2、证书续订</h4><h5 id="1、etcd证书"><a href="#1、etcd证书" class="headerlink" title="1、etcd证书"></a>1、etcd证书</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看证书有效期</span></span><br><span class="line"><span class="comment">#根证书十年有效期</span></span><br><span class="line">openssl x509 -<span class="keyword">in</span> /etc/kubernetes/pki/etcd/ca.crt -noout -dates</span><br><span class="line">openssl x509 -<span class="keyword">in</span> /etc/kubernetes/pki/etcd/healthcheck-client.crt -noout -dates</span><br><span class="line">openssl x509 -<span class="keyword">in</span> /etc/kubernetes/pki/etcd/peer.crt -noout -dates</span><br><span class="line">openssl x509 -<span class="keyword">in</span> /etc/kubernetes/pki/etcd/server.crt -noout -dates</span><br><span class="line">openssl x509 -<span class="keyword">in</span> /etc/kubernetes/pki/apiserver-etcd-client.crt -noout -dates</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">kubeadm alpha certs renew etcd-healthcheck-client --config /tmp/192.168.0.1/kubeadmcfg.yaml</span><br><span class="line">kubeadm alpha certs renew etcd-peer --config /tmp/192.168.0.1/kubeadmcfg.yaml</span><br><span class="line">kubeadm alpha certs renew etcd-server --config/tmp/192.168.0.1/kubeadmcfg.yaml</span><br><span class="line">kubeadm alpha certs renew apiserver-etcd-client --config /tmp/192.168.0.1/kubeadmcfg.yaml</span><br><span class="line">kubeadm alpha certs renew etcd-healthcheck-client --config /tmp/192.168.0.2/kubeadmcfg.yaml</span><br><span class="line">kubeadm alpha certs renew etcd-peer --config /tmp/192.168.0.2/kubeadmcfg.yaml</span><br><span class="line">kubeadm alpha certs renew etcd-server --config /tmp/192.168.0.2/kubeadmcfg.yaml</span><br><span class="line">kubeadm alpha certs renew apiserver-etcd-client --config/tmp/192.168.0.2/kubeadmcfg.yaml</span><br><span class="line">kubeadm alpha certs renew etcd-healthcheck-client --config /tmp/192.168.0.3/kubeadmcfg.yaml</span><br><span class="line">kubeadm alpha certs renew etcd-peer --config /tmp/192.168.0.3/kubeadmcfg.yaml</span><br><span class="line">kubeadm alpha certs renew etcd-server --config /tmp/192.168.0.3/kubeadmcfg.yaml</span><br><span class="line">kubeadm alpha certs renew apiserver-etcd-client --config/tmp/192.168.0.3/kubeadmcfg.yaml</span><br><span class="line"><span class="comment">#注意：kubeadmcfg.yaml的生成详见第五篇《kubernetes高可用集群及Helm的部署》</span></span><br><span class="line"><span class="comment">#分别在三台master上重启etcd服务：</span></span><br><span class="line">service etcd restart</span><br><span class="line"><span class="comment">#验证是否成功：</span></span><br><span class="line">etcdctl --ca-file=/etc/kubernetes/pki/etcd/ca.crt --cert-file=/etc/kubernetes/pki/etcd/server.crt --key-         file=/etc/kubernetes/pki/etcd/server.key --endpoints=https://192.168.0.1:2379 cluster-health</span><br><span class="line">etcdctl --ca-file=/etc/kubernetes/pki/etcd/ca.crt --cert-file=/etc/kubernetes/pki/etcd/server.crt --key-file=/etc/kubernetes/pki/etcd/server.key --endpoints=https://192.168.0.2:2379 member list</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、apiserver-证书和汇聚层证书"><a href="#2、apiserver-证书和汇聚层证书" class="headerlink" title="2、apiserver 证书和汇聚层证书"></a>2、apiserver 证书和汇聚层证书</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看证书有效期</span></span><br><span class="line"><span class="comment">#根证书十年有效期</span></span><br><span class="line">openssl x509 -<span class="keyword">in</span> /etc/kubernetes/pki/ca.crt -noout -dates</span><br><span class="line">openssl x509 -<span class="keyword">in</span> /etc/kubernetes/pki/apiserver.crt -noout -dates</span><br><span class="line">openssl x509 -<span class="keyword">in</span> /etc/kubernetes/pki/apiserver-kubelet-client.crt -noout -dates</span><br><span class="line"><span class="comment">#根证书十年有效期</span></span><br><span class="line">openssl x509 -<span class="keyword">in</span> /etc/kubernetes/pki/front-proxy-ca.crt -noout -dates</span><br><span class="line">openssl x509 -<span class="keyword">in</span> /etc/kubernetes/pki/front-proxy-client.crt -noout -dates</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#注意：分别在三台master机器上执行此命令</span></span><br><span class="line">kubeadm alpha certs renew apiserver --config /root/kubeadm-config.yaml</span><br><span class="line">kubeadm alpha certs renew apiserver-kubelet-client --config /root/kubeadm-config.yaml</span><br><span class="line">kubeadm alpha certs renew front-proxy-client --config /root/kubeadm-config.yaml</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、重新生成kubernetes配置文件"><a href="#三、重新生成kubernetes配置文件" class="headerlink" title="三、重新生成kubernetes配置文件"></a>三、重新生成kubernetes配置文件</h3><h5 id="1、备份配置文件"><a href="#1、备份配置文件" class="headerlink" title="1、备份配置文件"></a>1、备份配置文件</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mv /etc/kubernetes/admin.conf /etc/kubernetes/admin.conf`date <span class="string">&quot;+%Y%m%d&quot;</span>`</span><br><span class="line">mv /etc/kubernetes/controller-manager.conf /etc/kubernetes/controller-manager.conf`date <span class="string">&quot;+%Y%m%d&quot;</span>`</span><br><span class="line">mv /etc/kubernetes/kubelet.conf /etc/kubernetes/kubelet.conf`date <span class="string">&quot;+%Y%m%d&quot;</span>`</span><br><span class="line">mv /etc/kubernetes/scheduler.conf /etc/kubernetes/scheduler.conf`date <span class="string">&quot;+%Y%m%d&quot;</span>`</span><br><span class="line"><span class="comment">#注意：分别在三台master机器上执行此命令</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="2、重新生成配置文件"><a href="#2、重新生成配置文件" class="headerlink" title="2、重新生成配置文件"></a>2、重新生成配置文件</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init phase kubeconfig all --config /root/guosanmao/kubeadm-config.yaml</span><br><span class="line"><span class="comment">#注意：分别在三台master机器上执行此命令</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3、拷贝kuberctl客户端文件"><a href="#3、拷贝kuberctl客户端文件" class="headerlink" title="3、拷贝kuberctl客户端文件"></a>3、拷贝kuberctl客户端文件</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line"><span class="comment">#注意：分别在三台master机器上执行此命令</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="四、重启docker和kubelet"><a href="#四、重启docker和kubelet" class="headerlink" title="四、重启docker和kubelet"></a>四、重启docker和kubelet</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart docker </span><br><span class="line"><span class="comment">#在三台Master上重启docker容器 </span></span><br><span class="line">docker ps |grep -E <span class="string">&#x27;k8s_kube-apiserver|k8s_kube-controller-manager|k8s_kubescheduler&#x27;</span> | awk -F <span class="string">&#x27; &#x27;</span> <span class="string">&#x27;&#123;print $1&#125;&#x27;</span> |xargs docker restart </span><br><span class="line"><span class="comment">#或者也可以在三台Master上重启三个容器</span></span><br><span class="line">systemctl restart kubelet </span><br><span class="line"><span class="comment">#在三台Master上重启kubelet</span></span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2024/03/06/k8s%E8%A7%81%E8%A7%A3/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s见解</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2024/03/06/k8s%E9%83%A8%E7%BD%B2tomcat/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s部署tomcat</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2024&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">浑水摸鱼喵</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

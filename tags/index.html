@@ -1,55 +1,263 @@
-extends _partials/layout.pug
-include _mixin/sidebar.pug
-include _mixin/comment.pug
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="浑水摸鱼喵">
+    
+    <title>
+        
+            Tags |
+        
+        道可道，非常道
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-block title
-    if page.type === 'categories'
-        != __('title.all') + __('title.category')
-    else if page.type === 'tags'
-        != __('title.all') + __('title.tag')
-    else if page.type === '404'
-        != __('title.not_found')
-    else
-        != page.title
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
 
-block header
-    h1(itemprop="name headline")
-        if page.link
-            - var postTitleIcon = '<i class="ic i-link-alt"></i>'
-            - var postText = page.title || page.link
-            != _url(page.link, postText + postTitleIcon, {class: 'link external', itemprop: 'url'})
-        else
-            if page.type === 'categories'
-                != __('title.all') + __('title.category')
-            else if page.type === 'tags'
-                != __('title.all') + __('title.tag')
-            else if page.type === '404'
-                != __('title.not_found')
-            else
-                != page.title
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
-block content
-    if page.type === 'categories'
-        div(class="collapse wrap")
-            h2(class="item title")
-                a(href=url_for(site.path))
-                    != __('menu.home')
-                small
-                != _p('counter.categories', site.categories.length)
-            != _list_categories(3)
-    else if page.type === 'tags'
-        div(class="collapse wrap")
-            h2(class="item title")
-                a(href=url_for(site.path))
-                    != __('menu.home')
-                small
-                != _p('counter.tag_cloud', site.tags.length)
-            div(class="tag cloud")
-                != tagcloud({min_font: theme.tagcloud.min,max_font: theme.tagcloud.max,amount: theme.tagcloud.amount,color: true,start_color: theme.tagcloud.start,end_color: theme.tagcloud.end})
-    else
-        div(class="page wrap")
-            != partial('_partials/post/post.pug', {post: page})
-        +CommentRender
 
-block sidebar
-    +sidebarRender(true)
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                道可道，非常道
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class="active"
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class="active"
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    
+    <div class="fade-in-down-animation">
+        <div class="tagcloud-container">
+            <div class="tagcloud-content">
+                <a href="/tags/Linux/" style="font-size: 1rem;">Linux</a> <a href="/tags/apache/" style="font-size: 1rem;">apache</a> <a href="/tags/docker/" style="font-size: 1.3rem;">docker</a> <a href="/tags/gitlab/" style="font-size: 1rem;">gitlab</a> <a href="/tags/java/" style="font-size: 1.2rem;">java</a> <a href="/tags/kubernetes/" style="font-size: 1.4rem;">kubernetes</a> <a href="/tags/mysql/" style="font-size: 1rem;">mysql</a> <a href="/tags/%E5%AD%98%E5%82%A8/" style="font-size: 1.1rem;">存储</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.5rem;">数据库</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 1.4rem;">监控</a> <a href="/tags/%E7%B3%BB%E7%BB%9F/" style="font-size: 1.6rem;">系统</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 1.3rem;">网络</a>
+            </div>
+        </div>
+    </div>
+
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2024&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">浑水摸鱼喵</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

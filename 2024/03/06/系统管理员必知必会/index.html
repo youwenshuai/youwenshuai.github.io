@@ -1,36 +1,1857 @@
-extends _partials/layout.pug
-include _mixin/sidebar.pug
-include _mixin/comment.pug
-include _mixin/postmeta.pug
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="浑水摸鱼喵">
+    
+    <title>
+        
+            系统管理员必知必会 |
+        
+        道可道，非常道
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-block title
-    - var page_title = page.title
-    if page.categories && page.categories.length
-        - var cat_list = ''
-        - var comma = ''
-        each cat in page.categories.toArray()
-            - var cat_list = cat.name + comma + cat_list
-            - var comma = ' - '
-        if cat_list.length !== 0
-            - var page_title = page.title + ' - ' + cat_list
-    != `${page_title}`
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
 
-block header
-    h1(itemprop="name headline")
-        if page.link
-            - var postTitleIcon = '<i class="ic i-link-alt"></i>'
-            - var postText = page.title || page.link
-            != _url(page.link, postText + postTitleIcon, {class: 'link external', itemprop: 'url'})
-        else
-            != page.title
-    +PMRender(page, true)
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
-block content
-    div(class="article wrap")
-        +BCRender(page, true)
-        != partial('_partials/post/post.pug', {post: page})
-    != partial('_partials/post/nav.pug', {post: page})
-    +CommentRender
 
-block sidebar
-    +sidebarRender(true)
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                道可道，非常道
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">系统管理员必知必会</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">浑水摸鱼喵</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2024-03-06 15:19:25
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%B3%BB%E7%BB%9F/">系统</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h4 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h4><h5 id="文件系统管理"><a href="#文件系统管理" class="headerlink" title="文件系统管理"></a>文件系统管理</h5><p>重新创建文件系统会损坏原有文件</p>
+<blockquote>
+<p>mkfs: make file system</p>
+<p>​	-t FSTYPE </p>
+<p>mkfs -t ext2 &#x3D; mkfs.ext2</p>
+<p>mkfs -t ext3 &#x3D; mkfs.ext3</p>
+<p>专门管理ext系列文件：</p>
+<p>mke2fs</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>-j</th>
+<th><strong>创建ext3类型文件系统</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b BLOCK_SIZE</td>
+<td><strong>指定块大小，默认为4096；可用取值为1024、2048或4096</strong></td>
+</tr>
+<tr>
+<td>-L LABEL</td>
+<td><strong>指定分区卷标</strong></td>
+</tr>
+<tr>
+<td>-m</td>
+<td><strong>指定预留给超级用户的块数百分比</strong></td>
+</tr>
+<tr>
+<td>-i</td>
+<td><strong>用于指定为多少字节的空间创建一个inode，默认为8192；这里给出的数值应该为块大小的2^n倍</strong></td>
+</tr>
+<tr>
+<td>-N</td>
+<td><strong>指定inode个数</strong></td>
+</tr>
+<tr>
+<td>-F</td>
+<td><strong>强制创建文件系统</strong></td>
+</tr>
+<tr>
+<td>-E</td>
+<td><strong>用户指定额外文件系统属性</strong></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>blkid: 查询或查看磁盘设备的相关属性</p>
+<p>​	UUID</p>
+<p>​	TYPE</p>
+<p>​	LABEL</p>
+</blockquote>
+<p>​	</p>
+<blockquote>
+<p>e2label: 用于查看或定义卷标</p>
+<p>​	e2label 设备文件 卷标: 设定卷标</p>
+</blockquote>
+<p>​	</p>
+<p>tune2fs: 调整文件系统的相关属性</p>
+<table>
+<thead>
+<tr>
+<th>-j</th>
+<th>不损害原有数据，将ext2升级为ext3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-L LABEL</td>
+<td>设定或修改卷标</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>调整预留百分比</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>指定预留块数</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>设定默认挂载选项</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>指定挂载次数达到#次之后进行自检，0或-1表关闭此功能</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>每挂载使用多少天后进行自检；0或-1表示关闭此功能</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>显示超级块中的信息</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>dumpe2fs: 显示文件属性信息</p>
+<p>​	-h: 只显示超级块中的信息</p>
+<p>​	</p>
+<p>fsck: 检查并修复Linux文件系统</p>
+<p>​	-t FSTYPE: 指定文件系统类型</p>
+<p>​	-a: 自动修复</p>
+<p>​	</p>
+<p>e2fsck: 专用于修复ext2&#x2F;ext3文件系统</p>
+<p>​	-f: 强制检查；</p>
+<p>​	-p: 自动修复；</p>
+</blockquote>
+<p>​	</p>
+<blockquote>
+<p>挂载：将新的文件系统关联至当前根文件系统</p>
+<p>卸载：将某文件系统与当前根文件系统的关联关系预以移除；</p>
+<p>mount：挂载</p>
+<p>mount 设备 挂载点</p>
+<p>​	设备：</p>
+<p>​		设备文件：&#x2F;dev&#x2F;sda5</p>
+<p>​		卷标：LABEL&#x3D;“”</p>
+<p>​		UUID： UUID&#x3D;“”</p>
+<p>​	挂载点：目录</p>
+<p>​		要求：</p>
+<p>​			1、此目录没有被其它进程使用；</p>
+<p>​			2、目录得事先存在；</p>
+<p>​			3、目录中的原有的文件将会暂时隐藏；</p>
+<p>mount: 显示当前系统已经挂载的设备及挂载点</p>
+<p>mount [options] [-o options] DEVICE MOUNT_POINT</p>
+<p>​	-a: 表示挂载&#x2F;etc&#x2F;fstab文件中定义的所有文件系统</p>
+<p>​	-n: 默认情况下，mount命令每挂载一个设备，都会把挂载的设备信息保存至&#x2F;etc&#x2F;mtab文件；使用—n选项意味着挂载设备时，不把信息写入此文件；</p>
+<p>​	-t FSTYPE: 指定正在挂载设备上的文件系统的类型；不使用此选项时，mount会调用blkid命令获取对应文件系统的类型；</p>
+<p>​	-r: 只读挂载，挂载光盘时常用此选项</p>
+<p>​	-w: 读写挂载</p>
+<p>​	</p>
+<p>​	-o: 指定额外的挂载选项，也即指定文件系统启用的属性；</p>
+<p>​		remount: 重新挂载当前文件系统</p>
+<p>​		ro: 挂载为只读</p>
+<p>​		rw: 读写挂载</p>
+<p>​			</p>
+<p>挂载完成后，要通过挂载点访问对应文件系统上的文件；</p>
+<p>umount: 卸载某文件系统</p>
+<p>​	umount 设备</p>
+<p>​	umount 挂载点	</p>
+<p>​	卸载注意事项：</p>
+<p>​		挂载的设备没有进程使用；</p>
+</blockquote>
+<p>​		</p>
+<h6 id="练习："><a href="#练习：" class="headerlink" title="练习："></a>练习：</h6><p>1、创建一个2G的分区，文件系统为ext2，卷标为DATA，块大小为1024，预留管理空间为磁盘分区的8%；挂载至&#x2F;backup目录，要求使用卷标进行挂载，且在挂载时启动此文件系统上的acl功能；</p>
+<p># mke2fs -L DATA -b 1024 -m 8  &#x2F;dev&#x2F;sda7</p>
+<p># mount -o acl LABEL&#x3D;DATA &#x2F;backup</p>
+<p># tune2fs -o acl &#x2F;dev&#x2F;sda7</p>
+<p># mount LABEL&#x3D;DATA &#x2F;backup</p>
+<p>2、将此文件系统的超级块中的信息中包含了block和inode的行保存至&#x2F;tmp&#x2F;partition.txt中；</p>
+<p># tune2fs -l | egrep -i  “block|inode” &gt;&gt; &#x2F;tmp&#x2F;partition.txt  </p>
+<p># dumpe2fs -h |</p>
+<p>3、复制&#x2F;etc目录中的所有文件至此文件系统；而后调整此文件系统类型为ext3，要求不能损坏已经复制而来的文件；</p>
+<p># cp -r &#x2F;etc&#x2F;*  &#x2F;backup</p>
+<p># tune2	-j &#x2F;dev&#x2F;sda7</p>
+<p>4、调整其预留百分比为3%；</p>
+<p># tune2fs -m 3 -L DATA &#x2F;dev&#x2F;sda7</p>
+<p>5、以重新挂载的方式挂载此文件系统为不更新访问时间戳，并验正其效果；</p>
+<p># stat &#x2F;backup&#x2F;inittab</p>
+<p># cat &#x2F;backup&#x2F;inittab</p>
+<p># stat</p>
+<p># mount -o remount,noatime &#x2F;backup</p>
+<p># cat </p>
+<p># stat</p>
+<p>6、对此文件系统强行做一次检测；</p>
+<p>e2fsck -f &#x2F;dev&#x2F;sda7</p>
+<p>7、删除复制而来的所有文件，并将此文件系统重新挂载为同步(sync)；而后再次复制&#x2F;etc目录中的所有文件至此挂载点，体验其性能变化；</p>
+<p># rm -rf &#x2F;backup&#x2F;*</p>
+<p># mount -o remount,sync &#x2F;backup</p>
+<p># cp -r &#x2F;etc&#x2F;* &#x2F;backup</p>
+<p>swap分区：</p>
+<p>free </p>
+<p>​	-m</p>
+<p>fdisk命令中，调整分区类型为82；</p>
+<p>​	</p>
+<p>创建交换分区：</p>
+<p>mkswap &#x2F;dev&#x2F;sda8</p>
+<p>​	-L LABEL</p>
+<p>swapon &#x2F;dev&#x2F;sda8</p>
+<p>​	-a:启用所有的定义在&#x2F;etc&#x2F;fstab文件中的交换设备</p>
+<p>swapoff &#x2F;dev&#x2F;sda8</p>
+<p>回环设备</p>
+<p>loopback, 使用软件来模拟实现硬件</p>
+<p>创建一个镜像文件，120G</p>
+<p>dd命令：</p>
+<p>​	if&#x3D;数据来源</p>
+<p>​	of&#x3D;数据存储目标</p>
+<p>​	bs&#x3D;1</p>
+<p>​	count&#x3D;2</p>
+<p>​	seek&#x3D;#: 创建数据文件时，跳过的空间大小；</p>
+<p>​	</p>
+<p>dd if&#x3D;&#x2F;dev&#x2F;sda of&#x3D;&#x2F;mnt&#x2F;usb&#x2F;mbr.backup bs&#x3D;512 count&#x3D;1</p>
+<p>dd if&#x3D;&#x2F;mnt&#x2F;usb&#x2F;mbr.backup of&#x3D;&#x2F;dev&#x2F;sda bs&#x3D;512 count&#x3D;1</p>
+<p>dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;&#x2F;var&#x2F;swapfile bs&#x3D;1M count&#x3D;1024</p>
+<p>&#x2F;dev&#x2F;null</p>
+<p>​	</p>
+<p>mount命令，可以挂载iso镜像；</p>
+<p>mount DEVICE MOUNT_POINT</p>
+<p>​	-o loop: 挂载本地回环设备</p>
+<p>wget <a class="link"   href="ftp://172.16.0.1/pub/isos/rhci-5.8-1.iso" >ftp://172.16.0.1/pub/isos/rhci-5.8-1.iso<i class="fas fa-external-link-alt"></i></a></p>
+<p>mount &#x2F;dev&#x2F;sda5 &#x2F;mnt&#x2F;test</p>
+<p>文件系统的配置文件&#x2F;etc&#x2F;fstab</p>
+<p>​	OS在初始时，会自动挂载此文件中定义的每个文件系统</p>
+<p>​	</p>
+<p>要挂载的设备	挂载点		文件系统类型		挂载选项		转储频率(每多少天做一次完全备份)		文件系统检测次序(只有根可以为1)		</p>
+<p>&#x2F;dev&#x2F;sda5		&#x2F;mnt&#x2F;test		ext3		defaults		0 0</p>
+<p>mount -a：挂载&#x2F;etc&#x2F;fstab文件中定义的所有文件系统</p>
+<p>fuser: 验正进程正在使用的文件或套接字文件</p>
+<p>​	-v: 查看某文件上正在运行的进程</p>
+<p>​	-k:</p>
+<p>​	-m</p>
+<p>​	</p>
+<p>​	fuser -km MOUNT_POINT：终止正在访问此挂载点的所有进程</p>
+<p>​	</p>
+<h6 id="练习：-1"><a href="#练习：-1" class="headerlink" title="练习："></a>练习：</h6><p>1、创建一个5G的分区，文件系统为ext3，卷标为MYDATA，块大小为1024，预留管理空间为磁盘分区的3%，要求开机后可以自动挂载至&#x2F;data目录，并且自动挂载的设备要使用卷标进行引用；</p>
+<p>2、创建一个本地回环文件&#x2F;var&#x2F;swaptemp&#x2F;swapfile来用于swap，要求大小为512MB，卷标为SWAP-FILE，且开机自动启用此交换设备；</p>
+<p># mkdir &#x2F;var&#x2F;swaptemp</p>
+<p># dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;&#x2F;var&#x2F;swaptemp&#x2F;swapfile bs&#x3D;1M count&#x3D;512</p>
+<p># mkswap LABLE&#x3D;SWAP-FILE &#x2F;var&#x2F;swaptemp&#x2F;swapfile</p>
+<p>&#x2F;etc&#x2F;fstab</p>
+<p>&#x2F;var&#x2F;swaptemp&#x2F;swapfile  	swap		swap		defaults		0 0</p>
+<p>3、上述第一问，如何让其自动挂载的同时启用ACL功能；</p>
+<p>&#x2F;etc&#x2F;fstab</p>
+<p>LABEL&#x3D;’MYDATA’		&#x2F;data		ext3		defaults,acl	0 0</p>
+<p>压缩、解压缩命令</p>
+<p>压缩格式：gz, bz2, xz, zip, Z</p>
+<p>压缩算法：算法不同，压缩比也会不同；</p>
+<p>compress: FILENAME.Z</p>
+<p>uncompress</p>
+<p>gzip: .gz</p>
+<p>​	gzip &#x2F;PATH&#x2F;TO&#x2F;SOMEFILE：压缩完成后会删除原文件</p>
+<p>​		-d： </p>
+<p>​		-#：1-9，指定压缩比，默认是6；</p>
+<p>​	</p>
+<p>gunzip: </p>
+<p>​	gunzip &#x2F;PATH&#x2F;TO&#x2F;SOMEFILE.gz: 解压完成后会删除原文件</p>
+<p>zcat &#x2F;PATH&#x2F;TO&#x2F;SOMEFILE.gz： 不解压的情况，查看文本文件的内容</p>
+<p>​	</p>
+<p>bzip2: .bz2</p>
+<p>比gzip有着更大压缩比的压缩工具，使用格式近似</p>
+<p>​	bzip2 &#x2F;PATH&#x2F;TO&#x2F;SOMEFILE</p>
+<p>​		-d</p>
+<p>​		-#: 1-9,默认是6</p>
+<p>​		-k: 压缩时保留原文件</p>
+<p>​		</p>
+<p>​	bunzip2 &#x2F;PATH&#x2F;TO&#x2F;SOMEFILE.bz2</p>
+<p>​	bzcat</p>
+<p>xz: .xz</p>
+<p>​	xz &#x2F;PATH&#x2F;TO&#x2F;SOMEFILE</p>
+<p>​		-d</p>
+<p>​		-#: 1-9, 默认是6</p>
+<p>​		-k: 压缩时保留原文件</p>
+<p>​		</p>
+<p>​	unxz</p>
+<p>​	xzdec</p>
+<p>​	xzcat </p>
+<p>zip: 既归档又压缩的工具</p>
+<p>​	zip FILENAME.zip FILE1 FILE2 …: 压缩后不删除原文件</p>
+<p>​	unzip FILENAME.zip</p>
+<p>​	</p>
+<p>archive: 归档，归档本身并不意味着压缩</p>
+<p>xz, bz2, gz</p>
+<p>tar: 归档工具, .tar</p>
+<p>​	-c: 创建归档文件</p>
+<p>​	-f FILE.tar: 操作的归档文件</p>
+<p>​	-x: 展开归档</p>
+<p>​	–xattrs: 归档时，保留文件的扩展属性信息</p>
+<p>​	-t: 不展开归档，直接查看归档了哪些文件</p>
+<p>​	-zcf: 归档并调用gzip压缩</p>
+<p>​	-zxf: 调用gzip解压缩并展开归档，-z选项可省略</p>
+<p>​	</p>
+<p>​	-jcf: bzip2</p>
+<p>​	-jxf:</p>
+<p>​	</p>
+<p>​	-Jcf: xz</p>
+<p>​	-Jxf:</p>
+<p>cpio: 归档工具</p>
+<p>​	</p>
+<p>​	</p>
+<h6 id="练习：写一个脚本"><a href="#练习：写一个脚本" class="headerlink" title="练习：写一个脚本"></a>练习：写一个脚本</h6><p>从键盘让用户输入几个文件，脚本能够将此几个文件归档压缩成一个文件；</p>
+<p>read:</p>
+<p>​	-p “PROMPT”: 给出提示</p>
+<p>​	</p>
+<p>脚本编程：</p>
+<p>​	顺序结构</p>
+<p>​	选择结构</p>
+<p>​		if</p>
+<p>​		case</p>
+<p>​	循环结构</p>
+<p>​		for</p>
+<p>​		while</p>
+<p>​		until</p>
+<p>​		</p>
+<p>while循环：适用于循环次数未知的场景，要有退出条件</p>
+<p>语法：</p>
+<p>​	while CONDITION; do</p>
+<p>​	  statement</p>
+<p>​	  …</p>
+<p>​	done</p>
+<p>​	</p>
+<p>计算100以内所有正整数的和</p>
+<p>#!&#x2F;bin&#x2F;bash</p>
+<p>declare -i I&#x3D;1</p>
+<p>declare -i SUM&#x3D;0</p>
+<p>while [ $I -le 100 ]; do</p>
+<p>  let SUM+&#x3D;$I</p>
+<p>  let I++</p>
+<p>done</p>
+<p>echo $SUM</p>
+<p>练习：转换用户输入的字符为大写，除了quit:</p>
+<p>#!&#x2F;bin&#x2F;bash</p>
+<p>#</p>
+<p>read -p “Input something: “ STRING</p>
+<p>while [ $STRING !&#x3D; ‘quit’ ]; do</p>
+<p>  echo $STRING | tr ‘a-z’ ‘A-Z’</p>
+<p>  read -p “Input something: “ STRING</p>
+<p>done</p>
+<h6 id="练习：-2"><a href="#练习：-2" class="headerlink" title="练习："></a>练习：</h6><p>每隔5秒查看hadoop用户是否登录，如果登录，显示其登录并退出；否则，显示当前时间，并说明hadoop尚未登录：</p>
+<p>#!&#x2F;bin&#x2F;bash</p>
+<p>#</p>
+<p>who | grep “hadoop” &amp;&gt; &#x2F;dev&#x2F;null</p>
+<p>RETVAL&#x3D;$?</p>
+<p>while [ $RETVAL -ne 0 ]; do</p>
+<p>  echo “<code>date</code>, hadoop is not log.” </p>
+<p>  sleep 5</p>
+<p>  who | grep “hadoop” &amp;&gt; &#x2F;dev&#x2F;null</p>
+<p>  RETVAL&#x3D;$?</p>
+<p>done</p>
+<p>echo “hadoop is logged in.”</p>
+<p>写一个脚本：</p>
+<ol>
+<li>显示一个菜单给用户：</li>
+</ol>
+<p>d|D) show disk usages.</p>
+<p>m|M) show memory usages.</p>
+<p>s|S) show swap usages.</p>
+<p>*) quit.</p>
+<ol start="2">
+<li>当用户给定选项后显示相应的内容；</li>
+</ol>
+<p>扩展：</p>
+<p>​	当用户选择完成，显示相应信息后，不退出；而让用户再一次选择，再次显示相应内容；除了用户使用quit；</p>
+<p>#!&#x2F;bin&#x2F;bash</p>
+<p>#</p>
+<p>cat &lt;&lt; EOF</p>
+<p>d|D) show disk usages.</p>
+<p>m|M) show memory usages.</p>
+<p>s|S) show swap usages.</p>
+<p>*) quit.</p>
+<p>EOF</p>
+<p>read -p “Your choice: “ CHOICE</p>
+<p>while [ $CHOICE !&#x3D; ‘quit’ ];do</p>
+<p>  case $CHOICE in</p>
+<p>  d|D)</p>
+<p>​    echo “Disk usage: “</p>
+<p>​    df -Ph ;;</p>
+<p>  m|M)</p>
+<p>​    echo “Memory usage: “</p>
+<p>​    free -m | grep “Mem” ;;</p>
+<p>  s|S)</p>
+<p>​    echo “Swap usage: “</p>
+<p>​    free -m | grep “Swap” ;;</p>
+<p>  *)</p>
+<p>​    echo “Unknown..” ;;</p>
+<p>  esac</p>
+<p>read -p “Again, your choice: “ CHOICE</p>
+<p>done	</p>
+<p>ext2: 文件系统块组组成：</p>
+<p>超级块、GDT、block bitmap、inode bitmap、data blocks</p>
+<p>文件系统挂载时的注意事项：</p>
+<p>1、挂载点事先存在；</p>
+<p>2、目录是否已经被其它进程使用；</p>
+<p>3、目录中的原有文件会被暂时隐藏；</p>
+<p>mount DEVICE MOUNT_POINT</p>
+<p>1、设备文件；</p>
+<p>2、LABEL</p>
+<p>3、UUID</p>
+<p>&#x2F;etc&#x2F;fstab文件格式：</p>
+<p>设备		挂载点		文件系统类型		挂载选项		转储频率  检测次序</p>
+<p>tune2fs</p>
+<p>​	-l</p>
+<p>​	-L</p>
+<p>​	-o</p>
+<p>dumpe2fs -h</p>
+<p>安装RHEL6.3 x86_64的方法（前提：请确保你的CPU支持硬件虚拟化技术）：</p>
+<p>1、创建虚拟机；</p>
+<p>2、下载isos目录中的rhci-rhel-6.3-1.iso，并导入虚拟机的虚拟光驱；</p>
+<p>3、在boot提示符输入：linux ip&#x3D;172.16.x.1 netmask&#x3D;255.255.0.0 gateway&#x3D;172.16.0.1 dns&#x3D;172.16.0.1 ks&#x3D;<a class="link"   target="_blank" rel="noopener" href="http://172.16.0.1/rhel6.cfg" >http://172.16.0.1/rhel6.cfg<i class="fas fa-external-link-alt"></i></a></p>
+<p>​	</p>
+<p>64, 32</p>
+<p>&#x2F;lib</p>
+<p>&#x2F;lib64</p>
+<p>RAID: </p>
+<p>级别：仅代表磁盘组织方式不同，没有上下之分；</p>
+<p>0： 条带</p>
+<p>​	性能提升: 读，写</p>
+<p>​	冗余能力（容错能力）: 无</p>
+<p>​	空间利用率：nS</p>
+<p>​	至少2块盘</p>
+<p>1： 镜像</p>
+<p>​	性能表现：写性能下降，读性能提升</p>
+<p>​	冗余能力：有</p>
+<p>​	空间利用率：1&#x2F;2</p>
+<p>​	至少2块盘</p>
+<p>2</p>
+<p>3</p>
+<p>4: </p>
+<p>5: </p>
+<p>​	性能表现：读，写提升</p>
+<p>​	冗余能力：有</p>
+<p>​	空间利用率：(n-1)&#x2F;n</p>
+<p>​	至少需要3块</p>
+<p>10:</p>
+<p>​	性能表现：读、写提升</p>
+<p>​	冗余能力：有</p>
+<p>​	空间利用率：1&#x2F;2</p>
+<p>​	至少需要4块</p>
+<p>01:</p>
+<p>​	性能表现：读、写提升</p>
+<p>​	冗余能力：有</p>
+<p>​	空间利用率：1&#x2F;2</p>
+<p>​	至少需要4块</p>
+<p>50:</p>
+<p>​	性能表现：读、写提升</p>
+<p>​	冗余能力：有</p>
+<p>​	空间利用率：(n-2)&#x2F;n</p>
+<p>​    至少需要6块</p>
+<p>jbod:</p>
+<p>​	性能表现：无提升</p>
+<p>​	冗余能力：无</p>
+<p>​	空间利用率：100%</p>
+<p>​	至少需要2块</p>
+<p>逻辑RIAD：</p>
+<p>&#x2F;dev&#x2F;md0</p>
+<p>&#x2F;dev&#x2F;md1</p>
+<p>md: </p>
+<p>mdadm: 将任何块设备做成RAID</p>
+<p>模式化的命令：</p>
+<p>​	创建模式</p>
+<p>​		-C </p>
+<p>​			专用选项：</p>
+<p>​				-l: 级别</p>
+<p>​				-n #: 设备个数</p>
+<p>​				-a {yes|no}: 是否自动为其创建设备文件</p>
+<p>​				-c: CHUNK大小, 2^n，默认为64K</p>
+<p>​				-x #: 指定空闲盘个数</p>
+<p>​	管理模式</p>
+<p>​		–add, –remove, –fail</p>
+<p>​		mdadm &#x2F;dev&#x2F;md# –fail &#x2F;dev&#x2F;sda7</p>
+<p>​	监控模式</p>
+<p>​		-F</p>
+<p>​	增长模式</p>
+<p>​		-G</p>
+<p>​	装配模式</p>
+<p>​		-A</p>
+<p>查看RAID阵列的详细信息</p>
+<p>mdadm -D &#x2F;dev&#x2F;md#</p>
+<p>​	–detail</p>
+<p>​	</p>
+<p>停止阵列：</p>
+<p>​	mdadm -S &#x2F;dev&#x2F;md#</p>
+<p>​		–stop</p>
+<p>创建一个空间大小为10G的RAID5设备；其chuck大小为32k；要求此设备开机时可以自动挂载至&#x2F;backup目录；</p>
+<p>RAID0</p>
+<p>​	2G:</p>
+<p>​		4: 512MB</p>
+<p>​		2: 1G</p>
+<p>RAID1</p>
+<p>​	2G</p>
+<p>​		2：2G</p>
+<p>​		</p>
+<p>​		</p>
+<p>watch: 周期性地执行指定命令，并以全屏方式显示结果</p>
+<p>​	-n #：指定周期长度，单位为秒，默认为2</p>
+<p>格式： watch -n # ‘COMMAND’</p>
+<p>​	</p>
+<p>将当前RAID信息保存至配置文件，以便以后进行装配：</p>
+<p>mdamd -D –scan &gt; &#x2F;etc&#x2F;mdadm.conf</p>
+<p>RAID5: </p>
+<p>​	2G: 3, 1G</p>
+<p>​	</p>
+<p>归档</p>
+<p>–xattrs</p>
+<p>文件系统类型：</p>
+<p>​	ext2</p>
+<p>​	ext3</p>
+<p>​	</p>
+<p>cat &#x2F;proc&#x2F;filesystems : 查看当前内核所支持文件系统类型</p>
+<p>RAID: 独立冗余磁盘阵列</p>
+<p>Linux：硬件，软件</p>
+<p>​	&#x2F;dev&#x2F;md#</p>
+<p>​	</p>
+<p>MD: Multi Device, 多设备</p>
+<p>mdadm：用户空间工具，管理工具</p>
+<p>​	创建</p>
+<p>​		-C</p>
+<p>​	管理</p>
+<p>​		–add, –remove, –fail</p>
+<p>​		-a, -r, -f</p>
+<p>​	监控</p>
+<p>​	增长</p>
+<p>​	装配</p>
+<p>​		-A</p>
+<p>​	-S</p>
+<p>​	-D</p>
+<p>​	</p>
+<p>RAID0, RAID1</p>
+<p>RAID01, RAID10</p>
+<p>RAID0+1: </p>
+<p>MD, DM</p>
+<p>​	&#x2F;dev&#x2F;md#</p>
+<p>​	meta device</p>
+<p>DM: Device Mapper</p>
+<p>​	逻辑设备</p>
+<p>​		RAID, LVM2</p>
+<p>​		</p>
+<p>DM: LVM2</p>
+<p>​	快照</p>
+<p>​	多路径</p>
+<p>任务计划</p>
+<p>10G, VG</p>
+<p>vgcreate VG_NAME &#x2F;PATH&#x2F;TO&#x2F;PV</p>
+<p>​	-s #: PE大小，默认为4MB</p>
+<p>​	</p>
+<p>lvcreate -n LV_NAME -L #G VG_NAME</p>
+<p>练习：创建一个由两个物理卷组成的大小为20G的卷组myvg，要求其PE大小为16M；而后在此卷组中创建一个大小为5G的逻辑卷lv1，此逻辑卷要能在开机后自动挂载至&#x2F;users目录，且支持ACL功能；</p>
+<p>缩减前面创建的逻辑卷lv1的大小至2G；</p>
+<p>一、扩展逻辑卷；</p>
+<p>lvextend</p>
+<p>​	-L [+]# &#x2F;PATH&#x2F;TO&#x2F;LV</p>
+<p>2G, +3G</p>
+<p>5G	</p>
+<p>​	</p>
+<p>resize2fs</p>
+<p>​	resize2fs -p &#x2F;PATH&#x2F;TO&#x2F;LV</p>
+<h5 id="二、缩减逻辑卷；"><a href="#二、缩减逻辑卷；" class="headerlink" title="二、缩减逻辑卷；"></a>二、缩减逻辑卷；</h5><p>注意：1、不能在线缩减，得先卸载；</p>
+<p>​	  2、确保缩减后的空间大小依然能存储原有的所有数据；</p>
+<p>​	  3、在缩减之前应该先强行检查文件，以确保文件系统处于一至性状态；</p>
+<p>df -lh</p>
+<p>umount </p>
+<p>e2fsck -f</p>
+<p>​	  	  </p>
+<p>resize2fs </p>
+<p>​	resize2fs &#x2F;PATH&#x2F;TO&#x2F;PV 3G</p>
+<p>lvreduce -L [-]# &#x2F;PATH&#x2F;TO&#x2F;LV</p>
+<p>重新挂载</p>
+<h5 id="三、快照卷"><a href="#三、快照卷" class="headerlink" title="三、快照卷"></a>三、快照卷</h5><p>1、生命周期为整个数据时长；在这段时长内，数据的增长量不能超出快照卷大小；</p>
+<p>2、快照卷应该是只读的；</p>
+<p>3、跟原卷在同一卷组内；</p>
+<p>lvcreate </p>
+<p>​	-s</p>
+<p>​	-p r|w</p>
+<p>​	</p>
+<p>lvcreate -L # -n SLV_NAME -p r &#x2F;PATH&#x2F;TO&#x2F;LV</p>
+<p>脚本编程控制结构：</p>
+<p>​	顺序</p>
+<p>​	选择</p>
+<p>​		if</p>
+<p>​		case</p>
+<p>​	循环</p>
+<p>​		for </p>
+<p>​		while</p>
+<p>​		until</p>
+<p>while CONDITION; do</p>
+<p>  statment</p>
+<p>done</p>
+<p>进入循环：条件满足</p>
+<p>退出循环：条件不满足</p>
+<p>​		</p>
+<p>until CONDITION; do</p>
+<p>  statement</p>
+<p>  …</p>
+<p>done</p>
+<p>进入循环：条件不满足</p>
+<p>退出循环：条件满足</p>
+<p>for 变量 in 列表; do </p>
+<p>​	循环体</p>
+<p>done</p>
+<p>​		</p>
+<p>for (( expr1 ; expr2 ; expr3 )); do </p>
+<p>  循环体</p>
+<p>done</p>
+<p>写一个脚本：</p>
+<p>1、通过ping命令测试192.168.0.151到192.168.0.254之间的所有主机是否在线，</p>
+<p>​	如果在线，就显示”ip is up.”，其中的IP要换为真正的IP地址，且以绿色显示；</p>
+<p>​	如果不在线，就显示”ip is down.”，其中的IP要换为真正的IP地址，且以红色显示；</p>
+<p>要求：分别使用while，until和for(两种形式)循环实现。</p>
+<p>ping</p>
+<p>​	-c</p>
+<p>​	-W</p>
+<p>awk ‘PATTERN{ACTION}’ file</p>
+<p>​	print $1</p>
+<p>写一个脚本(前提：请为虚拟机新增一块硬盘，假设它为&#x2F;dev&#x2F;sdb)，为指定的硬盘创建分区：</p>
+<p>1、列出当前系统上所有的磁盘，让用户选择，如果选择quit则退出脚本；如果用户选择错误，就让用户重新选择；</p>
+<p>2、当用户选择后，提醒用户确认接下来的操作可能会损坏数据，并请用户确认；如果用户选择y就继续，n就退出；否则，让用户重新选择；</p>
+<p>3、抹除那块硬盘上的所有分区(提示，抹除所有分区后执行sync命令，并让脚本睡眠3秒钟后再分区)；并为其创建三个主分区，第一个为20M，第二个为512M, 第三个为128M，且第三个为swap分区类型；(提示：将分区命令通过echo传送给fdisk即可实现)</p>
+<p>fdisk -l |grep “</p>
+<p>dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;&#x2F;dev&#x2F;sdb bs&#x3D;512 count&#x3D;1</p>
+<p>sync</p>
+<p>sleep 3</p>
+<p>RAID</p>
+<p>LVM：</p>
+<p>​	逻辑卷的缩减</p>
+<p>​	扩展</p>
+<p>​	快照卷</p>
+<p>while CONDITION; do</p>
+<p>  循环体</p>
+<p>done</p>
+<p>while [ $VAR !&#x3D; ‘quit’ ];do  </p>
+<p>​	</p>
+<p>done</p>
+<p>​	</p>
+<p>网络及网络配置</p>
+<p>0000 0001 . 0000 0001</p>
+<p>1111 1111 . 0000 0000</p>
+<p>0000 0001 . 0000 0010</p>
+<p>0000 0001 . 0000 0000</p>
+<p>1.0</p>
+<p>1.1 –&gt; 2.1</p>
+<p>1.0 </p>
+<p>1.1 –&gt; 1.2</p>
+<p>1.0  1.0</p>
+<p>IPv4点分十进制：</p>
+<p>0000 0000 - 1111 1111</p>
+<p>0-255</p>
+<p>221.34.23.12</p>
+<p>网络地址：</p>
+<p>主机地址：</p>
+<p>32位二进制</p>
+<p>A类: 255.0.0.0， 8：</p>
+<p>​	0 000 0001 - 0 111 1111 </p>
+<p>​	127个A类，127用于回环，1-126</p>
+<p>​	2^7-1个A类</p>
+<p>​	容纳多少个主机：2^24-2</p>
+<p>​	主机位全0：网络地址</p>
+<p>​	主机位全1：广播地址</p>
+<p>B类：255.255.0.0， 16</p>
+<p>​	10 00 0000- 10 11 1111</p>
+<p>​	128-191</p>
+<p>​	129.1.0.0.</p>
+<p>​	130.1.0.0</p>
+<p>​	64个B类，2^14个B类网</p>
+<p>​	容纳多少个主机:2^16-2</p>
+<p>C类：255.255.255.0， 24</p>
+<p>​	110 0 0000 - 110 1 1111</p>
+<p>​	192-223</p>
+<p>​	32个C类, 2^21个C类网</p>
+<p>​	容纳多个少个主机：2^8-2</p>
+<p>私有地址：</p>
+<p>​	A类：10.0.0.0&#x2F;8</p>
+<p>​	B类：172.16.0.0&#x2F;16-172.31.0.0&#x2F;16</p>
+<p>​	C类：192.168.0.0&#x2F;24-192.168.255.0&#x2F;24</p>
+<p>​	</p>
+<p>路由：选路</p>
+<p>​	</p>
+<p>​	</p>
+<p>ICANN, IANA</p>
+<p>​	</p>
+<p>D类：</p>
+<p>​	1110 0000 - 1110 1111</p>
+<p>​	224-239</p>
+<p>E类：</p>
+<p>主机接入网络：</p>
+<p>IP</p>
+<p>NETMASK</p>
+<p>GATEWAY</p>
+<p>HOSTNAME</p>
+<p>DNS1</p>
+<p>DNS2</p>
+<p>DNS3</p>
+<p>​	手动指定</p>
+<p>​	DHCP：Dynamic Host Configuration Protocol</p>
+<p>​		169.254.</p>
+<p>路由</p>
+<p>Linux: 网络属于内核的功能</p>
+<p>RHEL5: &#x2F;etc&#x2F;modprobe.conf</p>
+<p>alias</p>
+<p>RHEL6: &#x2F;etc&#x2F;udev&#x2F;rules.d&#x2F;70-persistent-net.rules</p>
+<p>以太网：ethX</p>
+<p>ifconfig [ethX] </p>
+<p>​	-a: 显示所有接口的配置住处</p>
+<p>​	</p>
+<p>ifconfig ethX IP&#x2F;MASK [up|down] </p>
+<p>​	配置的地址立即生效，但重启网络服务或主机，都会失效；</p>
+<p>​	</p>
+<p>网络服务：</p>
+<p>RHEL5:	&#x2F;etc&#x2F;init.d&#x2F;network {start|stop|restart|status}</p>
+<p>RHEL6: &#x2F;etc&#x2F;init.d&#x2F;NetworkManager {start|stop|restart|status}</p>
+<p>网关：</p>
+<p>route </p>
+<p>​	add: 添加</p>
+<p>​		-host: 主机路由</p>
+<p>​		-net：网络路由</p>
+<p>​			-net 0.0.0.0</p>
+<p>​	route add -net|-host DEST gw NEXTHOP</p>
+<p>​	route add default gw NEXTHOP</p>
+<p>del：删除</p>
+<p>​	-host</p>
+<p>​	-net </p>
+<p>​	</p>
+<p>​	route del -net 10.0.0.0&#x2F;8 </p>
+<p>​	route del -net 0.0.0.0</p>
+<p>​	route del default</p>
+<p>​	所做出的改动重启网络服务或主机后失效；</p>
+<p>查看：</p>
+<p>​	route -n: 以数字方式显示各主机或端口等相关信息</p>
+<p>​	</p>
+<p>网络配置文件：</p>
+<p>&#x2F;etc&#x2F;sysconfig&#x2F;network</p>
+<p>网络接口配置文件：</p>
+<p>&#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-INTERFACE_NAME</p>
+<p>DEVICE&#x3D;: 关联的设备名称，要与文件名的后半部“INTERFACE_NAME”保持一致; </p>
+<p>BOOTPROTO&#x3D;{static|none|dhcp|bootp}: 引导协议；要使用静态地址，使用static或none；dhcp表示使用DHCP服务器获取地址；</p>
+<p>IPADDR&#x3D;: IP地址</p>
+<p>NETMASK&#x3D;：子网掩码</p>
+<p>GATEWAY&#x3D;：设定默认网关；</p>
+<p>ONBOOT&#x3D;：开机时是否自动激活此网络接口；</p>
+<p>HWADDR&#x3D;： 硬件地址，要与硬件中的地址保持一致；可省；</p>
+<p>USERCTL&#x3D;{yes|no}: 是否允许普通用户控制此接口；</p>
+<p>PEERDNS&#x3D;{yes|no}: 是否在BOOTPROTO为dhcp时接受由DHCP服务器指定的DNS地址；</p>
+<p>不会立即生效，但重启网络服务或主机都会生效；</p>
+<p>路由：</p>
+<p>&#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;route-ethX</p>
+<p>添加格式一：</p>
+<p>DEST	via 	NEXTHOP</p>
+<p>添加格式二：</p>
+<p>ADDRESS0&#x3D;</p>
+<p>NETMASK0&#x3D;</p>
+<p>GATEWAY0&#x3D;</p>
+<p>DNS服务器指定方法只有一种：</p>
+<p>&#x2F;etc&#x2F;resolv.conf</p>
+<p>nameserver DNS_IP_1</p>
+<p>nameserver DNS_IP_2</p>
+<p>指定本地解析：</p>
+<p>&#x2F;etc&#x2F;hosts</p>
+<p>主机IP	主机名	主机别名</p>
+<p>172.16.0.1		<a class="link"   target="_blank" rel="noopener" href="http://www.magedu.com/" >www.magedu.com<i class="fas fa-external-link-alt"></i></a>		www</p>
+<p>DNS–&gt;&#x2F;etc&#x2F;hosts–&gt;DNS</p>
+<p>配置主机名：</p>
+<p>hostname HOSTNAME</p>
+<p>立即生效，但不是永久有效；</p>
+<p>&#x2F;etc&#x2F;sysconfig&#x2F;network</p>
+<p>HOSTNAME&#x3D;</p>
+<p>RHEL5：</p>
+<p>​	setup: system-config-network-tui</p>
+<p>​	system-config-network-gui</p>
+<p>​	</p>
+<p>ifconfig, 老旧</p>
+<p>iproute2</p>
+<p>​	ip</p>
+<p>​		link: 网络接口属性</p>
+<p>​		addr: 协议地址</p>
+<p>​		route: 路由</p>
+<p>​	link</p>
+<p>​		show</p>
+<p>​			ip -s link show</p>
+<p>​		set</p>
+<p>​			ip link set DEV {up|down}</p>
+<p>​			</p>
+<p>​	addr</p>
+<p>​		add</p>
+<p>​			ip addr add ADDRESS dev DEV</p>
+<p>​		del</p>
+<p>​			ip addr del ADDRESS dev DEV</p>
+<p>​		show</p>
+<p>​			ip addr show dev DEV to PREFIX</p>
+<p>​		flush</p>
+<p>​			ip addr flush dev DEV to PREFIX</p>
+<p>​		</p>
+<p>​		</p>
+<p>一块网卡可以使用多个地址：</p>
+<p>网络设备可以别名：</p>
+<p>eth0</p>
+<p>​	ethX:X, eth0:0, eth0:1, …</p>
+<p>​	</p>
+<p>配置方法：</p>
+<p>​	ifconfig ethX:X IP&#x2F;NETMASK</p>
+<p>​	</p>
+<p>​	&#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-ethX:X</p>
+<p>​	DEVICE&#x3D;ethX:X</p>
+<p>​	非主要地址不能使用DHCP动态获取; </p>
+<p>ip</p>
+<p>​	eth1, 添加个地址192.168.100.1</p>
+<p>​	</p>
+<p>ip addr add 192.168.100.1&#x2F;24 dev eth1 label eth1:0</p>
+<p>primary address</p>
+<p>secondary adress</p>
+<p>192.168.100.6</p>
+<p>10.0.1.0&#x2F;24, 192.168.100.6</p>
+<p>路由:</p>
+<p>route add -net 10.0.1.0&#x2F;24 gw 192.168.100.6</p>
+<p>ip route add to 10.0.1.0&#x2F;24 dev eth1 via 192.168.100.6</p>
+<p>​	add, change, show, flush, replace</p>
+<p>​	</p>
+<p>ifconfig eth0, 172.16.200.33&#x2F;16</p>
+<p>ifconfig eth0:0 172.16.200.33&#x2F;16</p>
+<p>TCP:</p>
+<p>​	URG </p>
+<p>​	SYN</p>
+<p>​	ACK</p>
+<p>​	PSH</p>
+<p>​	RST</p>
+<p>​	FIN</p>
+<p>​	</p>
+<p>软件包管理</p>
+<p>应用程序：</p>
+<p>​	程序，Architecture</p>
+<p>​	</p>
+<p>C语言：源代码–&gt;（编译）二进制格式</p>
+<p>脚本：解释器（二进制程序）</p>
+<p>源代码–&gt;编译–&gt;链接–&gt;运行</p>
+<p>​	程序：</p>
+<p>​		库</p>
+<p>​			静态</p>
+<p>​			动态</p>
+<p>​			静态链接</p>
+<p>​			动态链接</p>
+<p>​				共享库</p>
+<p>​				</p>
+<p>配置文件：</p>
+<p>dir&#x3D;&#x2F;path&#x2F;to&#x2F;somewhere</p>
+<p>程序组成部分：</p>
+<p>​	二进制程序</p>
+<p>​	库</p>
+<p>​	配置文件</p>
+<p>​	帮助文件</p>
+<p>​	</p>
+<p>&#x2F;boot</p>
+<p>&#x2F;etc</p>
+<p>&#x2F;usr</p>
+<p>&#x2F;var</p>
+<p>&#x2F;dev</p>
+<p>&#x2F;lib</p>
+<p>&#x2F;tmp</p>
+<p>&#x2F;bin</p>
+<p>&#x2F;sbin</p>
+<p>&#x2F;proc</p>
+<p>&#x2F;sys</p>
+<p>&#x2F;mnt</p>
+<p>&#x2F;media</p>
+<p>&#x2F;home</p>
+<p>&#x2F;root</p>
+<p>&#x2F;misc</p>
+<p>&#x2F;opt</p>
+<p>&#x2F;srv</p>
+<p>&#x2F;usr&#x2F;share&#x2F;man</p>
+<p>&#x2F;etc, &#x2F;bin, &#x2F;sbin, &#x2F;lib</p>
+<p>​	系统启动就需要用到的程序，这些目录不能挂载额外的分区，必须在根文件系统的分区上</p>
+<p>​	</p>
+<p>&#x2F;usr&#x2F;</p>
+<p>​	bin</p>
+<p>​	sbin</p>
+<p>​	lib</p>
+<p>​	</p>
+<p>​	操作系统核心功能，可以单独分区</p>
+<p>​	</p>
+<p>&#x2F;usr&#x2F;local</p>
+<p>​	bin</p>
+<p>​	sbin</p>
+<p>​	lib</p>
+<p>​	etc</p>
+<p>​	man</p>
+<p>&#x2F;opt</p>
+<p>&#x2F;proc</p>
+<p>&#x2F;sys</p>
+<p>​	不能单独分区，默认为空；</p>
+<p>​	</p>
+<p>&#x2F;dev: 设备，不能单独分区；</p>
+<p>​	udev</p>
+<p>​	</p>
+<p>&#x2F;root: 不能单独分区</p>
+<p>&#x2F;var：建议单独分区</p>
+<p>&#x2F;boot：内核，initrd(initramfs)</p>
+<p>​	内核：</p>
+<p>​	</p>
+<p>POST–&gt;BIOS(HD)–&gt;(MBR)bootloader(文件系统结构，ext2, ext3, xfs)–&gt;内核</p>
+<p>程序：指令+数据</p>
+<p>​	指令：芯片</p>
+<p>​		CPU: 普通指令，特权指令</p>
+<p>​		指令集</p>
+<p>​		</p>
+<p>C语言：</p>
+<p>​	Powerpc: 二进制格式 </p>
+<p>​	x86：</p>
+<p>x86: 汇编</p>
+<p>powerpc: 汇编</p>
+<p>高级语言：</p>
+<p>C:</p>
+<p>软件包管理器的核心功能：</p>
+<p>1、制作软件包；</p>
+<p>2、安装、卸载、升级、查询、校验；</p>
+<p>Redhat, SUSE, Debian</p>
+<p>Redhat, SUSE: RPM</p>
+<p>​	Redhat Package Manager</p>
+<p>​	PRM is Package Manager</p>
+<p>Debian: dpt</p>
+<p>依赖关系：</p>
+<p>​	X–&gt;Y–&gt;Z</p>
+<p>​	</p>
+<p>​	X–&gt;Y–&gt;Z</p>
+<p>​	</p>
+<p>前端工具：yum, apt-get</p>
+<p>后端工具：RPM, dpt</p>
+<p>yum: Yellowdog Update Modifier</p>
+<p>​	yum</p>
+<p>rpm命令：</p>
+<p>​	rpm:</p>
+<p>​		数据库:&#x2F;var&#x2F;lib&#x2F;rpm</p>
+<p>​	rpmbuild:</p>
+<p>​	</p>
+<p>安装、查询、卸载、升级、校验、数据库的重建、验正数据包等工作；</p>
+<p>rpm命名：</p>
+<p>包：组成部分</p>
+<p>​	主包：</p>
+<p>​		bind-9.7.1-1.el5.i586.rpm</p>
+<p>​	子包：</p>
+<p>​		bind-libs-9.7.1-1.el5.i586.rpm</p>
+<p>​		bind-utils-9.7.1-1.el5.i586.rpm</p>
+<p>包名格式：</p>
+<p>​	name-version-release.arch.rpm</p>
+<p>​	bind-major.minor.release-release.arch.rpm</p>
+<p>主版本号：重大改进</p>
+<p>次版本号：某个子功能发生重大变化</p>
+<p>发行号：修正了部分bug，调整了一点功能</p>
+<p>bind-9.7.1.tar.gz	</p>
+<p>rpm包：</p>
+<p>​	二进制格式</p>
+<p>​		rpm包作者下载源程序，编译配置完成后，制作成rpm包</p>
+<p>​		bind-9.7.1-1.noarch.rpm</p>
+<p>​		bind-9.7.1-1.ppc.rpm</p>
+<p>rpm:</p>
+<p>1、安装</p>
+<p>rpm -i &#x2F;PATH&#x2F;TO&#x2F;PACKAGE_FILE</p>
+<p>​	-h: 以#显示进度；每个#表示2%; </p>
+<p>​	-v: 显示详细过程</p>
+<p>​	-vv: 更详细的过程</p>
+<p>​	</p>
+<p>rpm -ivh &#x2F;PATH&#x2F;TO&#x2F;PACKAGE_FILE</p>
+<p>​	–nodeps: 忽略依赖关系；</p>
+<p>​	–replacepkgs: 重新安装，替换原有安装；</p>
+<p>​	–force: 强行安装，可以实现重装或降级；</p>
+<p>​	</p>
+<p>2、查询</p>
+<p>rpm -q PACKAGE_NAME： 查询指定的包是否已经安装</p>
+<p>rpm -qa : 查询已经安装的所有包</p>
+<p>rpm -qi PACKAGE_NAME: 查询指定包的说明信息；</p>
+<p>rpm -ql PACKAGE_NAME: 查询指定包安装后生成的文件列表；</p>
+<p>rpm -qc PACEAGE_NEME：查询指定包安装的配置文件；</p>
+<p>rpm -qd PACKAGE_NAME: 查询指定包安装的帮助文件；</p>
+<p>rpm -q –scripts PACKAGE_NAME: 查询指定包中包含的脚本</p>
+<p>​	</p>
+<p>rpm -qf &#x2F;path&#x2F;to&#x2F;somefile: 查询指定的文件是由哪个rpm包安装生成的；</p>
+<p>​	</p>
+<p>如果某rpm包尚未安装，我们需查询其说明信息、安装以后会生成的文件；</p>
+<p>rpm -qpi &#x2F;PATH&#x2F;TO&#x2F;PACKAGE_FILE</p>
+<p>rpm -qpl </p>
+<p>3、升级</p>
+<p>rpm -Uvh &#x2F;PATH&#x2F;TO&#x2F;NEW_PACKAGE_FILE: 如果装有老版本的，则升级；否则，则安装；</p>
+<p>rpm -Fvh &#x2F;PATH&#x2F;TO&#x2F;NEW_PACKAGE_FILE：如果装有老版本的，则升级；否则，退出；</p>
+<p>​	–oldpackage: 降级</p>
+<p>​	</p>
+<p>4、卸载</p>
+<p>rpm -e PACKAGE_NAME</p>
+<p>​	–nodeps</p>
+<p>​	</p>
+<p>5、校验</p>
+<p>​	rpm -V PACKAGE_NAME</p>
+<p>​	</p>
+<p>6、重建数据库</p>
+<p>​	rpm </p>
+<p>​		–rebuilddb: 重建数据库，一定会重新建立；</p>
+<p>​		–initdb：初始化数据库，没有才建立，有就不用建立；</p>
+<p>7、检验来源合法性，及软件包完整性；</p>
+<p>加密类型：</p>
+<p>​	对称：加密解密使用同一个密钥</p>
+<p>​	公钥：一对儿密钥，公钥，私钥；公钥隐含于私钥中，可以提取出来，并公开出去；</p>
+<p>​		</p>
+<p>​	单向：</p>
+<p># ls &#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;</p>
+<p>​	RPM-GPG-KEY-redhat-release</p>
+<p>​	</p>
+<p>rpm -K &#x2F;PAPT&#x2F;TO&#x2F;PACKAGE_FILE</p>
+<p>​	dsa, gpg: 验正来源合法性，也即验正签名；可以使用–nosignature，略过此项</p>
+<p>​	sha1, md5: 验正软件包完整性；可以使用–nodigest，略过此项</p>
+<p>​	</p>
+<p>​	</p>
+<p>rpm –import &#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;RPM-GPG-KEY-redhat-release: 导入密钥文件</p>
+<p>1、rpm -qf </p>
+<p>2、rpm -qpl</p>
+<p>​	l: List</p>
+<p>​	i: 软件包的信息；</p>
+<p>3、–import &#x2F;etc&#x2F;pki&#x2F;rpm-gpg&#x2F;</p>
+<p>4、–rebuilddb</p>
+<p>rpm –&gt; yum</p>
+<p>HTML: HyperText Mark Language</p>
+<p>XML: eXtended Mark Language</p>
+<p>XML, JSON: 半结构化的数据</p>
+<p>yum仓库中的元数据文件：</p>
+<p>primary.xml.gz</p>
+<p>​	所有RPM包的列表；</p>
+<p>​	依赖关系；</p>
+<p>​	每个RPM安装生成的文件列表；</p>
+<p>filelists.xml.gz</p>
+<p>​	当前仓库中所有RPM包的所有文件列表；</p>
+<p>other.xml.gz</p>
+<p>​	额外信息，RPM包的修改日志；</p>
+<p>repomd.xml</p>
+<p>​	记录的是上面三个文件的时间戳和校验和；</p>
+<p>​	</p>
+<p>yum install zsh</p>
+<p>comps*.xml: RPM包分组信息</p>
+<p>​	</p>
+<p><a class="link"   href="ftp://172.16.0.1/pub/%7BServer,VT,Cluster,ClusterStorage%7D" >ftp://172.16.0.1/pub/{Server,VT,Cluster,ClusterStorage}<i class="fas fa-external-link-alt"></i></a></p>
+<p>如何为yum定义repo文件</p>
+<p>[Repo_ID]</p>
+<p>name&#x3D;Description</p>
+<p>baseurl&#x3D;</p>
+<p>​	ftp:&#x2F;&#x2F;</p>
+<p>​	http:&#x2F;&#x2F;</p>
+<p>​	file:&#x2F;&#x2F;&#x2F;</p>
+<p>enabled&#x3D;{1|0}</p>
+<p>gpgcheck&#x3D;{1|0}</p>
+<p>gpgkey&#x3D;</p>
+<p>yum [options] [command] [package …]</p>
+<p>-y: 自动回答为yes</p>
+<p>–nogpgcheck</p>
+<p>list: 列表 </p>
+<p>​	支持glob</p>
+<p>​	all</p>
+<p>​	available：可用的，仓库中有但尚未安装的</p>
+<p>​	installed: 已经安装的</p>
+<p>​	updates: 可用的升级</p>
+<p>clean: 清理缓存</p>
+<p>​	[ packages | headers | metadata | dbcache | all ]</p>
+<p>​	</p>
+<p>repolist: 显示repo列表及其简要信息</p>
+<p>​	all</p>
+<p>​	enabled： 默认</p>
+<p>​	disabled</p>
+<p>install: 安装</p>
+<p>yum install PACKAGE_NAME</p>
+<p>update: 升级</p>
+<p>update_to: 升级为指定版本</p>
+<p>remove|erase：卸载</p>
+<p>info: </p>
+<p>provides| whatprovides: 查看指定的文件或特性是由哪个包安装生成的; </p>
+<p>​	</p>
+<p>groupinfo</p>
+<p>grouplist</p>
+<p>groupinstall</p>
+<p>groupremove</p>
+<p>groupupdate</p>
+<p>&#x2F;media&#x2F;cdrom&#x2F;{Server,VT,Cluster,ClusterStorage}</p>
+<p>如何创建yum仓库：</p>
+<p>createrepo</p>
+<p><a class="link"   target="_blank" rel="noopener" href="http://172.16.0.1/yum/%7BServer,VT%7D" >http://172.16.0.1/yum/{Server,VT}<i class="fas fa-external-link-alt"></i></a></p>
+<p>练习：</p>
+<p>1、将系统安装光盘挂载至&#x2F;media&#x2F;yum目录，用其实现yum仓库；</p>
+<p>2、配置使用<a class="link"   target="_blank" rel="noopener" href="http://172.16.0.1/yum/%7BServer,VT,Cluster,ClusterStorage%7D%E4%B8%BA%E5%8F%AF%E7%94%A8yum%E4%BB%93%E5%BA%93%EF%BC%9B" >http://172.16.0.1/yum/{Server,VT,Cluster,ClusterStorage}为可用yum仓库；<i class="fas fa-external-link-alt"></i></a></p>
+<p>写一个脚本，完成以下功能：</p>
+<p>说明：此脚本能于同一个repo文件中创建多个Yum源的指向；</p>
+<p>1、接受一个文件名做为参数，此文件存放至&#x2F;etc&#x2F;yum.repos.d目录中，且文件名以.repo为后缀；要求，此文件不能事先存，否则，报错；</p>
+<p>2、在脚本中，提醒用户输入repo id；如果为quit，则退出脚本；否则，继续完成下面的步骤；</p>
+<p>3、repo name以及baseurl的路径，而后以repo文件的格式将其保存至指定的文件中；</p>
+<p>4、enabled默认为1，而gpgcheck默认设定为0；</p>
+<p>5、此脚本会循环执行多次，除非用户为repo id指定为quit；</p>
+<p>if [ -e $1 ]; then</p>
+<p>  echo “$1 exist.”</p>
+<p>  exit 5</p>
+<p>fi</p>
+<p>[repo id]</p>
+<p>name&#x3D;</p>
+<p>baseurl&#x3D;</p>
+<p>enabled&#x3D;</p>
+<p>gpgcheck&#x3D;</p>
+<p>while, until, for</p>
+<p>break: 提前退出循环</p>
+<p>continue：提前结束本轮循环，而进入下一轮循环；</p>
+<p>1000， SUM&gt;5000</p>
+<p>while的特殊用法一：</p>
+<p>while :;do</p>
+<p>done</p>
+<p>while的特殊用法二：</p>
+<p>while read LINE; do</p>
+<p>done &lt; &#x2F;PATH&#x2F;TO&#x2F;SOMEFILE</p>
+<p>&#x2F;etc&#x2F;passwd</p>
+<p>写一个脚本，完成如下功能：</p>
+<p>说明：此脚本能够为指定网卡创建别名，则指定地址；使用格式如：mkethalias.sh -v|–verbose -i ethX</p>
+<p>1、-i选项用于指定网卡；指定完成后，要判断其是否存在，如果不存在，就退出；</p>
+<p>2、如果用户指定的网卡存在，则让用户为其指定一个别名，此别名可以为空；如果不空，请确保其事先不存在，否则，要报错，并让用户重新输入；</p>
+<p>3、在用户输入了一个正确的别名后，请用户输入地址和掩码；并将其配置在指定的别名上；</p>
+<p>4、如果用户使用了-v选项，则在配置完成后，显示其配置结果信息；否则，将不显示；</p>
+<p>RPM安装：</p>
+<p>​	二进制格式：</p>
+<p>​	源程序–&gt;编译–&gt;二进制格式</p>
+<p>​		有些特性是编译选定的，如果编译未选定此特性，将无法使用；</p>
+<p>​		rpm包的版本会落后于源码包，甚至落后很多；bind-9.8.7, bind-9.7.2</p>
+<p>​		</p>
+<p>定制：手动编译安装</p>
+<p>编译环境，开发环境</p>
+<p>开发库，开发工具</p>
+<p>Linux: C,</p>
+<p>GNU: C</p>
+<p>C，C++:</p>
+<p>gcc: GNU C Complier, C</p>
+<p>g++: </p>
+<p>make: 项目管理工具，</p>
+<p>​	makefile: 定义了make（gcc,g++）按何种次序去编译这些源程序文件中的源程序</p>
+<p>automake, –&gt; makefile.in –&gt; makefile</p>
+<p>autoconf, –&gt; configure</p>
+<p>100个可选择特性，</p>
+<p>make install</p>
+<p>编译安装的三步骤：</p>
+<p>前提：准备开发环境(编译环境)</p>
+<p>安装”Development Tools”和”Development Libraries” </p>
+<p># tar </p>
+<p># cd</p>
+<p># .&#x2F;configure  </p>
+<p>​	–help </p>
+<p>​	–prefix&#x3D;&#x2F;path&#x2F;to&#x2F;somewhere</p>
+<p>​	–sysconfdir&#x3D;&#x2F;PATH&#x2F;TO&#x2F;CONFFILE_PATH</p>
+<p>​	功能：1、让用户选定编译特性；2、检查编译环境；</p>
+<p># make</p>
+<p># make install</p>
+<p># tar xf tengine-1.4.2.tar.gz</p>
+<p># cd tegnine-1.4.2</p>
+<p># .&#x2F;configure –prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;tengine –conf-path&#x3D;&#x2F;etc&#x2F;tengine&#x2F;tengine.conf</p>
+<p># make</p>
+<p># make install</p>
+<p># &#x2F;usr&#x2F;local&#x2F;tengine&#x2F;sbin&#x2F;nginx</p>
+<p>1、修改PATH环境变量，以能够识别此程序的二进制文件路径；</p>
+<p>​	修改&#x2F;etc&#x2F;profile文件</p>
+<p>​	在&#x2F;etc&#x2F;profile.d&#x2F;目录建立一个以.sh为名称后缀的文件，在里面定义export PATH&#x3D;$PATH:&#x2F;path&#x2F;to&#x2F;somewhere</p>
+<p>2、默认情况下，系统搜索库文件的路径&#x2F;lib, &#x2F;usr&#x2F;lib; 要增添额外搜寻路径：</p>
+<p>​	在&#x2F;etc&#x2F;ld.so.conf.d&#x2F;中创建以.conf为后缀名的文件，而后把要增添的路径直接写至此文件中；</p>
+<p>​	# ldconfig 通知系统重新搜寻库文件</p>
+<p>​		-v: 显示重新搜寻库的过程</p>
+<p>3、头文件：输出给系统</p>
+<p>​	默认：&#x2F;usr&#x2F;include</p>
+<p>​	增添头文件搜寻路径，使用链接进行：</p>
+<p>​		&#x2F;usr&#x2F;local&#x2F;tengine&#x2F;include&#x2F;   &#x2F;usr&#x2F;include&#x2F;</p>
+<p>​		两种方式：</p>
+<p>​		ln -s &#x2F;usr&#x2F;local&#x2F;tengine&#x2F;include&#x2F;* &#x2F;usr&#x2F;include&#x2F; 或</p>
+<p>​		ln -s &#x2F;usr&#x2F;local&#x2F;tengine&#x2F;include  &#x2F;usr&#x2F;include&#x2F;tengine</p>
+<p>4、man文件路径：安装在–prefix指定的目录下的man目录；&#x2F;usr&#x2F;share&#x2F;man	</p>
+<p>​		1、man -M &#x2F;PATH&#x2F;TO&#x2F;MAN_DIR COMMAND</p>
+<p>​		2、在&#x2F;etc&#x2F;man.config中添加一条MANPATH</p>
+<p>​		</p>
+<p>​		</p>
+<p>netstat命令：</p>
+<p>​	-r: 显示路由表</p>
+<p>​	-n: 以数字方式显示</p>
+<p>​	</p>
+<p>​	-t: 建立的tcp连接</p>
+<p>​	-u: 显示udp连接</p>
+<p>​	-l: 显示监听状态的连接</p>
+<p>​	-p: 显示监听指定的套接字的进程的进程号及进程名</p>
+<p>​	</p>
+<p>​	</p>
+<p>循环控制：</p>
+<p>break</p>
+<p>中断循环，而后执行循环后面的语句；</p>
+<p>continue</p>
+<p>中断当前这一次循环，提前进入下一软循环</p>
+<p>写一个脚本，完成以下功能：</p>
+<p>1、提示用户输入一个用户名；</p>
+<p>2、显示一个菜单给用户，形如：</p>
+<p>U|u  show UID</p>
+<p>G|g  show GID</p>
+<p>S|s  show SHELL</p>
+<p>Q|q  quit</p>
+<p>3、提醒用户选择一个选项，并显示其所选择的内容；</p>
+<p>如果用户给的是一个非上述所提示的选项，则提醒用户给出的选项错误，并请其重新选择后执行；</p>
+<p>写一个脚本：</p>
+<p>1、判断一个指定的bash脚本是否有语法错误；如果有错误，则提醒用户键入Q或者q无视错误并退出，其它任何键可以通过vim打开这个指定的脚本；</p>
+<p>2、如果用户通过vim打开编辑后保存退出时仍然有错误，则重复第1步中的内容；否则，就正常关闭退出。</p>
+<p>.&#x2F;syntax.sh a.sh</p>
+<p>until bash -n $1 &amp;&gt; &#x2F;dev&#x2F;null; do</p>
+<p>​	read -p “Syntax error, [Qq] to quit, others for editing: “  CHOICE</p>
+<p>​	case $CHOICE in</p>
+<p>​	q|Q)</p>
+<p>​	    echo “Something wrong, quiting.”</p>
+<p>​	    exit 5</p>
+<p>​	    ;;</p>
+<p>​	*)</p>
+<p>​		vim + $1</p>
+<p>​		;;</p>
+<p>​	esac</p>
+<p>done</p>
+<p>echo “0K”</p>
+<p>函数：功能, function</p>
+<p>代码重用：</p>
+<p>库：so</p>
+<p>脚本编程之函数：</p>
+<p>function: 功能</p>
+<p>结构化编程，不能独立运行，需要调用时执行，可以被多次调用</p>
+<p>定义一个函数：</p>
+<p>function FUNCNAME {</p>
+<p>  command</p>
+<p>}</p>
+<p>FUNCNAME() {</p>
+<p>  command</p>
+<p>}</p>
+<p>自定义执行状态返回值：</p>
+<p>return #</p>
+<p>0-255</p>
+<p>接受参数的函数：</p>
+<p>.&#x2F;a.sh m n </p>
+<p>$1: m</p>
+<p>$2: n</p>
+<p>TWOINT 5 6</p>
+<p>$1: 5</p>
+<p>$2: 6</p>
+<p>练习：写一个脚本，判定192.168.0.200-192.168.0.254之间的主机哪些在线。要求：</p>
+<p>1、使用函数来实现一台主机的判定过程；</p>
+<p>2、在主程序中来调用此函数判定指定范围内的所有主机的在线情况。</p>
+<p>#!&#x2F;bin&#x2F;bash</p>
+<p>#</p>
+<p>PING() {</p>
+<p>  for I in {200..254};do</p>
+<p>​    if ping -c 1 -W 1 192.168.0.$I &amp;&gt; &#x2F;dev&#x2F;null; then</p>
+<p>​      echo “192.168.0.$I is up.”</p>
+<p>​    else</p>
+<p>​      echo “192.168.0.$I is down.”</p>
+<p>​    fi</p>
+<p>  done</p>
+<p>}</p>
+<p>PING</p>
+<p>#!&#x2F;bin&#x2F;bash</p>
+<p>#</p>
+<p>PING() {</p>
+<p>​    if ping -c 1 -W 1 $1 &amp;&gt; &#x2F;dev&#x2F;null; then</p>
+<p>​      echo “$1 is up.”</p>
+<p>​    else</p>
+<p>​      echo “$1 is down.”</p>
+<p>​    fi</p>
+<p>}</p>
+<p>for I in {200..254}; do</p>
+<p>  PING 192.168.0.$I</p>
+<p>done</p>
+<p>#!&#x2F;bin&#x2F;bash</p>
+<p>#</p>
+<p>PING() {</p>
+<p>​    if ping -c 1 -W 1 $1 &amp;&gt; &#x2F;dev&#x2F;null; then</p>
+<p>​      return 0</p>
+<p>​    else</p>
+<p>​      return 1</p>
+<p>​    fi</p>
+<p>}</p>
+<p>for I in {200..254}; do</p>
+<p>  PING 192.168.0.$I</p>
+<p>  if [ $? -eq 0 ]; then</p>
+<p>​    echo “192.168.0.$I is up.”</p>
+<p>  else</p>
+<p>​    echo “192.168.0.$I is down.”</p>
+<p>  fi</p>
+<p>done</p>
+<p>写一个脚本：使用函数完成</p>
+<p>1、函数能够接受一个参数，参数为用户名；</p>
+<p>   判断一个用户是否存在</p>
+<p>   如果存在，就返回此用户的shell和UID；并返回正常状态值；</p>
+<p>   如果不存在，就说此用户不存在；并返回错误状态值；</p>
+<p>2、在主程序中调用函数；</p>
+<p>扩展1：在主程序中，让用户自己输入用户名后，传递给函数来进行判断；</p>
+<p>扩展2：在主程序中，输入用户名判断后不退出脚本，而是提示用户继续输入下一个用户名；如果用户输入的用户不存在，请用户重新输入；但如果用户输入的是q或Q就退出；</p>
+<p>#!&#x2F;bin&#x2F;bash</p>
+<p>#</p>
+<p>user () {</p>
+<p>if id $1 &amp;&gt; &#x2F;dev&#x2F;null ;then</p>
+<p>echo “<code>grep ^$1  /etc/passwd | cut -d: -f3,7</code>“</p>
+<p>   return 0</p>
+<p>else</p>
+<p>   echo “no $1”</p>
+<p>​    return 1</p>
+<p>fi</p>
+<p>}</p>
+<p>read -p “please input username:” username</p>
+<p>until [ $username &#x3D;&#x3D; q -o $username &#x3D;&#x3D; Q ]; do</p>
+<p>​	user $username</p>
+<p>​	if [ $? &#x3D;&#x3D; 0 ];then</p>
+<p>​		read -p “please input again:” username</p>
+<p>​	else</p>
+<p>​		read -p “no $username,please input again:” username</p>
+<p>​	fi</p>
+<p>done</p>
+<p>函数也可以接受参数, 即可以向函数传递参数</p>
+<p>函数接受一个用户名参数，显示此用户的shell和UID；</p>
+<p>写一个函数：接受一命令参数ls</p>
+<p>&#x2F;bin&#x2F;ls, &#x2F;mnt&#x2F;sysroot&#x2F;bin&#x2F;ls</p>
+<p>&#x2F;sbin&#x2F;ifconfig, &#x2F;mnt&#x2F;sysroot&#x2F;sbin&#x2F;ifconfig</p>
+<p>进程及作业管理</p>
+<p>Uninterruptible sleep: 不可中断的睡眠</p>
+<p>Interruptible sleep：可中断睡眠</p>
+<p>kernel:</p>
+<p>init: </p>
+<p>COW: Copy On Write, 写时复制</p>
+<p>100-139：用户可控制</p>
+<p>0-99：内核调整的</p>
+<p>O：</p>
+<p>​	O(1)</p>
+<p>​	O(n)</p>
+<p>​	O(logn)</p>
+<p>​	O(n^2)</p>
+<p>​	O(2^n)</p>
+<p>​	</p>
+<p>init: 进程号为1</p>
+<p>ps: Process State</p>
+<p>​	SysV风格：-</p>
+<p>​	BSD风格:</p>
+<p>​	</p>
+<p>​	a: 所有与终端有关的进程 </p>
+<p>​	u:</p>
+<p>​	x: 所有与终端无关的进程</p>
+<p>​	</p>
+<p>进程的分类：</p>
+<p>​	跟终端相关的进程</p>
+<p>​	跟终端无关的进程</p>
+<p>进程状态：</p>
+<p>​	D：不可中断的睡眠</p>
+<p>​	R：运行或就绪</p>
+<p>​	S：可中断的睡眠</p>
+<p>​	T：停止</p>
+<p>​	Z：僵死</p>
+<p>​	</p>
+<p>​	&lt;：高优先级进程</p>
+<p>​	N： 低优先级进程</p>
+<p>​	+：前台进程组中的进程</p>
+<p>​	l: 多线程进程</p>
+<p>​	s: 会话进程首进程</p>
+<p>ps	</p>
+<p>​	-elF</p>
+<p>​	-ef</p>
+<p>​	-eF</p>
+<p>ps -o PROPERTY1,PROPERTY2</p>
+<p>ps -o pid,comm,ni</p>
+<p>​	</p>
+<p>​	</p>
+<p>pstree: 显示当前系统上的进程树</p>
+<p>pgrep：</p>
+<p>pidof: 根据程序名称，查找其相关进程的ID号；</p>
+<p>top：</p>
+<p>vmstat</p>
+<p>free</p>
+<p>kill</p>
+<p>pkill</p>
+<p>bg</p>
+<p>fg</p>
+<p>&lt;：高优先级的进程</p>
+<p>N：低优先级的进程</p>
+<p>l: 多线程进程</p>
+<p>+：前台进程组中的进程</p>
+<p>s: 会话进程的领导者</p>
+<p>top:</p>
+<p>​	M: 根据驻留内存大小进行排序</p>
+<p>​	P：根据CPU使用百分比进行排序</p>
+<p>​	T: 根据累计时间进行排序</p>
+<p>​	</p>
+<p>​	l: 是否显示平均负载和启动时间</p>
+<p>​	t: 是否显示进程和CPU状态相关信息</p>
+<p>​	m: 是否显示内存相关信息</p>
+<p>​	</p>
+<p>​	c: 是否显示完整的命令行信息</p>
+<p>​	q: 退出top</p>
+<p>​	k: 终止某个进程</p>
+<p>top </p>
+<p>​	-d: 指定延迟时长，单位是秒</p>
+<p>​	-b: 批模式</p>
+<p>​	-n #：在批模式下，共显示多少批</p>
+<p>​	</p>
+<p>进程间通信（IPC: Inter Process Communication）</p>
+<p>​	共享内存</p>
+<p>​	信号: Signal</p>
+<p>​	Semaphore</p>
+<p>​	</p>
+<p>重要的信号：</p>
+<p>1：SIGHUP: 让一个进程不用重启，就可以重读其配置文件，并让新的配置信息生效；</p>
+<p>2: SIGINT：Ctrl+c: 中断一个进程</p>
+<p>9: SIGKILL：杀死一个进程</p>
+<p>15: SIGTERM：终止一个进程, 默认信号</p>
+<p>​	</p>
+<p>指定一个信号：</p>
+<p>​	信号号码：kill -1</p>
+<p>​	信号名称：kill -SIGKILL</p>
+<p>​	信号名称简写：kill -KILL</p>
+<p>kill PID</p>
+<p>killall COMMAND</p>
+<p>调整nice值：</p>
+<p>调整已经启动的进程的nice值：</p>
+<p>renice NI PID</p>
+<p>在启动时指定nice值：</p>
+<p>nice -n NI COMMAND</p>
+<p>前台作业：占据了命令提示符</p>
+<p>后台作业：启动之后，释放命令提示符，后续的操作在后台完成</p>
+<p>前台–&gt;后台：</p>
+<p>​	Ctrl+z: 把正在前台的作业送往后台</p>
+<p>​	COMMAND &amp;：让命令在后台执行</p>
+<p>​	</p>
+<p>bg: 让后台的停止作业继续运行</p>
+<p>​	bg [[%]JOBID]</p>
+<p>jobs: 查看后台的所有作业</p>
+<p>​	作业号，不同于进程号</p>
+<p>​		+：命令将默认操作的作业</p>
+<p>​		-：命令将第二个默认操作的作业</p>
+<p>​		</p>
+<p>fg: 将后台的作业调回前台</p>
+<p>​	fg [[%]JOBID]</p>
+<p>​	</p>
+<p>kill %JOBID: 终止某作业</p>
+<p>vmstat：系统状态查看命令</p>
+<p>uptime:</p>
+<p>&#x2F;proc&#x2F;meminfo</p>
+<p>.&#x2F;configure: </p>
+<p>​	检查编译环境：编译工具、库、头文件</p>
+<p>​	设定编译安装选项</p>
+<p>​	结果：结果Makefile.in生成makefile</p>
+<p>make</p>
+<p>make install</p>
+<p>日志系统</p>
+<p>Linux系统启动流程</p>
+<p>PC: OS(Linux)</p>
+<p>POST–&gt;BIOS(Boot Sequence)–&gt;MBR(bootloader,446)–&gt;Kernel–&gt;initrd–&gt;(ROOTFS)&#x2F;sbin&#x2F;init(&#x2F;etc&#x2F;inittab)</p>
+<p>启动的服务不同：</p>
+<p>​	运行级别：0-6</p>
+<p>​		0：halt</p>
+<p>​		1: single user mode, 直接以管理员身份切入， s,S,single</p>
+<p>​		2：multi user mode, no NFS</p>
+<p>​		3: multi user mode, text mode</p>
+<p>​		4：reserved</p>
+<p>​		5: multi user mode, graphic mode</p>
+<p>​		6: reboot</p>
+<p>详解启动过程</p>
+<p>​	bootloader(MBR)</p>
+<p>​		LILO: LInux LOader</p>
+<p>​		GRUB: GRand Unified Bootloader</p>
+<p>​			Stage1: MBR</p>
+<p>​			Stage1_5: </p>
+<p>​			Stage2: &#x2F;boot&#x2F;grub&#x2F;</p>
+<p>grub.conf			</p>
+<p>default&#x3D;0  # 设定默认启动的title的编号，从0开始</p>
+<p>timeout&#x3D;5  # 等待用户选择的超时时长，单位是秒</p>
+<p>splashimage&#x3D;(hd0,0)&#x2F;grub&#x2F;splash.xpm.gz  # grub的背景图片</p>
+<p>hiddenmenu # 隐藏菜单</p>
+<p>password redhat</p>
+<p>password –md5 $1$HKXJ51$B9Z8A.X&#x2F;&#x2F;XA.AtzU1.KuG.</p>
+<p>title Red Hat Enterprise Linux Server (2.6.18-308.el5)  # 内核标题，或操作系统名称，字符串，可自由修改</p>
+<p>​	root (hd0,0)  # 内核文件所在的设备；对grub而言，所有类型硬盘一律hd，格式为(hd#,N)；hd#, #表示第几个磁盘；最后的N表示对应磁盘的分区；</p>
+<p>​	kernel &#x2F;vmlinuz-2.6.18-308.el5 ro root&#x3D;&#x2F;dev&#x2F;vol0&#x2F;root rhgb quiet   # 内核文件路径，及传递给内核的参数</p>
+<p>​	initrd &#x2F;initrd-2.6.18-308.el5.img # ramdisk文件路径</p>
+<p>​	password –md5 $1$HKXJ51$B9Z8A.X&#x2F;&#x2F;XA.AtzU1.KuG.</p>
+<p>title Install Red Hat Enterprise Linux 5</p>
+<p>​	root (hd0,0)</p>
+<p>​	kernel &#x2F;vmlinuz-5 ks&#x3D;<a class="link"   target="_blank" rel="noopener" href="http://172.16.0.1/workstation.cfg" >http://172.16.0.1/workstation.cfg<i class="fas fa-external-link-alt"></i></a> ksdevice&#x3D;eth0 noipv6</p>
+<p>​	initrd &#x2F;initrd-5</p>
+<p>​	password –md5 $1$FSUEU&#x2F;$uhUUc8USBK5QAXc.BfW4m.</p>
+<p>查看运行级别：</p>
+<p>runlevel: </p>
+<p>who -r</p>
+<p>查看内核release号：</p>
+<p>​	uname -r</p>
+<p>安装grub stage1:</p>
+<p># grub</p>
+<p>grub&gt; root (hd0,0)</p>
+<p>grub&gt; set (hd0)</p>
+<p>安装grub第二种方式：</p>
+<p># grub-install –root-directory&#x3D;&#x2F;path&#x2F;to&#x2F;boot’s_parent_dir  &#x2F;PATH&#x2F;TO&#x2F;DEVICE</p>
+<p>grub&gt; find </p>
+<p>grub&gt; root (hd#,N)</p>
+<p>grub&gt; kernel &#x2F;PATH&#x2F;TO&#x2F;KERNEL_FILE</p>
+<p>grub&gt; initrd &#x2F;PATH&#x2F;TO&#x2F;INITRD_FILE</p>
+<p>grub&gt; boot</p>
+<p>Kernel初始化的过程：</p>
+<p>1、设备探测</p>
+<p>2、驱动初始化（可能会从initrd（initramfs）文件中装载驱动模块）</p>
+<p>3、以只读挂载根文件系统；</p>
+<p>4、装载第一个进程init（PID：1）</p>
+<p>&#x2F;sbin&#x2F;init：（&#x2F;etc&#x2F;inittab）</p>
+<p>​	upstart: ubuntu, d-bus, event-driven</p>
+<p>​	systemd: </p>
+<p>id:runlevels:action:process</p>
+<p>id: 标识符</p>
+<p>runlevels: 在哪个级别运行此行；</p>
+<p>action: 在什么情况下执行此行；</p>
+<p>process: 要运行程序; </p>
+<p>id:3:initdefault:</p>
+<p>si::sysinit:&#x2F;etc&#x2F;rc.d&#x2F;rc.sysinit	</p>
+<p>ACTION:</p>
+<p>initdefault: 设定默认运行级别</p>
+<p>sysinit: 系统初始化</p>
+<p>wait: 等待级别切换至此级别时执行</p>
+<p>respawn: 一旦程序终止，会重新启动</p>
+<p>&#x2F;etc&#x2F;rc.d&#x2F;rc.sysinit完成的任务：</p>
+<p>1、激活udev和selinux；</p>
+<p>2、根据&#x2F;etc&#x2F;sysctl.conf文件，来设定内核参数；</p>
+<p>3、设定时钟时钟；</p>
+<p>4、装载键盘映射；</p>
+<p>5、启用交换分区；</p>
+<p>6、设置主机名；</p>
+<p>7、根文件系统检测，并以读写方式重新挂载；</p>
+<p>8、激活RAID和LVM设备；</p>
+<p>9、启用磁盘配额；</p>
+<p>10、根据&#x2F;etc&#x2F;fstab，检查并挂载其它文件系统；</p>
+<p>11、清理过期的锁和PID文件；</p>
+<p>for I in &#x2F;etc&#x2F;rc3.d&#x2F;K*; do</p>
+<p>  $I stop</p>
+<p>done</p>
+<p>for I in &#x2F;etc&#x2F;rc3.d&#x2F;S*; do</p>
+<p>  $I start</p>
+<p>done</p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2024/03/06/%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">桥接网络设置</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2024&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">浑水摸鱼喵</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>

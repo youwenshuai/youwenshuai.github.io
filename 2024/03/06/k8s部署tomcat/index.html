@@ -1,36 +1,482 @@
-extends _partials/layout.pug
-include _mixin/sidebar.pug
-include _mixin/comment.pug
-include _mixin/postmeta.pug
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="浑水摸鱼喵">
+    
+    <title>
+        
+            k8s部署tomcat |
+        
+        道可道，非常道
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-block title
-    - var page_title = page.title
-    if page.categories && page.categories.length
-        - var cat_list = ''
-        - var comma = ''
-        each cat in page.categories.toArray()
-            - var cat_list = cat.name + comma + cat_list
-            - var comma = ' - '
-        if cat_list.length !== 0
-            - var page_title = page.title + ' - ' + cat_list
-    != `${page_title}`
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
 
-block header
-    h1(itemprop="name headline")
-        if page.link
-            - var postTitleIcon = '<i class="ic i-link-alt"></i>'
-            - var postText = page.title || page.link
-            != _url(page.link, postText + postTitleIcon, {class: 'link external', itemprop: 'url'})
-        else
-            != page.title
-    +PMRender(page, true)
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
-block content
-    div(class="article wrap")
-        +BCRender(page, true)
-        != partial('_partials/post/post.pug', {post: page})
-    != partial('_partials/post/nav.pug', {post: page})
-    +CommentRender
 
-block sidebar
-    +sidebarRender(true)
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                道可道，非常道
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">k8s部署tomcat</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">浑水摸鱼喵</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2024-03-06 15:19:25
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/kubernetes/">kubernetes</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h5 id="拉取tomcat镜像"><a href="#拉取tomcat镜像" class="headerlink" title="拉取tomcat镜像"></a><strong>拉取tomcat镜像</strong></h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">docker pull tomcat</span><br><span class="line">cat webapp-rc.yaml   </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: ReplicationController</span><br><span class="line">metadata: </span><br><span class="line">    name: webapp</span><br><span class="line">spec:	  </span><br><span class="line">    replicas: 3</span><br><span class="line">    template:</span><br><span class="line">        metadata: </span><br><span class="line">        name: webapp</span><br><span class="line">        labels:</span><br><span class="line">            app: webapp</span><br><span class="line">        spec: </span><br><span class="line">            containers:</span><br><span class="line">                - name: webapp</span><br><span class="line">                image: tomcat</span><br><span class="line">                 ports:</span><br><span class="line">                 - containerPort: 8080                 	  </span><br></pre></td></tr></table></figure>
+
+<h5 id="创建RC文件-副本控制器"><a href="#创建RC文件-副本控制器" class="headerlink" title="创建RC文件&#x2F;&#x2F;副本控制器"></a><strong>创建RC文件&#x2F;&#x2F;副本控制器</strong></h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f webapp-rc.yaml  </span><br><span class="line">replicationcontroller/webapp created</span><br><span class="line">kubectl get pods -l app=webapp </span><br><span class="line">NAME           READY   STATUS    RESTARTS   AGE</span><br><span class="line">webapp-fq2qh   1/1     Running   0          56s</span><br><span class="line">webapp-jbmzg   1/1     Running   0          56s</span><br><span class="line">webapp-jsv4z   1/1     Running   0          57s</span><br></pre></td></tr></table></figure>
+
+<h5 id="获取Pod-IP地址"><a href="#获取Pod-IP地址" class="headerlink" title="获取Pod IP地址"></a><strong>获取Pod IP地址</strong></h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -l app=webapp -o yaml</span><br><span class="line">kubectl get pods -l app=webapp -o yaml | grep podIP</span><br><span class="line">podIP: 10.1.7.31</span><br><span class="line">podIP: 10.1.7.30</span><br><span class="line">podIP: 10.1.7.29</span><br><span class="line">curl 10.1.7.31:8080       //测试访问</span><br><span class="line">curl 10.1.7.30:8080       //测试访问</span><br><span class="line">curl 10.1.7.29:8080       //测试访问</span><br><span class="line">kubectl <span class="built_in">exec</span> -ti &lt;your-pod-name&gt;  -n &lt;your-namespace&gt;  -- /bin/sh 可进入替换war包测试</span><br></pre></td></tr></table></figure>
+
+<h5 id="使用expose-将webapp里的所有pod添加到服务"><a href="#使用expose-将webapp里的所有pod添加到服务" class="headerlink" title="使用expose 将webapp里的所有pod添加到服务"></a><strong>使用expose 将webapp里的所有pod添加到服务</strong></h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kubectl expose rc webapp</span><br><span class="line">service/webapp exposed</span><br><span class="line">kubectl get svc</span><br><span class="line">NAME            TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE</span><br><span class="line">webapp          ClusterIP   10.97.154.51   &lt;none&gt;        8080/TCP   		21s</span><br><span class="line">curl 10.97.154.51:8080</span><br><span class="line">//这里的访问被自动负载分发到后面三个pod之一</span><br></pre></td></tr></table></figure>
+
+<h5 id="或者通过配置文件Service-创建"><a href="#或者通过配置文件Service-创建" class="headerlink" title="或者通过配置文件Service 创建"></a><strong>或者通过配置文件Service 创建</strong></h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">kubectl delete svc webapp  //删除刚刚通过命令创建的SVC</span><br><span class="line">service <span class="string">&quot;webapp&quot;</span> deleted</span><br><span class="line">vi webapp-service.yaml </span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">   name: webapp</span><br><span class="line">spec:</span><br><span class="line">   ports:</span><br><span class="line"> 	  - port: 8088 	</span><br><span class="line"> 	    targetPort: 8080 	</span><br><span class="line"> 	  selector:</span><br><span class="line">    	  app: webapp</span><br></pre></td></tr></table></figure>
+
+<p>字段解析：ports 关键字中指定了Service的虚拟端口8088，由于和pod容器端口8080不同，所以	需要targetPort指定后面pod的端口号。selector关键字设置了后端pod所拥有的label：app&#x3D;webapp</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">kubectl create -f  webapp-service.yaml </span><br><span class="line">service/webapp created</span><br><span class="line">kubectl get svc</span><br><span class="line">NAME               TYPE              CLUSTER-IP          EXTERNAL-IP       PORT(S)         AGE</span><br><span class="line">kubernetes       ClusterIP        10.96.0.1    	      &lt;none&gt;                  443/TCP           7d22h</span><br><span class="line">redis-service    ClusterIP         None             	      &lt;none&gt;                  6379/TCP         6d4h</span><br><span class="line">webapp            ClusterIP        10.102.174.4   	      &lt;none&gt;                  8088/TCP         7s</span><br><span class="line">curl 10.102.174.4:8088</span><br><span class="line">//这里的访问同样被自动负载分发到后面三个pod之一</span><br></pre></td></tr></table></figure>
+
+<p>名词解释：目前kubernetes提供的两种负载分发策略</p>
+<p>RoundRobin：轮训模式</p>
+<p>SesssionAffinity：基于客户端IP进行会话保持，会转发到相同的 pod上</p>
+<h5 id="其他场景"><a href="#其他场景" class="headerlink" title="其他场景"></a><strong>其他场景</strong></h5><p>在某些场景下，开发人员希望自己控制负载均衡策略，不使用Service提供的负载均衡功能，kubernetes通过Headless Service实现。不设置ClusterIP（无入口IP地址），仅通过Label Selector 将后端的Pod列表返回给调用的客户端。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">例1：</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service </span><br><span class="line">metadata:</span><br><span class="line">    name: nginx</span><br><span class="line">    labels:</span><br><span class="line">    app: nginx</span><br><span class="line">spec:</span><br><span class="line">    ports:</span><br><span class="line">    - port: 80</span><br><span class="line">    clusterIP: None</span><br><span class="line">    selector:</span><br><span class="line"> app: nginx</span><br></pre></td></tr></table></figure>
+
+<p>该Service没有指定clusterIP，对其的访问将获得具有label “app&#x3D;nginx”的全部pod列表，然后客户端程序需要自己实现负载分发策略，再确定访问具体哪一个后端的Pod。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">例2：</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service </span><br><span class="line">metadata:</span><br><span class="line">   name: my-service </span><br><span class="line">spec:</span><br><span class="line">   ports: </span><br><span class="line">   - protocol: TCP</span><br><span class="line">     port: 80</span><br><span class="line">        targetPort: 80</span><br></pre></td></tr></table></figure>
+
+<p>该定义创建一个不带标签选择器的Service，即无法选择后端Pod，系统也不会自动创建Endpoint,因此需要手动创建一个和该Service同名的Endpoint，用于指定后端的访问地址。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Endpoints </span><br><span class="line">metadata:</span><br><span class="line">    name: my-service</span><br><span class="line">subsets:</span><br><span class="line">- addresses: </span><br><span class="line">  - IP: 1.2.3.4</span><br><span class="line">  ports:</span><br><span class="line">  - port: 80</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">例3：</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service </span><br><span class="line">metadata:</span><br><span class="line">    name: webapp</span><br><span class="line">spec:</span><br><span class="line">    ports:</span><br><span class="line">    - port: 8080</span><br><span class="line">      targetPort: 8080</span><br><span class="line">      name: web</span><br><span class="line">      - port: 8005</span><br><span class="line">      targetPort: 8005</span><br><span class="line">      name: management</span><br><span class="line">      selector: </span><br><span class="line">      app: wepapp</span><br><span class="line">定义多个端口</span><br><span class="line">例4：</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service </span><br><span class="line">metadata:</span><br><span class="line">name: kube-dns</span><br><span class="line">namespace: kube-system</span><br><span class="line">labels:</span><br><span class="line">k8s-app: kube-dns</span><br><span class="line">kubernetes.io/cluster-servcvice: <span class="string">&quot;true&quot;</span></span><br><span class="line">kubernetes.io/name: <span class="string">&quot;KubeDNS&quot;</span></span><br><span class="line">spec:</span><br><span class="line">selector:</span><br><span class="line">k8s-app: kube-dns</span><br><span class="line">clusterIP:</span><br><span class="line">ports:</span><br><span class="line">- name: dns</span><br><span class="line">   port: 53</span><br><span class="line">   protocol: UDP</span><br><span class="line">- name: dns-tcp</span><br><span class="line">  port: 53</span><br><span class="line">  protocol: TCP  </span><br><span class="line">定义相同端口，不同协议</span><br></pre></td></tr></table></figure>
+
+<p><strong>7.集群外部访问Pod或Service</strong></p>
+<p>1.将容器应用的端口号映射到主机端口</p>
+<p>  （1）通过设置hostPort</p>
+<p>​      #vim webpod-hostport.yaml</p>
+<p>apiVersion: v1</p>
+<p>kind: Pod</p>
+<p>metadata:</p>
+<p>​    name: webapp1</p>
+<p>​    labels:</p>
+<pre><code>      app: webapp1
+</code></pre>
+<p>spec:</p>
+<p>​    containers:</p>
+<p>​    - name: webapp1</p>
+<pre><code>      image: tomcat
+  
+      ports:
+  
+       - containerPort: 8080
+  
+       hostPort: 8081
+</code></pre>
+<p>#kubectl create -f webpod-hostport.yaml</p>
+<p>pod&#x2F;webapp1 created</p>
+<p>#kubectl get pods</p>
+<p>&#x2F;&#x2F;此时通过浏览器访问 IP地址为该Pod运行在哪台Node上的地址</p>
+<p>&#x2F;&#x2F;通过此方式在Node节点看netstat -ntlp |grep 8081 不会有端口</p>
+<p>​    （2）通过设置Pod级别的hostNetwork&#x3D;true,该Pod的所有容器的端口号都将映射到物理</p>
+<pre><code>     机上，设置hostNetwork需要注意，在容器的ports部分如果不知道hostPort,则默认	 
+</code></pre>
+<p>​     hostPort等于containerPort,如果指定了hostPort,则hostPort必须等于containPort。</p>
+<p>​     #vim webpod-hostnetwork.yaml </p>
+<p>apiVersion: v1</p>
+<p>kind: Pod</p>
+<p>metadata:</p>
+<p>​    name: webapp2</p>
+<p>​    labels:</p>
+<p>​       app: webapp2</p>
+<p>spec:</p>
+<p>​    hostNetwork: true</p>
+<p>​    containers:</p>
+<p>​    - name: webapp2</p>
+<p>​      image: tomcat</p>
+<p>​      imagePullPolicy: Never</p>
+<p>​      ports:</p>
+<p>​      - containerPort: 8080</p>
+<p>#kubectl create -f webpod-hostnetwork.yaml </p>
+<p>pod&#x2F;webapp2 created</p>
+<p>#kubectl get pods</p>
+<p>&#x2F;&#x2F;此时通过浏览器访问 IP地址为该Pod运行在哪台Node上的地址</p>
+<p>&#x2F;&#x2F;通过此方式在Node节点看netstat -ntlp |grep 8080会有端口</p>
+<p>2.将Service的端口号映射到物理机</p>
+<p>（1）通过设置nodePort 映射到物理机，同时设置Service的类型为NodePort</p>
+<p>#kubectl delete -f  webpod-hostnetwork.yaml</p>
+<p>#kubectl get svc</p>
+<p>#kubectl delete svc webapp</p>
+<p>#vim webservice-nodeport.yaml</p>
+<p>apiVersion: v1</p>
+<p>kind: Service</p>
+<p>metadata:</p>
+<p>​    name: webapp3</p>
+<p>spec:</p>
+<p>​    type: NodePort</p>
+<p>​    ports:</p>
+<p>​    - port: 8080</p>
+<p>​      targetPort: 8080</p>
+<p>​      nodePort: 32222</p>
+<p>​    selector:</p>
+<p>​     	   app: webapp</p>
+<p>nodePort:取值范围30000-32767</p>
+<p>&#x2F;&#x2F;此时通过浏览器访问，将负载分发到后端的多个Pod上</p>
+<p>（2）设置LoadBalancer映射到云服务厂商提供的LoadBalancer地址。负载分发方式依赖于	</p>
+<p>  云服务厂商的LoadBalancer机制</p>
+<p>#vim loadBalancer-service.yaml</p>
+<p>apiVersion: v1</p>
+<p>kind: Service</p>
+<p>metadata:</p>
+<p>​    name: my-service </p>
+<p>spec:</p>
+<p>​    selector:</p>
+<p>​    app: myapp</p>
+<p>​    ports:</p>
+<p>​    - protocol: TCP</p>
+<p>​      port: 80</p>
+<p>​      targetPort:	9376</p>
+<p>​      nodePort: 30022</p>
+<p>​    clusterIP: 10.0.2.2</p>
+<p>​    loadBalancerIP: 22.22.22.22</p>
+<p>​    type: LoadBalancer</p>
+<p>status:</p>
+<p>​    loadBalancer:</p>
+<p>​      ingress:</p>
+<p>​       - ip:111.111.111.111</p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2024/03/06/k8s%E8%AF%81%E4%B9%A6%E7%BB%AD%E8%AE%A2/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s集群证书续订</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2024/03/06/k8s%E9%83%A8%E7%BD%B2/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">k8s部署</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>&nbsp;-&nbsp;
+            
+            2024&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">浑水摸鱼喵</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
