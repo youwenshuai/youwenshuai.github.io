@@ -1,36 +1,525 @@
-extends _partials/layout.pug
-include _mixin/sidebar.pug
-include _mixin/comment.pug
-include _mixin/postmeta.pug
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="浑水摸鱼喵">
+    
+    <title>
+        
+            mysql常用语法 |
+        
+        道可道，非常道
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-block title
-    - var page_title = page.title
-    if page.categories && page.categories.length
-        - var cat_list = ''
-        - var comma = ''
-        each cat in page.categories.toArray()
-            - var cat_list = cat.name + comma + cat_list
-            - var comma = ' - '
-        if cat_list.length !== 0
-            - var page_title = page.title + ' - ' + cat_list
-    != `${page_title}`
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
-block header
-    h1(itemprop="name headline")
-        if page.link
-            - var postTitleIcon = '<i class="ic i-link-alt"></i>'
-            - var postText = page.title || page.link
-            != _url(page.link, postText + postTitleIcon, {class: 'link external', itemprop: 'url'})
-        else
-            != page.title
-    +PMRender(page, true)
 
-block content
-    div(class="article wrap")
-        +BCRender(page, true)
-        != partial('_partials/post/post.pug', {post: page})
-    != partial('_partials/post/nav.pug', {post: page})
-    +CommentRender
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
 
-block sidebar
-    +sidebarRender(true)
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                道可道，非常道
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">mysql常用语法</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">浑水摸鱼喵</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2024-03-06 15:19:25
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h5 id="mysql表复制"><a href="#mysql表复制" class="headerlink" title="mysql表复制"></a>mysql表复制</h5><p>mysql &gt;create table t2 like t1;</p>
+<p>mysql &gt;insert into t2 select * from t1;</p>
+<h5 id="mysql表索引"><a href="#mysql表索引" class="headerlink" title="mysql表索引"></a>mysql表索引</h5><p>create index index_t1 on t1(name);</p>
+<p>show index from t1\G</p>
+<p>drop index index_t1 on t1;</p>
+<p>创建索引</p>
+<p>alter table t1 add index in_name (name);</p>
+<p>alter table t1 drop index in_name;</p>
+<p>删除主键索引</p>
+<p>alter table t1 modify id int unsigned not null;</p>
+<p>alter table t1 drop primary key;</p>
+<p>创建唯一索引</p>
+<p>alter table t1 add unique(name);</p>
+<p>alter table t1 add unique un_name(name);</p>
+<p>删除唯一索引</p>
+<p>alter table t1 drop index un_name;</p>
+<p>alter table t1 drop index un_name;</p>
+<p>创建主键索引</p>
+<p>alter table t1 add primary key(id)；</p>
+<p>alter table t1 modify id int unsigned not null auto_increment;</p>
+<h5 id="mysql视图"><a href="#mysql视图" class="headerlink" title="mysql视图"></a>mysql视图</h5><p>创建视图</p>
+<p>create view v_t1 as select * from t1 where id&gt;2 and id&lt;5;</p>
+<p>删除视图</p>
+<p>drop vied v_t1;</p>
+<h5 id="mysql内置函数"><a href="#mysql内置函数" class="headerlink" title="mysql内置函数"></a>mysql内置函数</h5><p>字符串</p>
+<p>concat(string,[]) &#x2F;&#x2F;连接自串</p>
+<p>lcase(string) &#x2F;&#x2F;转换成小写</p>
+<p>ucase(string) &#x2F;&#x2F;转换成大写</p>
+<p>length(string)&#x2F;&#x2F;长度</p>
+<p>ltrim(string)&#x2F;&#x2F;左边去空</p>
+<p>rtrim(string)&#x2F;&#x2F;右去空</p>
+<p>repeat(string,count) &#x2F;&#x2F;重复count次</p>
+<p>replace(str,search_str,replace_str) &#x2F;&#x2F;在str中的replace_str替换成search_str</p>
+<p>space(count)&#x2F;&#x2F;生成空格</p>
+<p>substring(str,pos,[length])&#x2F;&#x2F;从pos开始取length 长度</p>
+<p>数学函数</p>
+<p>bin(decimal_number)&#x2F;&#x2F;十进制转二进制</p>
+<p>ceiling(num) 向上取整</p>
+<p>floor(num) 向下取整</p>
+<p>max(col) &#x2F;&#x2F;聚合取大</p>
+<p>min(col)&#x2F;&#x2F;聚合取小</p>
+<p>sqrt(num)&#x2F;&#x2F;开平方</p>
+<p>日期函数</p>
+<p>curdata()&#x2F;&#x2F;目前日期</p>
+<p>crutime()&#x2F;&#x2F;目前时间</p>
+<p>now()&#x2F;&#x2F;目前时间日期</p>
+<p>unix_timestamp(date)&#x2F;&#x2F;返回当前date的unix时间戳</p>
+<p>from_unixtime()&#x2F;&#x2F;返回unix时间戳的日期</p>
+<p>week(date)&#x2F;&#x2F;返回第几周</p>
+<p>year(“1992-02-02”)&#x2F;&#x2F;返回年</p>
+<p>datediff(expr,expr2)&#x2F;&#x2F;返回起始时间差天数</p>
+<p>rand()&#x2F;&#x2F;返回0-1的随机数</p>
+<h5 id="mysql预处理语句"><a href="#mysql预处理语句" class="headerlink" title="mysql预处理语句"></a>mysql预处理语句</h5><p>? prepare</p>
+<p>prepare stmt1 from ‘select from t1 where id&gt;?’;</p>
+<p>set @i&#x3D;5;</p>
+<p>select @i;</p>
+<p>execute stmt1 using @i &#x2F;&#x2F;使用</p>
+<p>drop prepare stmt1 &#x2F;&#x2F;删除</p>
+<h5 id="mysql事务处理"><a href="#mysql事务处理" class="headerlink" title="mysql事务处理"></a>mysql事务处理</h5><p>myISAM引擎不支持  innodb支持</p>
+<p>数据回滚</p>
+<p>set autocommit&#x3D;0 关闭自动提交功能</p>
+<p>delete from t1 where id&#x3D;2;</p>
+<p>savepoint p1;</p>
+<p>delete from t1 where id&#x3D;3;</p>
+<p>savepoint p2;</p>
+<p>rollback to p1;还原到p1还原点</p>
+<p>rollback;最初还原点</p>
+<h5 id="mysql存储"><a href="#mysql存储" class="headerlink" title="mysql存储"></a>mysql存储</h5><p>? procedure;&#x2F;&#x2F;类似函数</p>
+<p>\d &#x2F;&#x2F; 修改定界符</p>
+<p>create procedure p2()</p>
+<p>begin</p>
+<p>set @i&#x3D;3;</p>
+<p>where @i&lt;&#x3D;100 do</p>
+<p>insert into t2(name) values(concat(“user”,@i));</p>
+<p>set @i&#x3D;@i+1；</p>
+<p>end while;</p>
+<p>end &#x2F;&#x2F;</p>
+<p>\d ;  改回定界符</p>
+<p>show procedure status\G;</p>
+<p>call p2; 调用存储</p>
+<p>select * from t2; 查看 </p>
+<h5 id="mysql触发器"><a href="#mysql触发器" class="headerlink" title="mysql触发器"></a>mysql触发器</h5><p>? trigger;</p>
+<p>#制造一个同时插入 t1 t2</p>
+<p>\d &#x2F;&#x2F;</p>
+<p>create trigger t1 before insert on t1 for each row</p>
+<p>begin</p>
+<p>insert into t2(id) values(new.id);</p>
+<p>end&#x2F;&#x2F;</p>
+<p>\d ; 改回定界符</p>
+<p>show triggers; 查看</p>
+<p>insert into t1(id) values(1);</p>
+<p>#删除</p>
+<p>\d &#x2F;&#x2F;</p>
+<p>create trigger t2 before delete on t1 for each row</p>
+<p>begin</p>
+<p>delete from t2 where id&#x3D;old.id;</p>
+<p>end&#x2F;&#x2F;</p>
+<p>\d ;</p>
+<p>#修改</p>
+<p>\d &#x2F;&#x2F;</p>
+<p>create trigger t3 before uptate on t1 for each row</p>
+<p>begin update t2 set id&#x3D;new.id where id&#x3D;old.id;</p>
+<p>end&#x2F;&#x2F;</p>
+<p>\d ;</p>
+<h5 id="重排auto-increment值"><a href="#重排auto-increment值" class="headerlink" title="重排auto_increment值"></a>重排auto_increment值</h5><p>alter table tablename auto_increment&#x3D;1;</p>
+<h5 id="分组聚合"><a href="#分组聚合" class="headerlink" title="分组聚合"></a>分组聚合</h5><p>group by  与with rollup一起使用</p>
+<p>select cname,pname,count(cname) from t1 group by cname,pname with rollup;</p>
+<h5 id="sql语句优化"><a href="#sql语句优化" class="headerlink" title="sql语句优化"></a>sql语句优化</h5><p>show status like “com%”;&#x2F;&#x2F;增删改查相关记录</p>
+<p>show status like “innodb_rows%”&#x2F;&#x2F;影响行数</p>
+<p>show status like “connections”&#x2F;&#x2F;连接mysql次数（无论成功与否）</p>
+<p>show status like “uptime”&#x2F;&#x2F;启动时间</p>
+<p>show status like “slow_qureies”;&#x2F;&#x2F;慢查询次数</p>
+<p>show variables like “%slow_query%”;&#x2F;&#x2F;查询相关配置开启与否 查询慢查询是否开启</p>
+<p>看慢查询日志</p>
+<p>索引优化</p>
+<p>check table sales;&#x2F;&#x2F;检查表错误</p>
+<p>optimize table sales;&#x2F;&#x2F;优化表空间</p>
+<p>数据导入导出 优化</p>
+<p>mysql&gt;select name from t1 into outfile  “&#x2F;tmp&#x2F;test.txt”;</p>
+<p>mysql&gt;load data infile “&#x2F;tmp&#x2F;test.txt” into table t1(name);</p>
+<p>myisam引擎存储的表</p>
+<p>mysql&gt;alter table t1 disable keys;</p>
+<p>mysql&gt;load data infile “&#x2F;tmp&#x2F;test.txt” into table t1(name);</p>
+<p>mysql&gt;alter table t1 enable keys;</p>
+<p>确保数据没有重复可以关闭唯一索引 可以提高导入效率&#x2F;&#x2F;慎用</p>
+<p>set unique_checks&#x3D;0  &#x2F;&#x2F;关闭</p>
+<p>set unique_checks&#x3D;1   &#x2F;&#x2F;开启</p>
+<p>innodb导入优化</p>
+<p>按照逐渐顺序保存的 可以将导入的数据主键的顺序排列，可以有效提高导入速率</p>
+<p>set autocommit&#x3D;0;关闭自动提交可以提高速率</p>
+<p>insert 优化</p>
+<p>数据库的连接关闭等</p>
+<p>group by优化</p>
+<p>避免嵌套查询</p>
+<p>数据库优化</p>
+<p>优化表的类型</p>
+<p>通过拆分提高表的访问率 分区 分表 主从数据库</p>
+<p>使用中间表提高统计查询速度  –视图</p>
+<p>mysql服务器优化</p>
+<p>myisam读锁定（都不能写，可以读）</p>
+<p>lock table t1 read;</p>
+<p>myisam写锁定(谁也写不了读不了，除了本人)</p>
+<p>lock table t1 write;</p>
+<p>解锁 unlock tables;</p>
+<p>四种字符集</p>
+<p>Server characterset utf8</p>
+<p>db characterset utf8</p>
+<p>client  characterset utf8</p>
+<p>conn  characterset utf8</p>
+<p>如何设置</p>
+<p>&#x2F;etc&#x2F;my.cnf</p>
+<p>default-character-set&#x3D;utf8</p>
+<p>[mysqld]</p>
+<p>character-set-server &#x3D; utf8</p>
+<p>collation-server &#x3D; utf8_general_ci &#x2F;&#x2F;校验字符集</p>
+<p>binary log 日志</p>
+<p>cat &#x2F;etc&#x2F;my.cnf</p>
+<p>log-bin&#x3D;mysql-bin</p>
+<p>slow log 日志</p>
+<p>cat &#x2F;etc&#x2F;my.cnf</p>
+<p>log_slow_queries&#x3D;slow.log</p>
+<p>long_query_time&#x3D;5</p>
+<p>socket问题</p>
+<p>没有socket 可尝试用tcp连接</p>
+<p>mysql -uroot -proot –protocol tcp -hlocalhost </p>
+<p>root密码丢失无法登陆</p>
+<p>mysqld_safe –skip-grant-tables –user&#x3D;mysql &amp;</p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2024/03/06/mysql%E5%8F%8C%E4%B8%BB/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">mysql双主搭建</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2024/03/06/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%A7%E5%B0%8F%E6%9F%A5%E7%9C%8B/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">mysql数据库大小查看</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>&nbsp;-&nbsp;
+            
+            2024&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">浑水摸鱼喵</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql%E8%A1%A8%E5%A4%8D%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">mysql表复制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql%E8%A1%A8%E7%B4%A2%E5%BC%95"><span class="nav-number">2.</span> <span class="nav-text">mysql表索引</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql%E8%A7%86%E5%9B%BE"><span class="nav-number">3.</span> <span class="nav-text">mysql视图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">mysql内置函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E5%8F%A5"><span class="nav-number">5.</span> <span class="nav-text">mysql预处理语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">mysql事务处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql%E5%AD%98%E5%82%A8"><span class="nav-number">7.</span> <span class="nav-text">mysql存储</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">8.</span> <span class="nav-text">mysql触发器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E6%8E%92auto-increment%E5%80%BC"><span class="nav-number">9.</span> <span class="nav-text">重排auto_increment值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88"><span class="nav-number">10.</span> <span class="nav-text">分组聚合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sql%E8%AF%AD%E5%8F%A5%E4%BC%98%E5%8C%96"><span class="nav-number">11.</span> <span class="nav-text">sql语句优化</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>

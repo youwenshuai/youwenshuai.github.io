@@ -48,7 +48,7 @@
 <p><code>docker version</code></p>
 <blockquote>
 <p>配置加速</p>
-<p>sudo mkdir -p &#x2F;etc&#x2F;docker sudo tee &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;-‘EOF’ {  “registry-mirrors”: [“<a href="https://27zv9ros.mirror.aliyuncs.com"]">https://27zv9ros.mirror.aliyuncs.com&quot;]</a> } EOF sudo systemctl daemon-reload sudo systemctl restart docker</p>
+<p>sudo mkdir -p &#x2F;etc&#x2F;docker sudo tee &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;-‘EOF’ {  “registry-mirrors”: [“<a class="link"   href="https://27zv9ros.mirror.aliyuncs.com" ]">https://27zv9ros.mirror.aliyuncs.com&quot;]<i class="fas fa-external-link-alt"></i></a> } EOF sudo systemctl daemon-reload sudo systemctl restart docker</p>
 <p>Ps：可能会在装的时候缺少包，单独下载安装rpm包即可</p>
 </blockquote>
 <p><strong>2. Docker使用</strong></p>
@@ -80,7 +80,7 @@
 <p><strong>(1)docker命令帮助</strong></p>
 <p>docker的管理命令都是以docker开头，加上一个容易理解的单词，对一个命令的参数不熟悉，可以使用docker command –help查看相关参数意义,例如：</p>
 <p>(2)<strong>docker使用教程</strong></p>
-<p><a href="http://www.runoob.com/docker/docker-tutorial.html">http://www.runoob.com/docker/docker-tutorial.html</a></p>
+<p><a class="link"   href="http://www.runoob.com/docker/docker-tutorial.html" >http://www.runoob.com/docker/docker-tutorial.html<i class="fas fa-external-link-alt"></i></a></p>
 <p><strong>3. Docker镜像导入导出</strong></p>
 <p>docker 提供把镜像导出export（保存save）为文件的机制，这样就可以把镜像copy到任意地方了。</p>
 <p><strong>3.1 方式一:容器export&#x2F;import</strong></p>
@@ -131,6 +131,22 @@
       </tags>
   </entry>
   <entry>
+    <title>docker报错案例</title>
+    <url>/2024/03/06/docker%E6%8A%A5%E9%94%99/</url>
+    <content><![CDATA[<blockquote>
+<p>docker报错Get <a class="link"   href="https://registry-1.docker.io/v2/" >https://registry-1.docker.io/v2/<i class="fas fa-external-link-alt"></i></a>: x509: certificate has expired or is not yet valid</p>
+<p>这个错误一般都是本地系统时间错误导致报错证书过期</p>
+<p>只需要输入</p>
+<p>ntpdate cn.pool.ntp.org </p>
+<p>同步一下时间</p>
+<p>然后date查看下就ok了</p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>docker 日志大小限制</title>
     <url>/2024/03/06/docker%E6%97%A5%E5%BF%97%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6/</url>
     <content><![CDATA[<p>创建&#x2F;etc&#x2F;docker&#x2F;daemon.json如果已经存在则不用创建</p>
@@ -146,9 +162,9 @@
     <url>/2024/03/06/docker%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<h4 id="一、基础环境"><a href="#一、基础环境" class="headerlink" title="一、基础环境"></a>一、基础环境</h4><p>1、操作系统：Centos 7.3以上</p>
 <p>2、官方参考文档</p>
-<p><a href="https://docs.docker.com/engine/install/binaries/">https://docs.docker.com/engine/install/binaries/</a></p>
-<p>3、docker 版本 <a href="https://download.docker.com/linux/static/stable/x86_64/">https://download.docker.com/linux/static/stable/x86_64/</a></p>
-<p><a href="https://download.docker.com/linux/centos/7/x86_64/stable/Packages/">https://download.docker.com/linux/centos/7/x86_64/stable/Packages/</a></p>
+<p><a class="link"   href="https://docs.docker.com/engine/install/binaries/" >https://docs.docker.com/engine/install/binaries/<i class="fas fa-external-link-alt"></i></a></p>
+<p>3、docker 版本 <a class="link"   href="https://download.docker.com/linux/static/stable/x86_64/" >https://download.docker.com/linux/static/stable/x86_64/<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   href="https://download.docker.com/linux/centos/7/x86_64/stable/Packages/" >https://download.docker.com/linux/centos/7/x86_64/stable/Packages/<i class="fas fa-external-link-alt"></i></a></p>
 <h4 id="二、Docker-安装"><a href="#二、Docker-安装" class="headerlink" title="二、Docker 安装"></a>二、Docker 安装</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#1、下载安装</span></span><br><span class="line">tar xf docker-20.10.0.tgz</span><br><span class="line"><span class="built_in">cd</span> docker/</span><br><span class="line">cp ./* /usr/bin</span><br><span class="line">vim /etc/systemd/system/docker.service</span><br><span class="line">[Unit]</span><br><span class="line">Description=Docker Application Container Engine</span><br><span class="line">Documentation=https://docs.docker.com</span><br><span class="line">After=network-online.target firewalld.service</span><br><span class="line">Wants=network-online.target</span><br><span class="line">  </span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line"><span class="comment"># the default is not to use systemd for cgroups because the delegate issues still</span></span><br><span class="line"><span class="comment"># exists and systemd currently does not support the cgroup feature set required</span></span><br><span class="line"><span class="comment"># for containers run by docker</span></span><br><span class="line">ExecStart=/usr/bin/dockerd</span><br><span class="line">ExecReload=/bin/<span class="built_in">kill</span> -s HUP <span class="variable">$MAINPID</span></span><br><span class="line"><span class="comment"># Having non-zero Limit*s causes performance problems due to accounting overhead</span></span><br><span class="line"><span class="comment"># in the kernel. We recommend using cgroups to do container-local accounting.</span></span><br><span class="line">LimitNOFILE=infinity</span><br><span class="line">LimitNPROC=infinity</span><br><span class="line">LimitCORE=infinity</span><br><span class="line"><span class="comment"># Uncomment TasksMax if your systemd version supports it.</span></span><br><span class="line"><span class="comment"># Only systemd 226 and above support this version.</span></span><br><span class="line"><span class="comment">#TasksMax=infinity</span></span><br><span class="line">TimeoutStartSec=0</span><br><span class="line"><span class="comment"># set delegate yes so that systemd does not reset the cgroups of docker containers</span></span><br><span class="line">Delegate=yes</span><br><span class="line"><span class="comment"># kill only the docker process, not all processes in the cgroup</span></span><br><span class="line">KillMode=process</span><br><span class="line"><span class="comment"># restart the docker process if it exits prematurely</span></span><br><span class="line">Restart=on-failure</span><br><span class="line">StartLimitBurst=3</span><br><span class="line">StartLimitInterval=60s</span><br><span class="line">  </span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"><span class="comment">#2、启动服务</span></span><br><span class="line">chmod +x /etc/systemd/system/docker.service</span><br><span class="line">systemctl daemon-reload </span><br><span class="line">systemctl start docker</span><br><span class="line">systemctl <span class="built_in">enable</span> docker.service</span><br><span class="line">docker -v</span><br></pre></td></tr></table></figure>
 
 ]]></content>
@@ -169,22 +185,6 @@
 <p>启动docker容器时报错：</p>
 <p>iptables failed: iptables –wait -t nat -A DOCKER -p tcp -d 0&#x2F;0 –dport 5000 -j DNAT –to-destination 172.18.0.4:5000 ! -i br-ff45d935188b: iptables: No chain&#x2F;target&#x2F;match by that name. (exit status 1)</p>
 <p>解决方案：重启docker</p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>docker报错案例</title>
-    <url>/2024/03/06/docker%E6%8A%A5%E9%94%99/</url>
-    <content><![CDATA[<blockquote>
-<p>docker报错Get <a href="https://registry-1.docker.io/v2/">https://registry-1.docker.io/v2/</a>: x509: certificate has expired or is not yet valid</p>
-<p>这个错误一般都是本地系统时间错误导致报错证书过期</p>
-<p>只需要输入</p>
-<p>ntpdate cn.pool.ntp.org </p>
-<p>同步一下时间</p>
-<p>然后date查看下就ok了</p>
 </blockquote>
 ]]></content>
       <tags>
@@ -220,7 +220,7 @@
 <p>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION</p>
 <p>10.0.0</p>
 <p>下载对应的中文版</p>
-<p>wget <a href="https://gitlab.com/xhang/gitlab/-/archive/10-0-stable-zh/gitlab-10-0-stable-zh.zip">https://gitlab.com/xhang/gitlab/-/archive/10-0-stable-zh/gitlab-10-0-stable-zh.zip</a></p>
+<p>wget <a class="link"   href="https://gitlab.com/xhang/gitlab/-/archive/10-0-stable-zh/gitlab-10-0-stable-zh.zip" >https://gitlab.com/xhang/gitlab/-/archive/10-0-stable-zh/gitlab-10-0-stable-zh.zip<i class="fas fa-external-link-alt"></i></a></p>
 <p>unzip gitlab-10-0-stable-zh.zip</p>
 <p>cp -r &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails{,.ori}</p>
 <p>&#x2F;bin&#x2F;cp -rf  &#x2F;root&#x2F;gitlab-10-0-stable-zh&#x2F;* &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;</p>
@@ -230,7 +230,7 @@
 </blockquote>
 <h5 id="汉化"><a href="#汉化" class="headerlink" title="汉化"></a>汉化</h5><blockquote>
 <p>yum -y install git</p>
-<p>git clone <a href="https://gitlab.com/xhang/gitlab.git">https://gitlab.com/xhang/gitlab.git</a></p>
+<p>git clone <a class="link"   href="https://gitlab.com/xhang/gitlab.git" >https://gitlab.com/xhang/gitlab.git<i class="fas fa-external-link-alt"></i></a></p>
 <p>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION</p>
 <p>cat gitlab&#x2F;VERSION</p>
 <p>cd &#x2F;root&#x2F;gitlab&#x2F;</p>
@@ -259,7 +259,7 @@
   <entry>
     <title>docker私有仓库harbor搭建</title>
     <url>/2024/03/06/harbor%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/</url>
-    <content><![CDATA[<h5 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h5><p><a href="https://github.com/goharbor/harbor/releases">https://github.com/goharbor/harbor/releases</a></p>
+    <content><![CDATA[<h5 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h5><p><a class="link"   href="https://github.com/goharbor/harbor/releases" >https://github.com/goharbor/harbor/releases<i class="fas fa-external-link-alt"></i></a></p>
 <h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#yum -y install epel-release </span></span><br><span class="line"><span class="comment">#yum -y install docker-compose</span></span><br><span class="line"><span class="comment">#tar xf harbor-offline-installer-v1.8.1.tgz -C /usr/local/</span></span><br><span class="line"><span class="comment">#cd /usr/local</span></span><br><span class="line"><span class="comment">#vim harbor.yml  #自定义配置文件</span></span><br><span class="line"><span class="comment">#./install.sh  #开始安装，执行完成后自动启动</span></span><br><span class="line"><span class="comment">#netstat -ntlp|grep 80</span></span><br></pre></td></tr></table></figure>
 
 <h5 id="修改docker配置文件"><a href="#修改docker配置文件" class="headerlink" title="修改docker配置文件"></a>修改docker配置文件</h5><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">vim /etc/docker/daemon.json</span><br><span class="line">&#123;</span><br><span class="line"><span class="string">&quot;insecure-registries&quot;</span>: [<span class="string">&quot;k8s-Node02&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line">systemctl restart docker</span><br><span class="line"></span><br><span class="line">yum -y install docker-registry  //私有仓库</span><br></pre></td></tr></table></figure>
@@ -410,24 +410,24 @@
 <p>OPTIONS&#x3D;’–selinux-enabled&#x3D;false –insecure-registry gcr.io’</p>
 <p>Kubernetes apiserver配置文件&#x2F;etc&#x2F;kubernetes&#x2F;apiserver中，把–admission_control参数中的ServiceAccount删除</p>
 <p><strong>4、配置CentOS证书</strong></p>
-<p>参考内容:<a href="http://www.bubuko.com/infodetail-2615893.html">Kubernetes创建pod一直处于ContainerCreating排查和解决</a></p>
+<p>参考内容:<a class="link"   href="http://www.bubuko.com/infodetail-2615893.html" >Kubernetes创建pod一直处于ContainerCreating排查和解决<i class="fas fa-external-link-alt"></i></a></p>
 <p>因为拉取gcr.io的镜像需要redhat的证书，但是系统默认是没有的，所以，这里我们自己添加。</p>
 <p>安装rhsm</p>
 <p>yum install -y <em>rhsm</em></p>
 <p>通过python-rhsm-certificates的rpm包获得证书：</p>
-<p>wget <a href="http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm">http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm</a> rpm2cpio python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm | cpio -iv –to-stdout .&#x2F;etc&#x2F;rhsm&#x2F;ca&#x2F;redhat-uep.pem | tee &#x2F;etc&#x2F;rhsm&#x2F;ca&#x2F;redhat-uep.pem</p>
+<p>wget <a class="link"   href="http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm" >http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm<i class="fas fa-external-link-alt"></i></a> rpm2cpio python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm | cpio -iv –to-stdout .&#x2F;etc&#x2F;rhsm&#x2F;ca&#x2F;redhat-uep.pem | tee &#x2F;etc&#x2F;rhsm&#x2F;ca&#x2F;redhat-uep.pem</p>
 <p>安装完成后，执行一下docker pull registry.access.redhat.com&#x2F;rhel7&#x2F;pod-infrastructure:latest</p>
 <p>此过程时间比较长。</p>
 <p><strong>5、配置docker阿里云镜像加速</strong></p>
 <p>这个镜像仓库是我个人在阿里云申请的：</p>
-<p>sudo mkdir -p &#x2F;etc&#x2F;docker sudo tee &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;-‘EOF’ {  “registry-mirrors”: [“<a href="https://27zv9ros.mirror.aliyuncs.com"]">https://27zv9ros.mirror.aliyuncs.com&quot;]</a> } EOF sudo systemctl daemon-reload sudo systemctl restart docker</p>
+<p>sudo mkdir -p &#x2F;etc&#x2F;docker sudo tee &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;-‘EOF’ {  “registry-mirrors”: [“<a class="link"   href="https://27zv9ros.mirror.aliyuncs.com" ]">https://27zv9ros.mirror.aliyuncs.com&quot;]<i class="fas fa-external-link-alt"></i></a> } EOF sudo systemctl daemon-reload sudo systemctl restart docker</p>
 <p><strong>6、启动所有服务</strong></p>
 <p>systemctl start etcd systemctl restart docker systemctl start kube-apiserver systemctl start kube-controller-manager systemctl start kube-scheduler systemctl start kubelet systemctl start kube-proxy</p>
 <p><strong>三、搭建服务</strong></p>
 <p>从github上下载需要的yaml文件：</p>
 <p>需要用到的是 java_web_app 文件夹内内容</p>
-<p>下载地址：<a href="https://github.com/bestlope/k8s_practice">https://github.com/bestlope/k8s_practice</a></p>
-<p>或者：git clone <a href="https://github.com/bestlope/k8s_practice.git">https://github.com/bestlope/k8s_practice.git</a></p>
+<p>下载地址：<a class="link"   href="https://github.com/bestlope/k8s_practice" >https://github.com/bestlope/k8s_practice<i class="fas fa-external-link-alt"></i></a></p>
+<p>或者：git clone <a class="link"   href="https://github.com/bestlope/k8s_practice.git" >https://github.com/bestlope/k8s_practice.git<i class="fas fa-external-link-alt"></i></a></p>
 <p><strong>1、搭建mysql服务</strong></p>
 <p>cd k8s_practice&#x2F;java_web_app&#x2F;mysql #启动mysql的RC服务 kubectl create -f mysql-rc.yaml #查看刚刚创建的RC kubectl get rc #查看pod创建的情况 kubectl get pods #启动mysql的SVC服务 kubectl create -f mysql-svc.yaml #查看刚刚创建的service kubectl get svc</p>
 <p><strong>2、启动tomcat应用</strong></p>
@@ -562,12 +562,22 @@
 <p>CURREN：当前的Replica的值，实际上是一直在增加的，直到等于 DESIRED，表明部署完成</p>
 <p>UP-TO-DATA：最新版本的Pod的数量，用于指示在滚动升级的过程中，有多少Pod副本完成了升级</p>
 <p>AVAILABLE：集群中存活的Pod的数量</p>
-<p><img loading="lazy" data-src="D:\有道云\文件\super_linux@163.com\3cb2d130ab99449ca91b275d68d47280\clipboard.png" alt="img"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="D:\有道云\文件\super_linux@163.com\3cb2d130ab99449ca91b275d68d47280\clipboard.png"
+                      alt="img"
+                ></p>
 <p>Horizontal Pod Authscaling	(HPA)</p>
 <p>Pod横向扩容，属于资源对象，通过分析RC控制的所有目标Pod的负载变化情况。来确定是否需要针对性的调整目标Pod的副本数量。</p>
 <p>Service （服务）</p>
 <p>资源对象，每个Service其实就是我们经常提起的微服务，其它的Pod，RC等都是为Service提供嫁衣。</p>
-<p><img loading="lazy" data-src="D:\有道云\文件\super_linux@163.com\9ff1fdb346f44aea9dbef1ec5a29df27\clipboard.png" alt="img"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="D:\有道云\文件\super_linux@163.com\9ff1fdb346f44aea9dbef1ec5a29df27\clipboard.png"
+                      alt="img"
+                ></p>
 <p>tomcat-service.yaml</p>
 <p>apiVersion: v1</p>
 <p>kind: Service</p>
@@ -581,7 +591,12 @@
 <p>$kubectl  create  -f   tomcat-service.yaml</p>
 <p>$kubectl get endpoints   ##可以查看podIP 和Container 暴露的端口</p>
 <p>$kubectl get svc tomcat-service  -o yaml   ##查看Cluster ip</p>
-<p><img loading="lazy" data-src="D:\有道云\文件\super_linux@163.com\ab0c1c13775d413da92d582730eb62a8\clipboard.png" alt="img"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="D:\有道云\文件\super_linux@163.com\ab0c1c13775d413da92d582730eb62a8\clipboard.png"
+                      alt="img"
+                ></p>
 <p>集群外部访问Service可以通过配置NodePort来解决访问问题</p>
 <p>Volume (存储卷)</p>
 <ul>
@@ -765,10 +780,10 @@
   <entry>
     <title>k8s部署</title>
     <url>/2024/03/06/k8s%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<h4 id="K8S集群和docker安装步骤："><a href="#K8S集群和docker安装步骤：" class="headerlink" title="K8S集群和docker安装步骤："></a>K8S集群和docker安装步骤：</h4><p>参考文档：<a href="https://www.cnblogs.com/liangjindong/p/9447279.html">https://www.cnblogs.com/liangjindong/p/9447279.html</a>        </p>
-<p>参考文档：<a href="https://www.cnblogs.com/huhyoung/p/9657186.html">https://www.cnblogs.com/huhyoung/p/9657186.html</a>          </p>
-<p>参考文档：<a href="https://blog.csdn.net/networken/article/details/84991940">https://blog.csdn.net/networken/article/details/84991940</a>              </p>
-<p>参考文档：<a href="https://github.com/minminmsn/k8s1.13">https://github.com/minminmsn/k8s1.13</a> （官方）</p>
+    <content><![CDATA[<h4 id="K8S集群和docker安装步骤："><a href="#K8S集群和docker安装步骤：" class="headerlink" title="K8S集群和docker安装步骤："></a>K8S集群和docker安装步骤：</h4><p>参考文档：<a class="link"   href="https://www.cnblogs.com/liangjindong/p/9447279.html" >https://www.cnblogs.com/liangjindong/p/9447279.html<i class="fas fa-external-link-alt"></i></a>        </p>
+<p>参考文档：<a class="link"   href="https://www.cnblogs.com/huhyoung/p/9657186.html" >https://www.cnblogs.com/huhyoung/p/9657186.html<i class="fas fa-external-link-alt"></i></a>          </p>
+<p>参考文档：<a class="link"   href="https://blog.csdn.net/networken/article/details/84991940" >https://blog.csdn.net/networken/article/details/84991940<i class="fas fa-external-link-alt"></i></a>              </p>
+<p>参考文档：<a class="link"   href="https://github.com/minminmsn/k8s1.13" >https://github.com/minminmsn/k8s1.13<i class="fas fa-external-link-alt"></i></a> （官方）</p>
 <p>** 部署前的准备**</p>
 <h5 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h5><p><code>systemctl stop firewalld.service &amp;&amp; systemctl disable firewalld.service</code>     	   </p>
 <h5 id="关闭swap"><a href="#关闭swap" class="headerlink" title="关闭swap"></a>关闭swap</h5><p><code>swapoff -a</code>             </p>
@@ -806,11 +821,11 @@
 <p>k8s.gcr.io&#x2F;pause:3.1               k8s.gcr.io&#x2F;etcd:3.2.24               k8s.gcr.io&#x2F;coredns:1.2.6           </p>
 <p> A、下载别人阿里云上的镜像，版本必须一致，否则初始化会报错（在线）                         </p>
 <p> B、导入已经提前下载好的镜像，版本必须一致，否则初始化会报错（离线）                        </p>
-<p> C、从dockers官网下载镜像：  <a href="https://hub.docker.com/u/mirrorgooglecontainers">https://hub.docker.com/u/mirrorgooglecontainers</a>               </p>
+<p> C、从dockers官网下载镜像：  <a class="link"   href="https://hub.docker.com/u/mirrorgooglecontainers" >https://hub.docker.com/u/mirrorgooglecontainers<i class="fas fa-external-link-alt"></i></a>               </p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull mirrorgooglecontainers/kube-apiserver:v1.13.2                            docker pull mirrorgooglecontainers/kube-controller-manager:v1.13.2                </span><br><span class="line">docker pull mirrorgooglecontainers/kube-scheduler:v1.13.2                </span><br><span class="line">docker pull mirrorgooglecontainers/kube-proxy:v1.13.2                </span><br><span class="line">docker pull mirrorgooglecontainers/pause:3.1               </span><br><span class="line">docker pull mirrorgooglecontainers/etcd:3.2.24               </span><br><span class="line">docker pull coredns/coredns:1.2.6             </span><br></pre></td></tr></table></figure>
 
 <p>版本信息需要根据实际情况进行相应的修改。通过docker tag命令修改为kubeadm查到的标签即可。      		</p>
-<p>D、在1.11版本当中，我们宣布CoreDNS已经实现了基于DNS服务发现的普遍可用。而在1.13版本中，CoreDNS则正式取代了kuber-dns成为Kubernetes中的默认DNS服务器。CoreDNS是一种通用的权威DNS服务器，能够提供与Kubernetes向下兼容且具备可扩展性的集成能力。CoreDNS自身属于单一可执行文件与单一进程，因此其活动部件数量要少于以往的其它DNS服务器，且可通过创建自定义DNS条目以支持各类灵活的用例。另外，由于CoreDNS使用Go语言编写，因此具有强大的内存安全性。CoreDNS现在已经成为Kubernetes 1.13及后续版本中的首选DNS解决方案。Kubernetes项目现在开始在常用测试基础设施中默认使用CoreDNS，我们亦建议用户尽快完成这一转换。        Kubernetes (K8s) 官方安装：<a href="https://kubernetes.io/docs/setup/independent/install-kubeadm/">https://kubernetes.io/docs/setup/independent/install-kubeadm/</a>       3、初始化master节点                       </p>
+<p>D、在1.11版本当中，我们宣布CoreDNS已经实现了基于DNS服务发现的普遍可用。而在1.13版本中，CoreDNS则正式取代了kuber-dns成为Kubernetes中的默认DNS服务器。CoreDNS是一种通用的权威DNS服务器，能够提供与Kubernetes向下兼容且具备可扩展性的集成能力。CoreDNS自身属于单一可执行文件与单一进程，因此其活动部件数量要少于以往的其它DNS服务器，且可通过创建自定义DNS条目以支持各类灵活的用例。另外，由于CoreDNS使用Go语言编写，因此具有强大的内存安全性。CoreDNS现在已经成为Kubernetes 1.13及后续版本中的首选DNS解决方案。Kubernetes项目现在开始在常用测试基础设施中默认使用CoreDNS，我们亦建议用户尽快完成这一转换。        Kubernetes (K8s) 官方安装：<a class="link"   href="https://kubernetes.io/docs/setup/independent/install-kubeadm/" >https://kubernetes.io/docs/setup/independent/install-kubeadm/<i class="fas fa-external-link-alt"></i></a>       3、初始化master节点                       </p>
 <p> 修改 &#x2F;etc&#x2F;sysconfig&#x2F;kubelet： KUBELET_EXTRA_ARGS&#x3D;”–fail-swap-on&#x3D;false”            </p>
 <p># kubeadm reset           </p>
 <p># kubeadm init –kubernetes-version&#x3D;v1.13.2 –pod-network-cidr&#x3D;10.244.0.0&#x2F;16 –service-cidr&#x3D;10.96.0.0&#x2F;12 –apiserver-advertise-address&#x3D;192.168.0.102  –ignore-preflight-errors&#x3D;Swap            注意：初始化成功生成的信息，记得保存，根据自己所生成的保存，切记</p>
@@ -820,19 +835,19 @@
 <p>  –ignore-preflight-errors：将错误显示为警告的检查列表进行忽略。</p>
 <p>例如:“IsPrivilegedUser,Swp”。Value ‘all’忽略所有检查中的错误。            </p>
 <p>  –image-repository：Kubenetes默认Registries地址是 k8s.gcr.io，在国内并不能访问 gcr.io，在1.13版本中我们可以增加–image-repository参数，默认值是 k8s.gcr.io，将其指定为阿里云镜像地址：registry.aliyuncs.com&#x2F;google_containers。            </p>
-<p> –kubernetes-version：关闭版本探测，因为它的默认值是stable-1，会导致从<a href="https://dl.k8s.io/release/stable-1.txt%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%9A%84%E7%89%88%E6%9C%AC%E5%8F%B7%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%B0%86%E5%85%B6%E6%8C%87%E5%AE%9A%E4%B8%BA%E5%9B%BA%E5%AE%9A%E7%89%88%E6%9C%AC%E6%9D%A5%E8%B7%B3%E8%BF%87%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E3%80%82">https://dl.k8s.io/release/stable-1.txt下载最新的版本号，我们可以将其指定为固定版本来跳过网络请求。</a>            </p>
+<p> –kubernetes-version：关闭版本探测，因为它的默认值是stable-1，会导致从<a class="link"   href="https://dl.k8s.io/release/stable-1.txt%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%9A%84%E7%89%88%E6%9C%AC%E5%8F%B7%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%B0%86%E5%85%B6%E6%8C%87%E5%AE%9A%E4%B8%BA%E5%9B%BA%E5%AE%9A%E7%89%88%E6%9C%AC%E6%9D%A5%E8%B7%B3%E8%BF%87%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E3%80%82" >https://dl.k8s.io/release/stable-1.txt下载最新的版本号，我们可以将其指定为固定版本来跳过网络请求。<i class="fas fa-external-link-alt"></i></a>            </p>
 <p>初始化生成token一定要记录下来，后边在node节点使用kubeadm join往集群中添加节点时会用到。           </p>
 <p> kubeadm join 192.168.0.102:6443 –token ij6at3.ehwxgh7vccsouuj5 –discovery-token-ca-cert-hash sha256:a580d31f70262a442734796dac01c27963106e41750c5339dc3fb6e3e769eec6 –ignore-preflight-errors&#x3D;Swap           </p>
 <p> # kubeadm token create –print-join-command  找回以上信息      </p>
 <h5 id="添加flannel网络附件："><a href="#添加flannel网络附件：" class="headerlink" title="添加flannel网络附件："></a>添加flannel网络附件：</h5><p># kubectl apply -f kube-flannel.yml                                    </p>
 <p>版本：quay.io&#x2F;coreos&#x2F;flannel:v0.10.0-amd64             </p>
-<p>安装文件下载：<a href="https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml">https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</a>            </p>
-<p>镜像文件下载： <a href="https://github.com/coreos/flannel/releases">https://github.com/coreos/flannel/releases</a>       </p>
+<p>安装文件下载：<a class="link"   href="https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml" >https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml<i class="fas fa-external-link-alt"></i></a>            </p>
+<p>镜像文件下载： <a class="link"   href="https://github.com/coreos/flannel/releases" >https://github.com/coreos/flannel/releases<i class="fas fa-external-link-alt"></i></a>       </p>
 <h5 id="添加calico网络插件："><a href="#添加calico网络插件：" class="headerlink" title="添加calico网络插件："></a>添加calico网络插件：</h5><p> # kubectl apply -f kube-calico.yml                       </p>
 <p>版本：quay.io&#x2F;calico&#x2F;node:v3.4.0           quay.io&#x2F;calico&#x2F;cni:v3.4.0           </p>
 <p>安装文件下载：</p>
-<p><a href="https://docs.projectcalico.org/v3.4/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml">https://docs.projectcalico.org/v3.4/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml</a>           </p>
-<p>镜像文件下载：<a href="https://docs.projectcalico.org/v3.4/releases/#v3.4.0">https://docs.projectcalico.org/v3.4/releases/#v3.4.0</a>            </p>
+<p><a class="link"   href="https://docs.projectcalico.org/v3.4/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml" >https://docs.projectcalico.org/v3.4/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml<i class="fas fa-external-link-alt"></i></a>           </p>
+<p>镜像文件下载：<a class="link"   href="https://docs.projectcalico.org/v3.4/releases/#v3.4.0" >https://docs.projectcalico.org/v3.4/releases/#v3.4.0<i class="fas fa-external-link-alt"></i></a>            </p>
 <p>若是root用户   echo “export KUBECONFIG&#x3D;&#x2F;etc&#x2F;kubernetes&#x2F;admin.conf” &gt;&gt; cat &#x2F;etc&#x2F;profile; source cat &#x2F;etc&#x2F;profile       </p>
 <h5 id="初始化work节点"><a href="#初始化work节点" class="headerlink" title="初始化work节点"></a>初始化work节点</h5><p>修改 &#x2F;etc&#x2F;sysconfig&#x2F;kubelet：  KUBELET_EXTRA_ARGS&#x3D;”–fail-swap-on&#x3D;false”           </p>
 <p>添加节点到集群中：            </p>
@@ -843,8 +858,8 @@
 <p># kubectl get pod –all-namespaces -o wide           </p>
 <p># kubectl describe pod coredns-86c58d9df4-lrc44 –namespace&#x3D;kube-system      </p>
 <h5 id="部署coredns组件"><a href="#部署coredns组件" class="headerlink" title="部署coredns组件"></a>部署coredns组件</h5><p>参考文档：</p>
-<p><a href="http://blog.51cto.com/jerrymin/2338752">http://blog.51cto.com/jerrymin/2338752</a>       <a href="https://github.com/minminmsn/k8s1.13/blob/master/coredns/kubernetes1.13.1%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2coredns.md">https://github.com/minminmsn/k8s1.13/blob/master/coredns/kubernetes1.13.1%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2coredns.md</a>                                      </p>
-<p>在官网下载<a href="https://github.com/coredns/deployment/tree/master/kubernetes">https://github.com/coredns/deployment/tree/master/kubernetes</a> </p>
+<p><a class="link"   href="http://blog.51cto.com/jerrymin/2338752" >http://blog.51cto.com/jerrymin/2338752<i class="fas fa-external-link-alt"></i></a>       <a class="link"   href="https://github.com/minminmsn/k8s1.13/blob/master/coredns/kubernetes1.13.1%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2coredns.md" >https://github.com/minminmsn/k8s1.13/blob/master/coredns/kubernetes1.13.1%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2coredns.md<i class="fas fa-external-link-alt"></i></a>                                      </p>
+<p>在官网下载<a class="link"   href="https://github.com/coredns/deployment/tree/master/kubernetes" >https://github.com/coredns/deployment/tree/master/kubernetes<i class="fas fa-external-link-alt"></i></a> </p>
 <p>配置文件主要是deploy.sh和coredns.yam.sed            </p>
 <p># .&#x2F;deploy.sh -h            </p>
 <p># .&#x2F;deploy.sh -s -r 10.96.0.0&#x2F;12 -i 10.96.0.10 -d cluster.local &gt; coredns.yaml           </p>
@@ -869,7 +884,7 @@
 <p># kubectl exec pod_name -c container_name -it – &#x2F;bin&#x2F;bash     #进入pod中的容器 </p>
 <h4 id="docker私有仓库搭建步骤："><a href="#docker私有仓库搭建步骤：" class="headerlink" title="docker私有仓库搭建步骤："></a>docker私有仓库搭建步骤：</h4><p>搭建企业私有的镜像仓库，满足从开发环境推送和拉取镜像。当我们使用k8s来编排和调度容器时，操作的基本单位是镜像，所以需要从仓库去拉取镜像到当前的工作节点。本来使用公共的docker hub完全可以满足我们的需求，也非常方便，但是上传的镜像任何人都可以访问，其次docker hub的私有仓库又是收费的，所以从安全和商业两方面考虑，企业必须搭建自己的私有镜像仓库。        </p>
 <p>为了保证镜像传输安全，从开发环境向私有仓库推送和拉取镜像时，一般使用https的方式，所以我们需要提供一个可信任的、知名的SSL&#x2F;TLS证书，可以向知名的第三方证书颁发机构购买证书，也可以使用Let’s Encrypt生产免费的证书，还可以自己生产一个自签名证书。由于没有购买真实的域名，无法和第三方证书颁发机构进行交互性验证，所以决定自己生产一个自签名证书，添加到私有仓库，然后让docker客户端信任此证书。        </p>
-<p>参考文档：<a href="https://www.cnblogs.com/justmine/p/8666907.html">https://www.cnblogs.com/justmine/p/8666907.html</a>    </p>
+<p>参考文档：<a class="link"   href="https://www.cnblogs.com/justmine/p/8666907.html" >https://www.cnblogs.com/justmine/p/8666907.html<i class="fas fa-external-link-alt"></i></a>    </p>
 <h5 id="拉取仓库镜像"><a href="#拉取仓库镜像" class="headerlink" title="拉取仓库镜像"></a>拉取仓库镜像</h5><p># docker pull registry    </p>
 <h5 id="生成认证certificate"><a href="#生成认证certificate" class="headerlink" title="生成认证certificate"></a>生成认证certificate</h5><p> 创建一个用于存储证书和私钥的目录         </p>
 <p> # mkdir &#x2F;certs         </p>
@@ -879,7 +894,7 @@
 <p>State or Province Name (full name) []:beijing            </p>
 <p>Locality Name (eg, city) [Default City]:beijing            </p>
 <p>Common Name (eg, your name or your server’s hostname) []:docker.registry.com            	  	 </p>
-<p>Email Address []:<a href="mailto:&#51;&#x37;&#54;&#x32;&#x38;&#52;&#x33;&#x39;&#x33;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#x6d;">&#51;&#x37;&#54;&#x32;&#x38;&#52;&#x33;&#x39;&#x33;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#x6d;</a>            </p>
+<p>Email Address []:<a class="link"   href="mailto:&#51;&#x37;&#54;&#x32;&#56;&#52;&#x33;&#57;&#51;&#x40;&#x71;&#x71;&#x2e;&#99;&#111;&#109;" >&#51;&#x37;&#54;&#x32;&#56;&#52;&#x33;&#57;&#51;&#x40;&#x71;&#x71;&#x2e;&#99;&#111;&#109;<i class="fas fa-external-link-alt"></i></a>            </p>
 <p>其他项填写默认即可           </p>
 <p>[root@docker certs]# ll           总用量 8          </p>
 <p> -rw-r–r– 1 root root 2122 1月  21 14:30 domain.crt          </p>
@@ -906,9 +921,9 @@
 <h5 id="docker镜像仓库测试"><a href="#docker镜像仓库测试" class="headerlink" title="docker镜像仓库测试"></a>docker镜像仓库测试</h5><p># docker pull centos         </p>
 <p># docker tag docker.io&#x2F;centos  docker.registry.com&#x2F;centos:v7.5         </p>
 <p># docker push docker.registry.com&#x2F;centos:v7.5         </p>
-<p>通过浏览器查看仓库概况：         <a href="https://192.168.0.55/v2/_catalog">https://192.168.0.55/v2/_catalog</a>        </p>
+<p>通过浏览器查看仓库概况：         <a class="link"   href="https://192.168.0.55/v2/_catalog" >https://192.168.0.55/v2/_catalog<i class="fas fa-external-link-alt"></i></a>        </p>
 <p>192.168.0.55为ocker镜像仓库        </p>
-<p>通过浏览器查看镜像详情：         <a href="https://192.168.0.55/v2/centos/tags/list">https://192.168.0.55/v2/centos/tags/list</a>         	 </p>
+<p>通过浏览器查看镜像详情：         <a class="link"   href="https://192.168.0.55/v2/centos/tags/list" >https://192.168.0.55/v2/centos/tags/list<i class="fas fa-external-link-alt"></i></a>         	 </p>
 <p>{“name”:”centos”,”tags”:[“v7.5”,”v7.2”,”7.5”]}    </p>
 <p>6、基于yaml的kubernetes容器构建测试        </p>
 <p># kubectl apply -f test.yaml                        	 #创建pod        </p>
@@ -1104,16 +1119,26 @@
     <url>/2024/03/06/k8s%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p><strong>Kubernetes创建pod一直处于ContainerCreating排查和解决</strong></p>
 <p>用k8s创建完pod后，发现无法访问demo应用，查了一下pods状态，发现都在containercreationg状态中。</p>
-<p><img loading="lazy" data-src="D:\有道云\文件\super_linux@163.com\2a439673c93a433ea739ed81cb166544\1daf6413ce50.png" alt="img"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="D:\有道云\文件\super_linux@163.com\2a439673c93a433ea739ed81cb166544\1daf6413ce50.png"
+                      alt="img"
+                ></p>
 <p>百度了一下，根据网上的方法，查了一下mysql-jn6f2这个pods的详情</p>
-<p><img loading="lazy" data-src="D:\有道云\文件\super_linux@163.com\a266c0dd3984408aa3a1c965ca9f4c4a\f8df32fa1d6.jpeg" alt="img"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="D:\有道云\文件\super_linux@163.com\a266c0dd3984408aa3a1c965ca9f4c4a\f8df32fa1d6.jpeg"
+                      alt="img"
+                ></p>
 <p>其中最主要的问题是：details: (open &#x2F;etc&#x2F;docker&#x2F;certs.d&#x2F;registry.access.redhat.com&#x2F;redhat-ca.crt: no such file or directory)</p>
 <p>解决方案：</p>
 <p>查看&#x2F;etc&#x2F;docker&#x2F;certs.d&#x2F;registry.access.redhat.com&#x2F;redhat-ca.crt （该链接就是上图中的说明） 是一个软链接，但是链接过去后并没有真实的&#x2F;etc&#x2F;rhsm，所以需要使用yum安装：</p>
 <p>yum install <em>rhsm</em></p>
 <p>安装完成后，执行一下docker pull registry.access.redhat.com&#x2F;rhel7&#x2F;pod-infrastructure:latest</p>
 <p>如果依然报错，可参考下面的方案：</p>
-<p>wget <a href="http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm">http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm</a></p>
+<p>wget <a class="link"   href="http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm" >http://mirror.centos.org/centos/7/os/x86_64/Packages/python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm<i class="fas fa-external-link-alt"></i></a></p>
 <p>rpm2cpio python-rhsm-certificates-1.19.10-1.el7_4.x86_64.rpm | cpio -iv –to-stdout .&#x2F;etc&#x2F;rhsm&#x2F;ca&#x2F;redhat-uep.pem | tee &#x2F;etc&#x2F;rhsm&#x2F;ca&#x2F;redhat-uep.pem</p>
 <p>这两个命令会生成&#x2F;etc&#x2F;rhsm&#x2F;ca&#x2F;redhat-uep.pem文件.</p>
 <p>顺得的话会得到下面的结果。</p>
@@ -1313,7 +1338,7 @@
     <content><![CDATA[<p>1、备份数据：</p>
 <p>mysqldump -u root -p wso2esbdb &gt; &#x2F;opt&#x2F;wso2eabdb.sql</p>
 <p>2、将数据文件传输至备份数据库</p>
-<p>scp  wso2eabdb.sql <a href="mailto:&#x72;&#x6f;&#x6f;&#116;&#64;&#49;&#55;&#x32;&#46;&#x32;&#x38;&#x2e;&#52;&#x32;&#46;&#x33;&#54;">&#x72;&#x6f;&#x6f;&#116;&#64;&#49;&#55;&#x32;&#46;&#x32;&#x38;&#x2e;&#52;&#x32;&#46;&#x33;&#54;</a>:&#x2F;opt&#x2F;</p>
+<p>scp  wso2eabdb.sql <a class="link"   href="mailto:&#114;&#111;&#111;&#116;&#x40;&#49;&#55;&#50;&#x2e;&#x32;&#x38;&#46;&#52;&#x32;&#x2e;&#x33;&#54;" >&#114;&#111;&#111;&#116;&#x40;&#49;&#55;&#50;&#x2e;&#x32;&#x38;&#46;&#52;&#x32;&#x2e;&#x33;&#54;<i class="fas fa-external-link-alt"></i></a>:&#x2F;opt&#x2F;</p>
 <p>3、备库删除原来的数据库</p>
 <p>drop database  wso2esbdb;</p>
 <p>FLUSH PRIVILEGES;</p>
@@ -1342,7 +1367,7 @@
     <content><![CDATA[<p>环境搭好</p>
 <p>182  183</p>
 <p>182用户授权</p>
-<p>mysql&gt;grant all on <em>.</em> to <a href="mailto:&#117;&#x73;&#101;&#x72;&#64;&#49;&#57;&#x32;&#46;&#49;&#54;&#x38;&#46;&#48;&#46;&#x31;&#56;&#51;">&#117;&#x73;&#101;&#x72;&#64;&#49;&#57;&#x32;&#46;&#49;&#54;&#x38;&#46;&#48;&#46;&#x31;&#56;&#51;</a> identified by ‘user’</p>
+<p>mysql&gt;grant all on <em>.</em> to <a class="link"   href="mailto:&#x75;&#x73;&#101;&#x72;&#x40;&#49;&#57;&#50;&#46;&#49;&#54;&#x38;&#x2e;&#x30;&#46;&#49;&#56;&#51;" >&#x75;&#x73;&#101;&#x72;&#x40;&#49;&#57;&#50;&#46;&#49;&#54;&#x38;&#x2e;&#x30;&#46;&#49;&#56;&#51;<i class="fas fa-external-link-alt"></i></a> identified by ‘user’</p>
 <p>查看bin-log</p>
 <p>&#x2F;mnt&#x2F;sdb&#x2F;mysql&#x2F;bin&#x2F;mysqlbinlog mysql-bin.000001 |more;</p>
 <p>flush logs;  刷新日志</p>
@@ -1723,7 +1748,7 @@
   <entry>
     <title>mysql数据库大小查看</title>
     <url>/2024/03/06/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%A7%E5%B0%8F%E6%9F%A5%E7%9C%8B/</url>
-    <content><![CDATA[<p><a href="https://www.cnblogs.com/yuwensong/p/7729267.html">用SQL命令查看Mysql数据库大小</a></p>
+    <content><![CDATA[<p><a class="link"   href="https://www.cnblogs.com/yuwensong/p/7729267.html" >用SQL命令查看Mysql数据库大小<i class="fas fa-external-link-alt"></i></a></p>
 <p>要想知道每个数据库的大小的话，步骤如下：</p>
 <p>1、进入information_schema 数据库（存放了其他的数据库的信息）</p>
 <p>use information_schema;</p>
@@ -1755,7 +1780,7 @@
     <title>redis部署</title>
     <url>/2024/03/06/redis/</url>
     <content><![CDATA[<p>redis 4.0.8 cluster 安装 需要ruby2.2.2+</p>
-<p>1.wget <a href="http://download.redis.io/releases/redis-4.0.10.tar.gz">http://download.redis.io/releases/redis-4.0.10.tar.gz</a></p>
+<p>1.wget <a class="link"   href="http://download.redis.io/releases/redis-4.0.10.tar.gz" >http://download.redis.io/releases/redis-4.0.10.tar.gz<i class="fas fa-external-link-alt"></i></a></p>
 <p>2.tar xf redis-4.0.8.tar.gz -C &#x2F;opt&#x2F;redis&#x2F; –strip-components&#x3D;1</p>
 <p>3.yum -y install gcc make tcl</p>
 <p>4.cd &#x2F;opt&#x2F;redis&#x2F;src &amp;&amp; make MALLOC&#x3D;libc （默认值为libc）&amp;&amp; make </p>
@@ -1840,8 +1865,8 @@
 <p>13.&#x2F;opt&#x2F;redis&#x2F;src&#x2F;redis-trib.rb create –replicas 1 192.168.203.13:6379 192.168.203.13:6380 192.168.203.13:6381 192.168.203.13:6382 192.168.203.13:6383 192.168.203.13:6384  &#x2F;&#x2F;创建集群</p>
 <p>14.echo for i in {6379..6384}; do &#x2F;opt&#x2F;redis&#x2F;src&#x2F;redis-server &#x2F;opt&#x2F;redis&#x2F;cluster&#x2F;$i&#x2F;$i.conf; done &gt;&gt; &#x2F;etc&#x2F;rc.local &#x2F;&#x2F;开机自启</p>
 <p>参考文档：</p>
-<p>​	<a href="https://redis.io/topics/cluster-tutorial">https://redis.io/topics/cluster-tutorial</a></p>
-<p>​	<a href="https://blog.csdn.net/ljl890705/article/details/51039015">https://blog.csdn.net/ljl890705/article/details/51039015</a></p>
+<p>​	<a class="link"   href="https://redis.io/topics/cluster-tutorial" >https://redis.io/topics/cluster-tutorial<i class="fas fa-external-link-alt"></i></a></p>
+<p>​	<a class="link"   href="https://blog.csdn.net/ljl890705/article/details/51039015" >https://blog.csdn.net/ljl890705/article/details/51039015<i class="fas fa-external-link-alt"></i></a></p>
 <p>&#x2F;*	初始化redis cluter *&#x2F;</p>
 <p>​	for i in {6379..6384}; do &#x2F;opt&#x2F;redis&#x2F;src&#x2F;redis-cli -h 192.168.205.55 -p $i shutdown; done</p>
 <p>​	for i in {6379..6384}; do rm -rf &#x2F;opt&#x2F;redis&#x2F;cluster&#x2F;*; done</p>
@@ -1862,7 +1887,7 @@
     <url>/2024/03/06/redis%E5%8D%95%E6%9C%BA%E6%8C%81%E4%B9%85%E5%8C%96/</url>
     <content><![CDATA[<p>1.安装</p>
 <p>yum -y install gcc make tcl &#x2F;&#x2F;安装依赖</p>
-<p>wget <a href="http://download.redis.io/releases/redis-4.0.X.tar.gz">http://download.redis.io/releases/redis-4.0.X.tar.gz</a></p>
+<p>wget <a class="link"   href="http://download.redis.io/releases/redis-4.0.X.tar.gz" >http://download.redis.io/releases/redis-4.0.X.tar.gz<i class="fas fa-external-link-alt"></i></a></p>
 <p>tar xf redis-4.0.8.tar.gz -C &#x2F;opt&#x2F;redis&#x2F; –strip-components&#x3D;1</p>
 <p>cd &#x2F;opt&#x2F;redis&#x2F;src &amp;&amp; make MALLOC&#x3D;libc</p>
 <p>2.优化系统参数</p>
@@ -2261,7 +2286,7 @@
     <title>安装zabbix server</title>
     <url>/2024/03/06/zabbix_server/</url>
     <content><![CDATA[<p>1.准备zabbix的源码包</p>
-<p><a href="https://cdn.zabbix.com/zabbix/sources/stable/5.0/zabbix-5.0.6.tar.gz">https://cdn.zabbix.com/zabbix/sources/stable/5.0/zabbix-5.0.6.tar.gz</a></p>
+<p><a class="link"   href="https://cdn.zabbix.com/zabbix/sources/stable/5.0/zabbix-5.0.6.tar.gz" >https://cdn.zabbix.com/zabbix/sources/stable/5.0/zabbix-5.0.6.tar.gz<i class="fas fa-external-link-alt"></i></a></p>
 <p>解压</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">[root@linux1 ~]<span class="comment"># tar xf zabbix-5.0.6.tar.gz</span></span><br><span class="line"></span><br><span class="line">[root@linux1 ~]<span class="comment"># cd zabbix-5.0.6</span></span><br></pre></td></tr></table></figure>
 
@@ -2375,6 +2400,17 @@
 ]]></content>
       <tags>
         <tag>网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux服务器双网卡绑定</title>
+    <url>/2024/03/06/%E7%BD%91%E5%8D%A1%E7%BB%91%E5%AE%9A/</url>
+    <content><![CDATA[<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line"></span><br><span class="line">[root@linuxprobe ~]<span class="comment"># vim /etc/sysconfig/network-scripts/ifcfg-eno16777736</span></span><br><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">ONBOOT=yes</span><br><span class="line">USERCTL=no</span><br><span class="line">DEVICE=eno16777736</span><br><span class="line">MASTER=bond0</span><br><span class="line">SLAVE=yes</span><br><span class="line"></span><br><span class="line">[root@linuxprobe ~]<span class="comment"># vim /etc/sysconfig/network-scripts/ifcfg-eno33554968</span></span><br><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">ONBOOT=yes</span><br><span class="line">USERCTL=no</span><br><span class="line">DEVICE=eno33554968</span><br><span class="line">MASTER=bond0</span><br><span class="line">SLAVE=yes</span><br><span class="line"></span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">[root@linuxprobe ~]<span class="comment"># vim /etc/sysconfig/network-scripts/ifcfg-bond0</span></span><br><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">ONBOOT=yes</span><br><span class="line">USERCTL=no</span><br><span class="line">DEVICE=bond0</span><br><span class="line">IPADDR=192.168.10.10</span><br><span class="line">PREFIX=24</span><br><span class="line">DNS=192.168.10.1</span><br><span class="line">NM_CONTROLLED=no</span><br><span class="line"></span><br><span class="line">3    </span><br><span class="line"></span><br><span class="line">mode0（平衡负载模式）：平时两块网卡均工作，且自动备援，但需要在与服务器本地网卡相连的交换机设备上进行端口聚合来支持绑定技术。</span><br><span class="line">mode1（自动备援模式）：平时只有一块网卡工作，在它故障后自动替换为另外的网卡。</span><br><span class="line">[root@linuxprobe ~]<span class="comment"># vim /etc/modprobe.d/bond.conf</span></span><br><span class="line"><span class="built_in">alias</span> bond0 bonding</span><br><span class="line">options bond0 miimon=100 mode=6</span><br><span class="line">mode6（平衡负载模式）：平时两块网卡均工作，且自动备援，无须交换机设备提供辅助支持。</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>网络</tag>
+        <tag>系统</tag>
       </tags>
   </entry>
   <entry>
@@ -2577,7 +2613,7 @@
 <p>mount命令，可以挂载iso镜像；</p>
 <p>mount DEVICE MOUNT_POINT</p>
 <p>​	-o loop: 挂载本地回环设备</p>
-<p>wget <a href="ftp://172.16.0.1/pub/isos/rhci-5.8-1.iso">ftp://172.16.0.1/pub/isos/rhci-5.8-1.iso</a></p>
+<p>wget <a class="link"   href="ftp://172.16.0.1/pub/isos/rhci-5.8-1.iso" >ftp://172.16.0.1/pub/isos/rhci-5.8-1.iso<i class="fas fa-external-link-alt"></i></a></p>
 <p>mount &#x2F;dev&#x2F;sda5 &#x2F;mnt&#x2F;test</p>
 <p>文件系统的配置文件&#x2F;etc&#x2F;fstab</p>
 <p>​	OS在初始时，会自动挂载此文件中定义的每个文件系统</p>
@@ -2765,7 +2801,7 @@
 <p>安装RHEL6.3 x86_64的方法（前提：请确保你的CPU支持硬件虚拟化技术）：</p>
 <p>1、创建虚拟机；</p>
 <p>2、下载isos目录中的rhci-rhel-6.3-1.iso，并导入虚拟机的虚拟光驱；</p>
-<p>3、在boot提示符输入：linux ip&#x3D;172.16.x.1 netmask&#x3D;255.255.0.0 gateway&#x3D;172.16.0.1 dns&#x3D;172.16.0.1 ks&#x3D;<a href="http://172.16.0.1/rhel6.cfg">http://172.16.0.1/rhel6.cfg</a></p>
+<p>3、在boot提示符输入：linux ip&#x3D;172.16.x.1 netmask&#x3D;255.255.0.0 gateway&#x3D;172.16.0.1 dns&#x3D;172.16.0.1 ks&#x3D;<a class="link"   href="http://172.16.0.1/rhel6.cfg" >http://172.16.0.1/rhel6.cfg<i class="fas fa-external-link-alt"></i></a></p>
 <p>​	</p>
 <p>64, 32</p>
 <p>&#x2F;lib</p>
@@ -3114,7 +3150,7 @@
 <p>指定本地解析：</p>
 <p>&#x2F;etc&#x2F;hosts</p>
 <p>主机IP	主机名	主机别名</p>
-<p>172.16.0.1		<a href="http://www.magedu.com/">www.magedu.com</a>		www</p>
+<p>172.16.0.1		<a class="link"   href="http://www.magedu.com/" >www.magedu.com<i class="fas fa-external-link-alt"></i></a>		www</p>
 <p>DNS–&gt;&#x2F;etc&#x2F;hosts–&gt;DNS</p>
 <p>配置主机名：</p>
 <p>hostname HOSTNAME</p>
@@ -3390,7 +3426,7 @@
 <p>yum install zsh</p>
 <p>comps*.xml: RPM包分组信息</p>
 <p>​	</p>
-<p><a href="ftp://172.16.0.1/pub/%7BServer,VT,Cluster,ClusterStorage%7D">ftp://172.16.0.1/pub/{Server,VT,Cluster,ClusterStorage}</a></p>
+<p><a class="link"   href="ftp://172.16.0.1/pub/%7BServer,VT,Cluster,ClusterStorage%7D" >ftp://172.16.0.1/pub/{Server,VT,Cluster,ClusterStorage}<i class="fas fa-external-link-alt"></i></a></p>
 <p>如何为yum定义repo文件</p>
 <p>[Repo_ID]</p>
 <p>name&#x3D;Description</p>
@@ -3433,10 +3469,10 @@
 <p>&#x2F;media&#x2F;cdrom&#x2F;{Server,VT,Cluster,ClusterStorage}</p>
 <p>如何创建yum仓库：</p>
 <p>createrepo</p>
-<p><a href="http://172.16.0.1/yum/%7BServer,VT%7D">http://172.16.0.1/yum/{Server,VT}</a></p>
+<p><a class="link"   href="http://172.16.0.1/yum/%7BServer,VT%7D" >http://172.16.0.1/yum/{Server,VT}<i class="fas fa-external-link-alt"></i></a></p>
 <p>练习：</p>
 <p>1、将系统安装光盘挂载至&#x2F;media&#x2F;yum目录，用其实现yum仓库；</p>
-<p>2、配置使用<a href="http://172.16.0.1/yum/%7BServer,VT,Cluster,ClusterStorage%7D%E4%B8%BA%E5%8F%AF%E7%94%A8yum%E4%BB%93%E5%BA%93%EF%BC%9B">http://172.16.0.1/yum/{Server,VT,Cluster,ClusterStorage}为可用yum仓库；</a></p>
+<p>2、配置使用<a class="link"   href="http://172.16.0.1/yum/%7BServer,VT,Cluster,ClusterStorage%7D%E4%B8%BA%E5%8F%AF%E7%94%A8yum%E4%BB%93%E5%BA%93%EF%BC%9B" >http://172.16.0.1/yum/{Server,VT,Cluster,ClusterStorage}为可用yum仓库；<i class="fas fa-external-link-alt"></i></a></p>
 <p>写一个脚本，完成以下功能：</p>
 <p>说明：此脚本能于同一个repo文件中创建多个Yum源的指向；</p>
 <p>1、接受一个文件名做为参数，此文件存放至&#x2F;etc&#x2F;yum.repos.d目录中，且文件名以.repo为后缀；要求，此文件不能事先存，否则，报错；</p>
@@ -3829,7 +3865,7 @@
 <p>​	password –md5 $1$HKXJ51$B9Z8A.X&#x2F;&#x2F;XA.AtzU1.KuG.</p>
 <p>title Install Red Hat Enterprise Linux 5</p>
 <p>​	root (hd0,0)</p>
-<p>​	kernel &#x2F;vmlinuz-5 ks&#x3D;<a href="http://172.16.0.1/workstation.cfg">http://172.16.0.1/workstation.cfg</a> ksdevice&#x3D;eth0 noipv6</p>
+<p>​	kernel &#x2F;vmlinuz-5 ks&#x3D;<a class="link"   href="http://172.16.0.1/workstation.cfg" >http://172.16.0.1/workstation.cfg<i class="fas fa-external-link-alt"></i></a> ksdevice&#x3D;eth0 noipv6</p>
 <p>​	initrd &#x2F;initrd-5</p>
 <p>​	password –md5 $1$FSUEU&#x2F;$uhUUc8USBK5QAXc.BfW4m.</p>
 <p>查看运行级别：</p>
@@ -3886,17 +3922,6 @@
 <p>for I in &#x2F;etc&#x2F;rc3.d&#x2F;S*; do</p>
 <p>  $I start</p>
 <p>done</p>
-]]></content>
-      <tags>
-        <tag>网络</tag>
-        <tag>系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux服务器双网卡绑定</title>
-    <url>/2024/03/06/%E7%BD%91%E5%8D%A1%E7%BB%91%E5%AE%9A/</url>
-    <content><![CDATA[<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">1</span><br><span class="line"></span><br><span class="line">[root@linuxprobe ~]<span class="comment"># vim /etc/sysconfig/network-scripts/ifcfg-eno16777736</span></span><br><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">ONBOOT=yes</span><br><span class="line">USERCTL=no</span><br><span class="line">DEVICE=eno16777736</span><br><span class="line">MASTER=bond0</span><br><span class="line">SLAVE=yes</span><br><span class="line"></span><br><span class="line">[root@linuxprobe ~]<span class="comment"># vim /etc/sysconfig/network-scripts/ifcfg-eno33554968</span></span><br><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">ONBOOT=yes</span><br><span class="line">USERCTL=no</span><br><span class="line">DEVICE=eno33554968</span><br><span class="line">MASTER=bond0</span><br><span class="line">SLAVE=yes</span><br><span class="line"></span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">[root@linuxprobe ~]<span class="comment"># vim /etc/sysconfig/network-scripts/ifcfg-bond0</span></span><br><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">ONBOOT=yes</span><br><span class="line">USERCTL=no</span><br><span class="line">DEVICE=bond0</span><br><span class="line">IPADDR=192.168.10.10</span><br><span class="line">PREFIX=24</span><br><span class="line">DNS=192.168.10.1</span><br><span class="line">NM_CONTROLLED=no</span><br><span class="line"></span><br><span class="line">3    </span><br><span class="line"></span><br><span class="line">mode0（平衡负载模式）：平时两块网卡均工作，且自动备援，但需要在与服务器本地网卡相连的交换机设备上进行端口聚合来支持绑定技术。</span><br><span class="line">mode1（自动备援模式）：平时只有一块网卡工作，在它故障后自动替换为另外的网卡。</span><br><span class="line">[root@linuxprobe ~]<span class="comment"># vim /etc/modprobe.d/bond.conf</span></span><br><span class="line"><span class="built_in">alias</span> bond0 bonding</span><br><span class="line">options bond0 miimon=100 mode=6</span><br><span class="line">mode6（平衡负载模式）：平时两块网卡均工作，且自动备援，无须交换机设备提供辅助支持。</span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <tags>
         <tag>网络</tag>

@@ -1,36 +1,457 @@
-extends _partials/layout.pug
-include _mixin/sidebar.pug
-include _mixin/comment.pug
-include _mixin/postmeta.pug
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="浑水摸鱼喵">
+    
+    <title>
+        
+            docker在线安装 |
+        
+        道可道，非常道
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-block title
-    - var page_title = page.title
-    if page.categories && page.categories.length
-        - var cat_list = ''
-        - var comma = ''
-        each cat in page.categories.toArray()
-            - var cat_list = cat.name + comma + cat_list
-            - var comma = ' - '
-        if cat_list.length !== 0
-            - var page_title = page.title + ' - ' + cat_list
-    != `${page_title}`
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
-block header
-    h1(itemprop="name headline")
-        if page.link
-            - var postTitleIcon = '<i class="ic i-link-alt"></i>'
-            - var postText = page.title || page.link
-            != _url(page.link, postText + postTitleIcon, {class: 'link external', itemprop: 'url'})
-        else
-            != page.title
-    +PMRender(page, true)
 
-block content
-    div(class="article wrap")
-        +BCRender(page, true)
-        != partial('_partials/post/post.pug', {post: page})
-    != partial('_partials/post/nav.pug', {post: page})
-    +CommentRender
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
 
-block sidebar
-    +sidebarRender(true)
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                道可道，非常道
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">docker在线安装</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">浑水摸鱼喵</span>
+                        
+                            <span class="author-label">Lv4</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2024-03-06 15:19:25
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/docker/">docker</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p><strong>1.docker安装</strong></p>
+<p>1、Docker 要求 CentOS 系统的内核版本高于 3.10 </p>
+<p>通过 <strong>uname -r</strong> 命令查看你当前的内核版本</p>
+<p><code>uname -r</code></p>
+<p>2、使用 root 权限登录 Centos。确保 yum 包更新到最新。</p>
+<p> <code>sudo yum update</code></p>
+<p>3、卸载旧版本(如果安装过旧版本的话)</p>
+<p><code>sudo yum remove docker  docker-common docker-selinux docker-engine</code></p>
+<p>4、安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的</p>
+<p><code>sudo yum install -y yum-utils device-mapper-persistent-data lvm2</code></p>
+<p>5、设置yum源</p>
+<p><code>sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</code></p>
+<p>6、可以查看所有仓库中所有docker版本，并选择特定版本安装</p>
+<p><code>yum list docker-ce --showduplicates | sort -r</code></p>
+<p>7、安装docker</p>
+<p><code>sudo yum install docker-ce</code></p>
+<p>8、启动并加入开机启动</p>
+<p><code>sudo systemctl start docker $ sudo systemctl enable docker</code></p>
+<p>9、验证安装是否成功(有client和service两部分表示docker安装启动都成功了)</p>
+<p><code>docker version</code></p>
+<blockquote>
+<p>配置加速</p>
+<p>sudo mkdir -p &#x2F;etc&#x2F;docker sudo tee &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;-‘EOF’ {  “registry-mirrors”: [“<a class="link"   target="_blank" rel="noopener" href="https://27zv9ros.mirror.aliyuncs.com" ]">https://27zv9ros.mirror.aliyuncs.com&quot;]<i class="fas fa-external-link-alt"></i></a> } EOF sudo systemctl daemon-reload sudo systemctl restart docker</p>
+<p>Ps：可能会在装的时候缺少包，单独下载安装rpm包即可</p>
+</blockquote>
+<p><strong>2. Docker使用</strong></p>
+<p><strong>2.1 docker基本信息查看</strong></p>
+<p>（1）docker version：查看docker的版本号，包括客户端、服务端、依赖的Go等 ；</p>
+<p> （2）docker info ：查看系统(docker)层面信息，包括管理的images, containers数等；</p>
+<p> <strong>2.2 docker镜像的获取与删除</strong></p>
+<p>(1) docker pull centos ：下载centos所有的镜像</p>
+<p>(2)docker pull centos:centos6  下载centos6镜像</p>
+<p>(3)docker images  查看本机所有的镜像包</p>
+<p>(4)docker images -a 列出所有的images（包含历史）</p>
+<p>(5)docker 导入镜像  docker load –input ~&#x2F;centos-7.3.tar</p>
+<p>(6)docker挂载主机目录 -v</p>
+<p>docker run -i -t -v &#x2F;root&#x2F;engine&#x2F;:&#x2F;root&#x2F;engine centos &#x2F;bin&#x2F;bash</p>
+<p>(7)docker 容器镜像删除</p>
+<p>①.停止所有的container，这样才能够删除其中的images：</p>
+<p>docker stop $(docker ps -a -q)</p>
+<p>如果想要删除所有container的话再加一个指令：</p>
+<p>docker rm $(docker ps -a -q)</p>
+<p>②.查看当前有些什么images</p>
+<p>docker images</p>
+<p>③.删除images，通过image的id来指定删除谁</p>
+<p>docker rmi <image id></p>
+<p>想要删除untagged images，也就是那些id为<None>的image的话可以用</p>
+<p>docker rmi $(docker images | grep “^<none>“ | awk “{print $3}”)</p>
+<p>要删除全部image的话</p>
+<p>docker rmi $(docker images -q)</p>
+<p><strong>2.3 docker容器的使用</strong></p>
+<p><strong>(1)docker命令帮助</strong></p>
+<p>docker的管理命令都是以docker开头，加上一个容易理解的单词，对一个命令的参数不熟悉，可以使用docker command –help查看相关参数意义,例如：</p>
+<p>(2)<strong>docker使用教程</strong></p>
+<p><a class="link"   target="_blank" rel="noopener" href="http://www.runoob.com/docker/docker-tutorial.html" >http://www.runoob.com/docker/docker-tutorial.html<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>3. Docker镜像导入导出</strong></p>
+<p>docker 提供把镜像导出export（保存save）为文件的机制，这样就可以把镜像copy到任意地方了。</p>
+<p><strong>3.1 方式一:容器export&#x2F;import</strong></p>
+<p>格式：docker export CONTAINER(容器)</p>
+<p>使用 docker ps -a 查看本机已有的容器.</p>
+<p><strong>3.2 方式一:镜像save&#x2F;load</strong></p>
+<p>格式：docker save IMAGE(镜像)</p>
+<p>使用  docker commit <CONTAIN-ID> <IMAGE-NAME>命令把一个正在运行的容器保存为镜像，如：</p>
+<p>(1)首先查看所有的容器信息</p>
+<p>(2）使用docker commit命令将指定容器保存为镜像</p>
+<p>（3）使用docker images 查看刚才保存的镜像</p>
+<p>（4）使用docker run 命令测试刚才保存的镜像是否正确</p>
+<p>（5）使用docker save 命令将镜像导出成文件</p>
+<p> 现在就可以在任何装 docker 的地方加载 刚保存的镜像了。</p>
+<p> 查看加载的镜像</p>
+<p> 查看刚刚加载的镜像tag为<none>，现在可修改下镜像的tag名称：</p>
+<p> <strong>4.</strong> <strong>利用****dockerfile构建镜像</strong></p>
+<p>docker build命令会根据Dockerfile文件及上下文构建新Docker镜像。构建上下文是指Dockerfile所在的本地路径或一个URL（Git仓库地址）。构建上下文环境会被递归处理，所以，构建所指定的路径还包括了子目录，而URL还包括了其中指定的子模块。</p>
+<p><strong>构建镜像</strong></p>
+<p>将当前目录做为构建上下文时，可以像下面这样使用docker build命令构建镜像：</p>
+<p>$ docker build .</p>
+<p>Sending build context to Docker daemon 6.51 MB</p>
+<p>…</p>
+<p>说明：构建会在Docker后台守护进程（daemon）中执行，而不是CLI中。构建前，构建进程会将全部内容（递归）发送到守护进程。大多情况下，应该将一个空目录作为构建上下文环境，并将Dockerfile文件放在该目录下。</p>
+<p>在构建上下文中使用的Dockerfile文件，是一个构建指令文件。为了提高构建性能，可以通过.dockerignore文件排除上下文目录下，不需要的文件和目录。</p>
+<p>Dockerfile一般位于构建上下文的根目录下，也可以通过-f指定该文件的位置：</p>
+<p>$ docker build -f &#x2F;path&#x2F;to&#x2F;a&#x2F;Dockerfile .</p>
+<p>构建时，还可以通过-t参数指定构建成后，镜像的仓库、标签等：</p>
+<p><strong>镜像标签</strong></p>
+<p>$ docker build -t shykes&#x2F;myapp .</p>
+<p><strong>5.docker常用命令</strong></p>
+<p><strong>docker search:</strong> Search the Docker Hub for images </p>
+<p><strong>docker pull:</strong> Pull an image or a repository from a registry </p>
+<p><strong>docker imases:</strong> List images</p>
+<p><strong>docker create:</strong> Create a new container</p>
+<p><strong>docker start:</strong> Start one or more stopped containers</p>
+<p><strong>docker run:</strong> Run a command in a new container</p>
+<p><strong>docker attach:</strong> Attach to running container</p>
+<p><strong>docker ps:</strong> List containers</p>
+<p><strong>docker logs:</strong> Fetch the logs of a container</p>
+<p><strong>docker restart:</strong> Restart a container</p>
+<p><strong>docker stop:</strong> Stop one or more running containers </p>
+<p><strong>docker kill:</strong> Kill one or more running containers</p>
+<p><strong>docker rm:</strong> Remove one or more containers</p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2024/03/06/dns/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">DNS服务器搭建</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2024/03/06/docker%E6%8A%A5%E9%94%99/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">docker报错案例</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>&nbsp;-&nbsp;
+            
+            2024&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">浑水摸鱼喵</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/toc.js"></script>
+    
+</div>
+
+
+
+</body>
+</html>
