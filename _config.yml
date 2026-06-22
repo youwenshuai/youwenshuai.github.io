@@ -99,6 +99,13 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: shiro
+# 阅读进度条（页面顶部的朱红色细条）
+progress_bar:
+  enabled: true
+
+# 回到顶部按钮
+back_to_top:
+  enabled: true
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -106,12 +113,3 @@ deploy:
   type: git
   repo: https://github.com/youwenshuai/youwenshuai.github.io.git
   branch: main
-menu:
-  - name: 首页
-    url: /
-  - name: 归档
-    url: /archives
-  - name: 分类
-    url: /categories
-  - name: 标签
-    url: /tags
