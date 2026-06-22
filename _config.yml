@@ -4,10 +4,10 @@
 
 # Site
 title: 旷 野 的 风
-subtitle: '无所屌谓'
+subtitle: '无所屌谓 天下兴亡多少事，悠悠，不尽长江滚滚流'
 description: ''
 keywords:
-author: John Doe
+author: Mis You
 language: zh-CN
 timezone: ''
 
@@ -29,6 +29,8 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+
+
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -101,4 +103,15 @@ theme: shiro
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/youwenshuai/youwenshuai.github.io.git
+  branch: main
+menu:
+  - name: 首页
+    url: /
+  - name: 归档
+    url: /archives
+  - name: 分类
+    url: /categories
+  - name: 标签
+    url: /tags
