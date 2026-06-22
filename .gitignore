@@ -1,0 +1,6 @@
+.deploy_git/
+public/
+node_modules/
+.cache/
+.idea/
+*.log
