@@ -26,6 +26,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
+    <!-- Warm the CDN connection so the lightbox assets download instantly on first interaction. -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <!-- Prefetch the LightGallery JS/CSS and same-origin wrapper at lowest priority so the lightbox
+         opens instantly on the first tap, even on touch devices with no hover to warm on.
+         crossorigin matches the SRI requests; keep lightgallery@<version> in sync with lightgallery.js. -->
+    <link rel="prefetch" as="script" href="https://cdn.jsdelivr.net/npm/lightgallery@2.9.0/lightgallery.min.js" crossorigin />
+    <link rel="prefetch" as="style" href="https://cdn.jsdelivr.net/npm/lightgallery@2.9.0/css/lightgallery.min.css" crossorigin />
+    <link rel="prefetch" as="script" href="/js/lightgallery.min.js?v=bdc2fa8a" />
+    
     
     
     
@@ -117,12 +126,20 @@
     <meta property="og:locale" content="zh_CN" />
     
     
+    <meta property="og:image" content="https://youwenshuai.github.io/images/2026%E5%B9%B4%E7%AB%AF%E5%8D%88%E8%8A%82/2b8a9eb91aa73c00c3e5f8f48841cf4b_compress.jpg" />
+    <meta property="og:image:alt" content="端午节 | 旷 野 的 风" />
+    
+    
+    <meta property="og:image:width" content="769" />
+    <meta property="og:image:height" content="1920" />
+    
+    
     
     
     <meta property="article:published_time" content="2026-06-23T06:08:44.758Z" />
     
     
-    <meta property="article:modified_time" content="2026-06-23T06:14:58.215Z" />
+    <meta property="article:modified_time" content="2026-06-23T06:27:47.591Z" />
     
     
     <meta property="article:author" content="Mis You" />
@@ -135,9 +152,11 @@
     
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="端午节 | 旷 野 的 风" />
     
+    
+    <meta name="twitter:image" content="https://youwenshuai.github.io/images/2026%E5%B9%B4%E7%AB%AF%E5%8D%88%E8%8A%82/2b8a9eb91aa73c00c3e5f8f48841cf4b_compress.jpg" />
     
 
     <!-- Canonical URL -->
@@ -149,7 +168,7 @@
     <!-- Structured data (JSON-LD) -->
     
     
-    <script type="application/ld+json">[{"@context":"https://schema.org","@type":"BlogPosting","headline":"端午节","mainEntityOfPage":{"@type":"WebPage","@id":"https://youwenshuai.github.io/2026/06/23/2026%E5%B9%B4%E7%AB%AF%E5%8D%88%E8%8A%82/index.html"},"datePublished":"2026-06-23T06:08:44.758Z","dateModified":"2026-06-23T06:14:58.215Z","author":{"@type":"Person","name":"Mis You"},"publisher":{"@type":"Organization","name":"旷 野 的 风","logo":{"@type":"ImageObject","url":"https://youwenshuai.github.io/favicon.svg"}},"keywords":"图片"}]</script>
+    <script type="application/ld+json">[{"@context":"https://schema.org","@type":"BlogPosting","headline":"端午节","mainEntityOfPage":{"@type":"WebPage","@id":"https://youwenshuai.github.io/2026/06/23/2026%E5%B9%B4%E7%AB%AF%E5%8D%88%E8%8A%82/index.html"},"image":["https://youwenshuai.github.io/images/2026%E5%B9%B4%E7%AB%AF%E5%8D%88%E8%8A%82/2b8a9eb91aa73c00c3e5f8f48841cf4b_compress.jpg"],"datePublished":"2026-06-23T06:08:44.758Z","dateModified":"2026-06-23T06:27:47.591Z","author":{"@type":"Person","name":"Mis You"},"publisher":{"@type":"Organization","name":"旷 野 的 风","logo":{"@type":"ImageObject","url":"https://youwenshuai.github.io/favicon.svg"}},"keywords":"图片"}]</script>
     
 
     <!-- Favicon -->
@@ -171,7 +190,7 @@
 </head>
 
 
-<body class="h-full fog-bg text-slate-800">
+<body class="h-full fog-bg text-slate-800" data-shiro-lightgallery="true">
     <!-- Font-load preloader: covers the title-font swap until preloader.min.js fades it out.
          data-shiro-font-text lists the title glyphs to wait for. -->
     <div id="shiroPreloader" class="shiro-preloader" aria-hidden="true"
@@ -204,6 +223,8 @@
     
     <div id="progressBar" class="progress-bar" aria-hidden="true"></div>
     
+    
+    <div id="backToTopSentinel" class="back-to-top-sentinel" aria-hidden="true"></div>
     
 
     <div class="min-h-full px-4 pt-14 pb-6 md:pb-5">
@@ -429,10 +450,10 @@
     
 
     <div class="prose-shiro" data-pagefind-body>
-        <p><img src="C:\Users\Administrator\Desktop\my-blog\source_posts\2b8a9eb91aa73c00c3e5f8f48841cf4b_compress.jpg" alt="2b8a9eb91aa73c00c3e5f8f48841cf4b_compress" decoding="async" loading="eager" fetchpriority="high"></p>
-<p><img src="C:\Users\Administrator\Desktop\my-blog\source_posts\924753321df49e461ecc74ba2f60d702_compress.jpg" alt="924753321df49e461ecc74ba2f60d702_compress" decoding="async" loading="lazy" fetchpriority="auto"></p>
-<p><img src="C:\Users\Administrator\Desktop\my-blog\source_posts\a3cce5b754b1b08be9196e47055d6e3d_compress.jpg" alt="a3cce5b754b1b08be9196e47055d6e3d_compress" decoding="async" loading="lazy" fetchpriority="auto"></p>
-<p><img src="C:\Users\Administrator\Desktop\my-blog\source_posts\bb8498a305e9bc7424bd274353aff3b1_compress.jpg" alt="bb8498a305e9bc7424bd274353aff3b1_compress" decoding="async" loading="lazy" fetchpriority="auto"></p>
+        <p><img src="/images/2026%E5%B9%B4%E7%AB%AF%E5%8D%88%E8%8A%82/2b8a9eb91aa73c00c3e5f8f48841cf4b_compress.jpg" decoding="async" loading="eager" fetchpriority="high" width="769" height="1920"></p>
+<p><img src="/images/2026%E5%B9%B4%E7%AB%AF%E5%8D%88%E8%8A%82/924753321df49e461ecc74ba2f60d702_compress.jpg" decoding="async" loading="lazy" fetchpriority="auto" width="769" height="2560"></p>
+<p><img src="/images/2026%E5%B9%B4%E7%AB%AF%E5%8D%88%E8%8A%82/a3cce5b754b1b08be9196e47055d6e3d_compress.jpg" alt="a3cce5b754b1b08be9196e47055d6e3d_compress" decoding="async" loading="lazy" fetchpriority="auto" width="769" height="1920"></p>
+<p><img src="/images/2026%E5%B9%B4%E7%AB%AF%E5%8D%88%E8%8A%82/bb8498a305e9bc7424bd274353aff3b1_compress.jpg" alt="bb8498a305e9bc7424bd274353aff3b1_compress" decoding="async" loading="lazy" fetchpriority="auto" width="769" height="1920"></p>
 
     </div>
 
@@ -503,13 +524,25 @@
     </div>
 
     
+    <button id="backToTop" type="button" class="back-to-top" data-visible="false" aria-label="回到顶部">
+        <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+        </svg>
+    </button>
+    
 
     <!-- Scripts -->
     
     
     <script>
         
+        window.__i18n = window.__i18n || {};
         
+        
+        
+        window.__i18n["gallery"] = {"view_image":"查看图片","visit_source":"查看原始链接"};
+        window["__lightgalleryThemeCss"] = "/css/lightgallery.min.css?v=9d4e2b16";
+        window["__lightgalleryScript"] = "/js/lightgallery.min.js?v=bdc2fa8a";
         
         
         
@@ -519,11 +552,15 @@
     
     
     
+    <script defer src="/js/lightgallery-bootstrap.min.js?v=ee44832a"></script>
+    
     
     
     
     <script defer src="/js/progress.min.js?v=428a847d"></script>
     
+    
+    <script defer src="/js/back-to-top.min.js?v=3e17f0a3"></script>
     
     
     <script defer src="/js/theme-toggle.min.js?v=94c4155c"></script>
