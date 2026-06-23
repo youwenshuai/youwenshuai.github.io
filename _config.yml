@@ -64,7 +64,7 @@ prismjs:
 index_generator:
   path: ''
   per_page: 4
-  order_by: -date
+  order_by: date
 # 目录（TOC）
 toc:
   enabled: true
@@ -77,6 +77,7 @@ analytics:
     enabled: false
     # 例如 "G-XXXXXXXXXX"
     id: "G-SM6W0RQDK9"
+
 search:
   enabled: false
   # Pagefind 文档根选择器。默认使用 body，以兼容缺少外层 <html> 的生成页；
