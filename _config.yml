@@ -82,6 +82,10 @@ search:
   # Pagefind 文档根选择器。默认使用 body，以兼容缺少外层 <html> 的生成页；
   # 若想保持 Pagefind 默认行为，可设为 html。
   root_selector: body
+# 启用阅读全文按钮
+read_more_btn: true
+# 优先识别more标签截断，不自动乱截取文字
+excerpt_description: true
 menu:
   - name: 首页
     url: /
