@@ -1,0 +1,606 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html lang="zh-CN" class="h-full scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Hexo " />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Warm the CDN connection so the lightbox assets download instantly on first interaction. -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <!-- Prefetch the LightGallery JS/CSS and same-origin wrapper at lowest priority so the lightbox
+         opens instantly on the first tap, even on touch devices with no hover to warm on.
+         crossorigin matches the SRI requests; keep lightgallery@<version> in sync with lightgallery.js. -->
+    <link rel="prefetch" as="script" href="https://cdn.jsdelivr.net/npm/lightgallery@2.9.0/lightgallery.min.js" crossorigin />
+    <link rel="prefetch" as="style" href="https://cdn.jsdelivr.net/npm/lightgallery@2.9.0/css/lightgallery.min.css" crossorigin />
+    <link rel="prefetch" as="script" href="/js/lightgallery.min.js?v=bdc2fa8a" />
+    
+    
+    
+    
+    <!-- Preload the critical (title + body) font stylesheet so it is fetched at highest
+         priority ahead of the blocking theme script, shrinking the swap window.
+         Kept as a preload (not a stylesheet) here so it does not delay the theme script. -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Yuji+Syuku&family=Zen+Old+Mincho:wght@400;600&family=Noto+Serif+SC:wght@400;600&display=swap" />
+    
+    <!-- FOUC prevention: resolve theme before first paint.
+         Flow: read default → build valid states → read localStorage (try/catch for Safari private mode)
+         → validate saved state → set data-theme-state on <html> → resolve effective dark/light
+         → set data-theme and colorScheme. In "system" mode it also keeps following OS
+         light/dark changes live, so the page updates without a reload even when the toggle is hidden.
+         data-cfasync="false" stops Cloudflare Rocket Loader from deferring this past first paint
+         (it must run synchronously for both theme resolution and the preloader skip). -->
+    <script data-cfasync="false">
+    ;(() => {
+        const defaultTheme = "light";
+        window.__themeDefault = defaultTheme;
+        const states = defaultTheme === 'system' ? ['system', 'light', 'dark'] : ['light', 'dark'];
+        let saved;
+        try { saved = localStorage.getItem('theme'); } catch (_) {}
+        const state = saved && states.includes(saved) ? saved : defaultTheme;
+        const html = document.documentElement;
+        html.setAttribute('data-theme-state', state);
+        const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const isDark = state === 'dark' || (state !== 'light' && darkQuery.matches);
+        html.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        html.style.colorScheme = isDark ? 'dark' : 'light';
+        if (defaultTheme === 'system') {
+            // Keep following OS light/dark changes while in "system" mode even when the
+            // toggle (and theme-toggle.js) is disabled, so the page updates without a reload.
+            const followSystem = () => {
+                if (html.getAttribute('data-theme-state') !== 'system') return;
+                html.setAttribute('data-theme', darkQuery.matches ? 'dark' : 'light');
+                html.style.colorScheme = darkQuery.matches ? 'dark' : 'light';
+            };
+            if (darkQuery.addEventListener) darkQuery.addEventListener('change', followSystem);
+            else if (darkQuery.addListener) darkQuery.addListener(followSystem);
+        }
+        try {
+            if (sessionStorage.getItem('shiro:title-font-ready') === '1') {
+                html.classList.add('shiro-preloader-done');
+            }
+        } catch (_) {}
+    })();
+    </script>
+    
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Yuji+Syuku&family=Zen+Old+Mincho:wght@400;600&family=Noto+Serif+SC:wght@400;600&display=swap" />
+    
+    
+    
+    <!-- Non-critical (display=optional) font stylesheets load async so they never block first
+         paint or compete with the critical title+body stylesheet above. -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=optional" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=optional" /></noscript>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+    
+    
+    <title>爬香山 | 旷 野 的 风</title>
+
+    <!-- SEO Meta -->
+    
+    
+    <meta name="author" content="Mis You" />
+    
+    
+    <meta name="keywords" content="图片, 摄影" />
+    
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="爬香山 | 旷 野 的 风" />
+    
+    <meta property="og:url" content="https://youwenshuai.github.io/2026/06/29/%E7%88%AC%E9%A6%99%E5%B1%B1/index.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="旷 野 的 风" />
+    
+    
+    <meta property="og:locale" content="zh_CN" />
+    
+    
+    <meta property="og:image" content="https://youwenshuai.github.io/images/%E7%88%AC%E9%A6%99%E5%B1%B1/f8726227-f308-4612-940d-cdea750ad1bc.jpg" />
+    <meta property="og:image:alt" content="爬香山 | 旷 野 的 风" />
+    
+    
+    <meta property="og:image:width" content="769" />
+    <meta property="og:image:height" content="4096" />
+    
+    
+    
+    
+    <meta property="article:published_time" content="2026-06-29T03:01:58.140Z" />
+    
+    
+    <meta property="article:modified_time" content="2026-06-29T03:37:54.645Z" />
+    
+    
+    <meta property="article:author" content="Mis You" />
+    
+    
+    
+    <meta property="article:tag" content="图片" />
+    
+    <meta property="article:tag" content="摄影" />
+    
+    
+    
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="爬香山 | 旷 野 的 风" />
+    
+    
+    <meta name="twitter:image" content="https://youwenshuai.github.io/images/%E7%88%AC%E9%A6%99%E5%B1%B1/f8726227-f308-4612-940d-cdea750ad1bc.jpg" />
+    
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://youwenshuai.github.io/2026/06/29/%E7%88%AC%E9%A6%99%E5%B1%B1/index.html" />
+
+    <!-- Pagination rel hints for paginated list pages (home / archive / tag / category) -->
+    
+
+    <!-- Structured data (JSON-LD) -->
+    
+    
+    <script type="application/ld+json">[{"@context":"https://schema.org","@type":"BlogPosting","headline":"爬香山","mainEntityOfPage":{"@type":"WebPage","@id":"https://youwenshuai.github.io/2026/06/29/%E7%88%AC%E9%A6%99%E5%B1%B1/index.html"},"image":["https://youwenshuai.github.io/images/%E7%88%AC%E9%A6%99%E5%B1%B1/f8726227-f308-4612-940d-cdea750ad1bc.jpg"],"datePublished":"2026-06-29T03:01:58.140Z","dateModified":"2026-06-29T03:37:54.645Z","author":{"@type":"Person","name":"Mis You"},"publisher":{"@type":"Organization","name":"旷 野 的 风","logo":{"@type":"ImageObject","url":"https://youwenshuai.github.io/favicon.svg"}},"keywords":"图片, 摄影"}]</script>
+    
+
+    <!-- Favicon -->
+    
+    <link rel="icon" href="/favicon.svg" />
+    
+
+    <!-- RSS -->
+    
+    
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.min.css?v=091b0130">
+    
+    
+    <!-- Preloader script in <head> (defer) so its fetch starts during head parse;
+         data-cfasync="false" stops Cloudflare Rocket Loader from deferring it past first paint. -->
+    <script defer data-cfasync="false" src="/js/preloader.min.js?v=2a95d784"></script>
+</head>
+
+
+<body class="h-full fog-bg text-slate-800" data-shiro-lightgallery="true">
+    <!-- Font-load preloader: covers the title-font swap until preloader.min.js fades it out.
+         data-shiro-font-text lists the title glyphs to wait for. -->
+    <div id="shiroPreloader" class="shiro-preloader" aria-hidden="true"
+        data-shiro-font-text="旷 野 的 风游白は、余白の名。">
+        <div class="shiro-preloader-ripple" aria-hidden="true">
+            <span class="shiro-preloader-ring"></span>
+            <span class="shiro-preloader-ring"></span>
+        </div>
+    </div>
+    
+    
+<svg width="0" height="0" class="absolute pointer-events-none" aria-hidden="true">
+    <defs>
+        <filter id="seal-roughness" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
+        </filter>
+        <filter id="text-erosion">
+            <feTurbulence type="fractalNoise" baseFrequency="0.15" numOctaves="1" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" />
+        </filter>
+    </defs>
+</svg>
+
+    
+
+    
+    
+
+    
+    <div id="progressBar" class="progress-bar" aria-hidden="true"></div>
+    
+    
+
+    <div class="min-h-full px-4 pt-14 pb-6 md:pb-5">
+
+        <!-- Paper Card -->
+        <div
+            class="paper relative mx-auto w-full max-w-4xl rounded-xl px-5 sm:px-8 md:px-12 lg:px-14 pt-10 pb-6 md:pt-12 md:pb-8">
+
+            
+
+<header class="relative" data-pagefind-ignore>
+
+    <div class="relative flex items-start justify-center">
+        <div class="text-center">
+            <div class="relative inline-block">
+                
+                <p class="site-title">
+                    <a href="/">旷 野 的 风</a>
+                </p>
+                
+                <!-- Seal: Mathematically Centered -->
+                
+                <div
+                    class="absolute left-full top-1/2 -translate-y-1/2 ml-1 sm:ml-4 origin-left scale-75 sm:scale-110">
+                    
+<svg width="52" height="52" viewBox="0 0 100 100" aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg">
+    <path d="M15,12 Q50,5 85,12 Q95,50 88,88 Q50,95 12,88 Q5,50 15,12 Z"
+        fill="var(--color-seal)" filter="url(#seal-roughness)" opacity="0.92" />
+    <text x="50" y="50" text-anchor="middle" dominant-baseline="central"
+        font-size="42" fill="rgba(255,255,255,0.92)" filter="url(#text-erosion)"
+        class="seal-text select-none">游</text>
+</svg>
+
+                </div>
+                
+            </div>
+            
+            <p class="site-subtitle">
+                无所屌谓 天下兴亡多少事，悠悠，不尽长江滚滚流
+            </p>
+            
+            <div class="mt-3 sm:mt-4 flex justify-center gap-2">
+                
+                
+                <button id="themeToggle" type="button" class="focus-elegant header-pill-btn" aria-label="浅色" data-label-system="跟随系统" data-label-light="浅色" data-label-dark="深色">
+                    
+<svg data-icon="system" class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <rect x="2" y="3" width="20" height="14" rx="2" stroke-width="1.5"/>
+    <path d="M8 21h8M12 17v4" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
+
+                    
+<svg data-icon="light" class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="4" stroke-width="1.5"/>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
+
+                    
+<svg data-icon="dark" class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                </button>
+                
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Navigation -->
+
+<nav class="mt-8 md:mt-10" aria-label="菜单" data-pagefind-ignore>
+    <!-- Mobile Toggle -->
+    <div class="flex items-center justify-center md:hidden">
+        <button id="menuBtn" type="button"
+            class="focus-elegant inline-flex cursor-pointer items-center gap-2 rounded-full border border-slate-200 bg-paper/95 px-4 py-2 text-sm text-slate-700 shadow-xs"
+            aria-expanded="false" aria-controls="mobileMenu">
+            <span class="text-base leading-none tracking-widest">菜单</span>
+            
+<svg class="size-4 text-slate-500 transition-transform duration-200" id="menuChevron"
+    viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+    <path fill-rule="evenodd"
+        d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"
+        clip-rule="evenodd" />
+</svg>
+
+        </button>
+    </div>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:block">
+        <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-base text-slate-700 px-4">
+            
+            
+            
+            <li><a class="focus-elegant rounded-md px-2 py-1 hover:text-seal transition-colors"
+                    href="/" >首页</a></li>
+            
+            <li class="text-slate-400 select-none" role="separator" aria-hidden="true">/</li>
+            
+            
+            
+            
+            <li><a class="focus-elegant rounded-md px-2 py-1 hover:text-seal transition-colors"
+                    href="/archives" >归档</a></li>
+            
+            <li class="text-slate-400 select-none" role="separator" aria-hidden="true">/</li>
+            
+            
+            
+            
+            <li><a class="focus-elegant rounded-md px-2 py-1 hover:text-seal transition-colors"
+                    href="/categories" >分类</a></li>
+            
+            <li class="text-slate-400 select-none" role="separator" aria-hidden="true">/</li>
+            
+            
+            
+            
+            <li><a class="focus-elegant rounded-md px-2 py-1 hover:text-seal transition-colors"
+                    href="/tags" >标签</a></li>
+            
+            <li class="text-slate-400 select-none" role="separator" aria-hidden="true">/</li>
+            
+            
+            
+            
+            <li><a class="focus-elegant rounded-md px-2 py-1 hover:text-seal transition-colors"
+                    href="/about" >关于</a></li>
+            
+            
+        </ul>
+    </div>
+
+    <!-- Mobile Menu Panel -->
+    <div id="mobileMenu" class="menu-panel md:hidden mt-4" data-open="false">
+        <ul
+            class="mx-auto max-w-sm max-h-menu overflow-y-auto rounded-2xl border border-slate-200 bg-paper/95 shadow-xs">
+            
+            
+            
+            <li><a class="focus-elegant block px-6 py-3 text-center text-slate-800 hover:text-seal hover:bg-seal/5 transition-colors"
+                    href="/" >首页</a></li>
+            
+            <li class="h-px bg-slate-200/70" role="separator" aria-hidden="true"></li>
+            
+            
+            
+            
+            <li><a class="focus-elegant block px-6 py-3 text-center text-slate-800 hover:text-seal hover:bg-seal/5 transition-colors"
+                    href="/archives" >归档</a></li>
+            
+            <li class="h-px bg-slate-200/70" role="separator" aria-hidden="true"></li>
+            
+            
+            
+            
+            <li><a class="focus-elegant block px-6 py-3 text-center text-slate-800 hover:text-seal hover:bg-seal/5 transition-colors"
+                    href="/categories" >分类</a></li>
+            
+            <li class="h-px bg-slate-200/70" role="separator" aria-hidden="true"></li>
+            
+            
+            
+            
+            <li><a class="focus-elegant block px-6 py-3 text-center text-slate-800 hover:text-seal hover:bg-seal/5 transition-colors"
+                    href="/tags" >标签</a></li>
+            
+            <li class="h-px bg-slate-200/70" role="separator" aria-hidden="true"></li>
+            
+            
+            
+            
+            <li><a class="focus-elegant block px-6 py-3 text-center text-slate-800 hover:text-seal hover:bg-seal/5 transition-colors"
+                    href="/about" >关于</a></li>
+            
+            
+        </ul>
+    </div>
+</nav>
+
+
+
+            <!-- Main Content -->
+            <main class="section-divider">
+                
+
+
+
+
+
+
+
+
+<article class="py-2">
+    <header class="text-center mb-8">
+        
+        <h1 class="page-title mb-4" data-pagefind-body data-pagefind-meta="title">
+            爬香山
+        </h1>
+        
+        
+
+
+
+<div class="mb-4 flex items-center justify-center gap-4 text-sm text-slate-500 flex-wrap">
+    <div class="flex items-center gap-1.5">
+        
+<svg class="size-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+</svg>
+
+        <a href="/archives/2026/" class="oldstyle-nums link-muted"><time datetime="2026-06-29">2026/06/29</time></a>
+    </div>
+    
+        
+        <span class="text-slate-300" aria-hidden="true">•</span>
+        <div class="flex items-center gap-1.5">
+            
+<svg class="size-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+</svg>
+
+            
+                
+                    <a class="link-muted" href="/categories/%E7%88%AC%E5%B1%B1/">爬山</a>
+                    
+                
+            
+        </div>
+    
+</div>
+
+        
+    </header>
+
+    
+
+    <div class="prose-shiro" data-pagefind-body>
+        <p><img src="/images/%E7%88%AC%E9%A6%99%E5%B1%B1/f8726227-f308-4612-940d-cdea750ad1bc.jpg" alt="img" decoding="async" loading="eager" fetchpriority="high" width="769" height="4096"></p>
+<span id="more"></span>
+
+<p>​	周六早早起来和媳妇去爬香山，香山已经爬过太多次了。这次我们依然选择我们的电动车出行，在北京电动车出行还是最方便的存在，我们从家出发需要骑车1个小时到达香山，早点出发骑车也不会很热。</p>
+<p>​	一般我骑车的时候需要注意力集中，所以就不会打瞌睡。老婆坐在后面1个小时也没什么事干，就比较困。我们到了香山脚下时候，媳妇的精力还没有恢复，我们在石凳上休息了一会才开始进入香山景区。</p>
+<p>​	我爬山还是喜欢人比较少的地方，没有那么的喧闹，我们走的是东线，这条线路是人最少的了，在我爬香山很多次总结出来的经验。</p>
+<p>​	刚开始爬，会经过香山饭店，这里是一个星级酒店，有住宿有餐饮，是个度假胜地，一家人也好，一个人也好都可以过来疗养休整。</p>
+<p>​	我们继续前进向前爬，老婆最近的体力不佳，要走5步歇3分钟，我们就这样走走停停，伴着夏日蝉鸣，伴着欢声笑语。香山立了很多的登山提示，我们站在一处旁，念着上面的提示… “森林浴：人们进入森林，跋山涉水，全身沐浴的森林的精气和香气，洗净都市尘嚣，顿觉身心舒畅，充满活力”，确实如此，当我们上一周班，身上很多班味，在大自然可以洗净这些味道。</p>
+<p>​	路上遇上一些行人，听他们的说话应该是第一次来香山，到了一个岔路口，他们下意识的认为和我们走的这条路爬山比较近，我听到了他们的对话，我就好心提醒他们，这个是最绕远的路，他们也很听劝，立马就掉头下去走了另外的大路，还一直说谢谢，谢谢的，是很有礼貌的一家人，愿你们一家身体健康，工作顺利。</p>
+<p>​	我和老婆继续前进，途中我们又在一个树干形状的木凳子休息了一会，还接了一个二姐的电话，问我车载逆变器怎么选云云。</p>
+<p>​	走着走着，我们又看到了一处登山提示，老婆就默默地念起来，“一贯知足，二目远眺，三餐有节，四季不懒，五谷皆食，六欲不长，七分忍让，八方交往，酒薄烟断，十分坦荡”，这几个词，也说尽了人生的很多真理，老婆是个聪明的人，她记了一下就都记住了，不看就能背出来了，给她点赞。</p>
+<p>​	在我们的坚持下，到了东线的顶点，我们补充了一点水分就开始下山了。</p>
+<p>​	爬山的故事还在继续，我们的人生路程，有时候就像爬山一样，我们需要翻过一座座山，克服一个个挡在我们面前问题，可能会感觉累，可能会流汗，可能会疲惫，但是当我们把这些问题都解决掉，站在这个问题上面再看自己走过的路，就会发现一切问题困难只要你肯下功夫解决，就没有解决不了的，然后再去向前看，站在高处，会发现我们的人生一片光明，一片生机。</p>
+<p><img src="/images/%E7%88%AC%E9%A6%99%E5%B1%B1/f0d3556c-99d4-4bc7-8e09-6b87ef9d1599.jpg" alt="山神庙" decoding="async" loading="lazy" fetchpriority="auto" width="769" height="3072"></p>
+<p>​									山神庙</p>
+
+    </div>
+
+    <!-- Tags -->
+    
+    <div class="mt-8 flex flex-wrap gap-2">
+        
+        
+<a href="/tags/%E5%9B%BE%E7%89%87/" class="tag-pill">
+    <svg class="size-3 text-slate-400 mr-2 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" />
+        <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
+    </svg>
+    图片
+    
+</a>
+
+        
+        
+<a href="/tags/%E6%91%84%E5%BD%B1/" class="tag-pill">
+    <svg class="size-3 text-slate-400 mr-2 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" />
+        <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
+    </svg>
+    摄影
+    
+</a>
+
+        
+    </div>
+    
+
+    
+    <!-- Post Navigation: Hexo's page.prev = newer post, page.next = older post -->
+    <div class="section-divider flex justify-between items-center text-sm md:text-base">
+        
+        <div></div>
+        
+
+        
+        <a href="/2026/06/26/%E5%90%90%E5%8F%B8%E9%B8%A1%E8%9B%8B%E4%B8%89%E6%98%8E%E6%B2%BB/" class="post-nav-link group text-right" title="吐司鸡蛋三明治">
+            <span class="post-nav-title">吐司鸡蛋三明治</span>
+            <span aria-hidden="true">&rarr;</span>
+        </a>
+        
+    </div>
+
+
+    
+
+
+
+
+
+
+
+
+</article>
+
+
+            </main>
+
+            <footer class="section-divider" data-pagefind-ignore>
+    <div class="text-center text-sm text-slate-500 leading-relaxed">
+        <p>&copy; <span class="oldstyle-nums">2026</span> 旷 野 的 风</p>
+        <p class="font-eng text-footnote tracking-wide opacity-90">个人记录网站，仅代表个人观点<span aria-label="love" title="love">❤️</span></p>
+    </div>
+</footer>
+
+        </div>
+
+        <!-- Note Text — decorative aside, not part of main content or footer -->
+        <aside class="mt-4 text-center" aria-hidden="true" role="presentation">
+            <p class="site-note font-title text-xs sm:text-sm text-slate-400/70 tracking-note font-light select-none" lang="ja">
+                人呐，不是有了意义才行动，而是在行动的过程中找到意义。
+            </p>
+        </aside>
+    </div>
+
+    
+
+    <!-- Scripts -->
+    
+    
+    <script>
+        
+        window.__i18n = window.__i18n || {};
+        
+        
+        
+        window.__i18n["gallery"] = {"view_image":"查看图片","visit_source":"查看原始链接"};
+        window["__lightgalleryThemeCss"] = "/css/lightgallery.min.css?v=9d4e2b16";
+        window["__lightgalleryScript"] = "/js/lightgallery.min.js?v=bdc2fa8a";
+        
+        
+        
+        window["__mobileMenuScript"] = "/js/mobile-menu.min.js?v=adbc00fb";
+        
+    </script>
+    
+    
+    
+    <script defer src="/js/lightgallery-bootstrap.min.js?v=ee44832a"></script>
+    
+    
+    
+    
+    <script defer src="/js/progress.min.js?v=428a847d"></script>
+    
+    
+    
+    <script defer src="/js/theme-toggle.min.js?v=94c4155c"></script>
+    
+    
+    <script defer src="/js/mobile-menu-bootstrap.min.js?v=e8a36113"></script>
+    
+
+    
+
+
+
+</body>
+</html>
