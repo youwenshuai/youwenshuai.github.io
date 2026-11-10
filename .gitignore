@@ -4,3 +4,8 @@ node_modules/
 .cache/
 .idea/
 *.log
+# mobile app
+mobile-app/build/
+mobile-app/*.apk
+mobile-app/release.jks
+.workbuddy/
