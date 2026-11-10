@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3">
+<style>
+  body {
+    font-family: -apple-system, "Microsoft YaHei", sans-serif;
+    font-size: 17px; line-height: 1.75; color: #2c3e50;
+    padding: 16px 18px 48px; word-wrap: break-word;
+  }
+  h1.t { font-size: 24px; color: #3F51B5; border-bottom: 2px solid #e8eaf6; padding-bottom: 8px; }
+  h1 { font-size: 22px; } h2 { font-size: 20px; } h3 { font-size: 18px; }
+  h1, h2, h3, h4 { margin: 18px 0 10px; }
+  p { margin: 10px 0; }
+  img { max-width: 100%; border-radius: 6px; margin: 8px 0; }
+  blockquote {
+    margin: 12px 0; padding: 8px 14px; color: #666;
+    border-left: 4px solid #3F51B5; background: #f5f6fa;
+  }
+  pre {
+    background: #f0f2f8; padding: 12px; border-radius: 6px;
+    overflow-x: auto; font-size: 14px; line-height: 1.5;
+  }
+  code { background: #f0f2f8; padding: 2px 5px; border-radius: 3px; font-size: 14px; }
+  pre code { background: none; padding: 0; }
+  ul, ol { padding-left: 24px; margin: 10px 0; }
+  li { margin: 4px 0; }
+  hr { border: none; border-top: 1px solid #ddd; margin: 20px 0; }
+  a { color: #3F51B5; }
+  .meta { color: #999; font-size: 13px; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div id="content"><p class="meta">加载中…</p></div>
+<script>
+var SITE_BASE = "__SITE_BASE__";
+var MD = __MD_JSON__;
+
+function esc(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function inline(s) {
+  s = esc(s);
+  // 图片
+  s = s.replace(/!\[([^\]]*)\]\(([^)\s]+)[^)]*\)/g, function (m, alt, src) {
+    var u = src;
+    if (u.indexOf("://") < 0) {
+      if (u.charAt(0) === "/") u = SITE_BASE + u.substring(1);
+      else u = SITE_BASE + u;
+    }
+    var fallback = alt ? "[图片: " + alt + "]" : "[图片]";
+    return '<img src="' + u + '" alt="' + alt + '" onerror="this.outerHTML=\'' + fallback + '\'">';
+  });
+  // 链接
+  s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+  // 粗体、斜体、行内代码
+  s = s.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
+  s = s.replace(/\*([^*]+)\*/g, "<i>$1</i>");
+  s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
+  return s;
+}
+
+function render(md) {
+  var title = "";
+  var fm = md.match(/^---\r?\n([\s\S]*?)\r?\n---\s*(\r?\n|$)/);
+  if (fm) {
+    md = md.slice(fm[0].length);
+    var t = fm[1].match(/^title:\s*(.+)$/m);
+    if (t) title = t[1].replace(/^["']|["']$/g, "");
+  }
+  var lines = md.split(/\r?\n/);
+  var out = [];
+  var inCode = false, codeBuf = [], listType = null;
+  function closeList() {
+    if (listType) { out.push("</" + listType + ">"); listType = null; }
+  }
+  for (var i = 0; i < lines.length; i++) {
+    var L = lines[i];
+    if (/^```/.test(L)) {
+      if (inCode) {
+        out.push("<pre><code>" + esc(codeBuf.join("\n")) + "</code></pre>");
+        codeBuf = []; inCode = false;
+      } else { closeList(); inCode = true; }
+      continue;
+    }
+    if (inCode) { codeBuf.push(L); continue; }
+    var h = L.match(/^(#{1,6})\s+(.*)/);
+    if (h) {
+      closeList();
+      out.push("<h" + h[1].length + ">" + inline(h[2]) + "</h" + h[1].length + ">");
+      continue;
+    }
+    if (L.trim().length >= 3 && !L.replace(/[-*_\s]/g, "").length) {
+      closeList(); out.push("<hr>"); continue;
+    }
+    var q = L.match(/^>\s?(.*)/);
+    if (q) { closeList(); out.push("<blockquote>" + inline(q[1]) + "</blockquote>"); continue; }
+    var ul = L.match(/^\s*[-*+]\s+(.*)/);
+    var ol = L.match(/^\s*\d+[.、]\s+(.*)/);
+    if (ul) {
+      if (listType !== "ul") { closeList(); out.push("<ul>"); listType = "ul"; }
+      out.push("<li>" + inline(ul[1]) + "</li>"); continue;
+    }
+    if (ol) {
+      if (listType !== "ol") { closeList(); out.push("<ol>"); listType = "ol"; }
+      out.push("<li>" + inline(ol[1]) + "</li>"); continue;
+    }
+    if (L.trim() === "") { closeList(); continue; }
+    closeList();
+    out.push("<p>" + inline(L) + "</p>");
+  }
+  closeList();
+  if (inCode) out.push("<pre><code>" + esc(codeBuf.join("\n")) + "</code></pre>");
+  return (title ? '<h1 class="t">' + esc(title) + "</h1>" : "") + out.join("");
+}
+
+document.getElementById("content").innerHTML = render(MD);
+</script>
+</body>
+</html>

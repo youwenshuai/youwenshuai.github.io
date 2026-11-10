@@ -2,12 +2,14 @@ package com.youwenshuai.blogwriter;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.TextWatcher;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,8 +31,10 @@ public class EditorActivity extends Activity {
     String name, sha, token, owner, repo, branch, dir;
     EditText fileField, bodyField;
     TextView status;
-    Button saveBtn;
+    Button saveBtn, toggleBtn;
+    WebView webView;
     boolean isNew;
+    boolean previewing = false;
 
     @Override
     protected void onCreate(Bundle b) {
@@ -51,9 +57,19 @@ public class EditorActivity extends Activity {
         title.setTextSize(20);
         root.addView(title);
 
+        // 预览切换行
+        LinearLayout bar = new LinearLayout(this);
+        bar.setGravity(Gravity.CENTER_VERTICAL);
         status = new TextView(this);
         status.setPadding(0, (int) (6 * dp), 0, 0);
-        root.addView(status);
+        status.setTextSize(13);
+        bar.addView(status, new LinearLayout.LayoutParams(0,
+                LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+        toggleBtn = new Button(this);
+        toggleBtn.setText("预览");
+        toggleBtn.setOnClickListener(v -> togglePreview());
+        bar.addView(toggleBtn);
+        root.addView(bar);
 
         if (isNew) {
             fileField = new EditText(this);
@@ -66,10 +82,18 @@ public class EditorActivity extends Activity {
         bodyField = new EditText(this);
         bodyField.setHint("用 Markdown 写你的文章…");
         bodyField.setGravity(Gravity.TOP);
-        bodyField.setTextSize(15);
-        bodyField.setTypeface(android.graphics.Typeface.MONOSPACE);
+        bodyField.setTextSize(16);
+        bodyField.setTypeface(Typeface.MONOSPACE);
+        bodyField.setLineSpacing((int) (5 * dp), 1.15f);
         bodyField.setMinLines(6);
         root.addView(bodyField, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
+
+        webView = new WebView(this);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDefaultTextEncodingName("utf-8");
+        webView.setVisibility(View.GONE);
+        root.addView(webView, new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
 
         saveBtn = new Button(this);
@@ -79,7 +103,6 @@ public class EditorActivity extends Activity {
 
         setContentView(root);
 
-        // 编辑已有文章时先拉取内容
         if (!isNew) fetchContent();
 
         bodyField.addTextChangedListener(new TextWatcher() {
@@ -97,6 +120,40 @@ public class EditorActivity extends Activity {
         repo = prefs.getString("repo", "youwenshuai.github.io");
         branch = prefs.getString("branch", "hexo-source");
         dir = prefs.getString("dir", "source/_posts");
+    }
+
+    void togglePreview() {
+        previewing = !previewing;
+        if (previewing) {
+            renderPreview();
+            bodyField.setVisibility(View.GONE);
+            if (fileField != null) fileField.setVisibility(View.GONE);
+            webView.setVisibility(View.VISIBLE);
+            toggleBtn.setText("编辑");
+        } else {
+            webView.setVisibility(View.GONE);
+            bodyField.setVisibility(View.VISIBLE);
+            if (fileField != null) fileField.setVisibility(View.VISIBLE);
+            toggleBtn.setText("预览");
+        }
+    }
+
+    void renderPreview() {
+        try {
+            InputStream is = getResources().openRawResource(R.raw.preview);
+            ByteArrayOutputStream buf = new ByteArrayOutputStream();
+            byte[] t = new byte[8192];
+            int n;
+            while ((n = is.read(t)) > 0) buf.write(t, 0, n);
+            is.close();
+            String tpl = new String(buf.toByteArray(), StandardCharsets.UTF_8);
+            String siteBase = "https://" + owner + ".github.io/";
+            String json = JSONObject.quote(bodyField.getText().toString());
+            String html = tpl.replace("__SITE_BASE__", siteBase).replace("__MD_JSON__", json);
+            webView.loadDataWithBaseURL(siteBase, html, "text/html", "utf-8", null);
+        } catch (Exception e) {
+            status.setText("预览失败: " + e.getMessage());
+        }
     }
 
     void fetchContent() {

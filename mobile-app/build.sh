@@ -23,6 +23,6 @@ python "$ROOT/merge_dex.py" "$B/base.apk" "$B/dex/classes.dex" "$B/unsigned.apk"
 
 "$JAVA/java" -jar "$BT/lib/apksigner.jar" sign \
   --ks "$ROOT/release.jks" --ks-pass pass:blogwriter123 --key-pass pass:blogwriter123 \
-  --out "$ROOT/博客写作-v1.0.apk" "$B/aligned.apk"
+  --out "$ROOT/博客写作-v1.1.apk" "$B/aligned.apk"
 
-"$JAVA/java" -jar "$BT/lib/apksigner.jar" verify "$ROOT/博客写作-v1.0.apk" && echo "== BUILD OK =="
+"$JAVA/java" -jar "$BT/lib/apksigner.jar" verify "$ROOT/博客写作-v1.1.apk" && echo "== BUILD OK =="
