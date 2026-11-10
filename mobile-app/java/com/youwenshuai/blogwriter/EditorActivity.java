@@ -1,9 +1,15 @@
 package com.youwenshuai.blogwriter;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -27,14 +33,19 @@ import java.util.Locale;
 
 public class EditorActivity extends Activity {
 
+    static final int REQ_GALLERY = 101;
+    static final int REQ_CAMERA = 102;
+
     SharedPreferences prefs;
     String name, sha, token, owner, repo, branch, dir;
     EditText fileField, bodyField;
     TextView status;
-    Button saveBtn, toggleBtn;
+    Button saveBtn, toggleBtn, imgBtn;
     WebView webView;
     boolean isNew;
     boolean previewing = false;
+    Uri pendingCameraUri;
+    int pendingInsertPos = -1;
 
     @Override
     protected void onCreate(Bundle b) {
@@ -96,6 +107,16 @@ public class EditorActivity extends Activity {
         root.addView(webView, new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
 
+        // 工具行：插图片
+        LinearLayout tools = new LinearLayout(this);
+        tools.setOrientation(LinearLayout.HORIZONTAL);
+        imgBtn = new Button(this);
+        imgBtn.setText("📷 插入图片");
+        imgBtn.setOnClickListener(v -> showImageSourceDialog());
+        tools.addView(imgBtn, new LinearLayout.LayoutParams(0,
+                LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+        root.addView(tools);
+
         saveBtn = new Button(this);
         saveBtn.setText("保存并上传");
         saveBtn.setOnClickListener(v -> save());
@@ -122,18 +143,22 @@ public class EditorActivity extends Activity {
         dir = prefs.getString("dir", "source/_posts");
     }
 
+    // ---------- 预览 ----------
+
     void togglePreview() {
         previewing = !previewing;
         if (previewing) {
             renderPreview();
             bodyField.setVisibility(View.GONE);
             if (fileField != null) fileField.setVisibility(View.GONE);
+            imgBtn.setVisibility(View.GONE);
             webView.setVisibility(View.VISIBLE);
             toggleBtn.setText("编辑");
         } else {
             webView.setVisibility(View.GONE);
             bodyField.setVisibility(View.VISIBLE);
             if (fileField != null) fileField.setVisibility(View.VISIBLE);
+            imgBtn.setVisibility(View.VISIBLE);
             toggleBtn.setText("预览");
         }
     }
@@ -156,6 +181,8 @@ public class EditorActivity extends Activity {
         }
     }
 
+    // ---------- 拉取原文 ----------
+
     void fetchContent() {
         status.setText("正在拉取原文…");
         new Thread(() -> {
@@ -177,6 +204,125 @@ public class EditorActivity extends Activity {
             }
         }).start();
     }
+
+    // ---------- 插入图片 ----------
+
+    void showImageSourceDialog() {
+        String[] options = {"从相册选择", "拍照"};
+        new android.app.AlertDialog.Builder(this)
+                .setTitle("插入图片")
+                .setItems(options, (d, w) -> {
+                    if (w == 0) {
+                        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+                        i.setType("image/*");
+                        startActivityForResult(Intent.createChooser(i, "选择图片"), REQ_GALLERY);
+                    } else {
+                        try {
+                            ContentValues v = new ContentValues();
+                            v.put(MediaStore.Images.Media.DISPLAY_NAME,
+                                    "cam_" + System.currentTimeMillis() + ".jpg");
+                            pendingCameraUri = getContentResolver().insert(
+                                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI, v);
+                            Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            i.putExtra(MediaStore.EXTRA_OUTPUT, pendingCameraUri);
+                            startActivityForResult(i, REQ_CAMERA);
+                        } catch (Exception e) {
+                            Toast.makeText(this, "无法打开相机: " + e.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    protected void onActivityResult(int req, int res, android.content.Intent data) {
+        super.onActivityResult(req, res, data);
+        if (res != RESULT_OK) return;
+        Uri uri = null;
+        if (req == REQ_GALLERY && data != null && data.getData() != null) {
+            uri = data.getData();
+        } else if (req == REQ_CAMERA) {
+            uri = pendingCameraUri;
+            pendingCameraUri = null;
+        }
+        if (uri != null) uploadImage(uri);
+    }
+
+    /** 当前文章对应的图片目录名（不含扩展名的文件名） */
+    String imageSlug() {
+        String fname = isNew ? fileField.getText().toString().trim() : name;
+        if (fname.endsWith(".md")) fname = fname.substring(0, fname.length() - 3);
+        if (fname.isEmpty()) fname = "mobile";
+        // 去掉非法字符
+        return fname.replaceAll("[\\\\/:*?\"<>|\\s]", "-");
+    }
+
+    void uploadImage(Uri uri) {
+        pendingInsertPos = bodyField.getSelectionEnd();
+        if (pendingInsertPos < 0) pendingInsertPos = bodyField.length();
+        final String slug = imageSlug();
+        final String fname = "img_"
+                + new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date())
+                + ".jpg";
+        status.setText("正在处理图片…");
+        imgBtn.setEnabled(false);
+
+        new Thread(() -> {
+            try {
+                byte[] bytes = readCompressed(uri);
+                JSONObject body = new JSONObject();
+                body.put("message", "上传图片: " + slug + "/" + fname + "（手机端）");
+                body.put("content", Base64.encodeToString(bytes, Base64.NO_WRAP));
+                body.put("branch", branch);
+                String url = "https://api.github.com/repos/" + owner + "/" + repo
+                        + "/contents/" + GitHubApi.encPath("source/images/" + slug + "/" + fname);
+                GitHubApi.request("PUT", url, token, body);
+                String mdRef = "![](/images/" + slug + "/" + fname + ")";
+                runOnUiThread(() -> {
+                    imgBtn.setEnabled(true);
+                    int pos = Math.min(pendingInsertPos, bodyField.length());
+                    bodyField.getText().insert(pos,
+                            (pos > 0 && bodyField.getText().charAt(pos - 1) != '\n' ? "\n" : "")
+                                    + mdRef);
+                    status.setText("图片已上传: " + slug + "/" + fname);
+                    Toast.makeText(this, "图片已上传并插入", Toast.LENGTH_SHORT).show();
+                });
+            } catch (Exception e) {
+                runOnUiThread(() -> {
+                    imgBtn.setEnabled(true);
+                    status.setText("图片上传失败: " + e.getMessage());
+                });
+            }
+        }).start();
+    }
+
+    /** 读取图片并压缩到最长边 ≤1600px 的 JPEG（质量 85） */
+    byte[] readCompressed(Uri uri) throws Exception {
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inJustDecodeBounds = true;
+        InputStream in = getContentResolver().openInputStream(uri);
+        if (in == null) throw new Exception("无法读取所选图片");
+        BitmapFactory.decodeStream(in, null, o);
+        in.close();
+
+        int sample = 1;
+        while (o.outWidth / (sample * 2) >= 1600 || o.outHeight / (sample * 2) >= 1600) {
+            sample *= 2;
+        }
+        o = new BitmapFactory.Options();
+        o.inSampleSize = sample;
+        in = getContentResolver().openInputStream(uri);
+        Bitmap bmp = BitmapFactory.decodeStream(in, null, o);
+        if (in != null) in.close();
+        if (bmp == null) throw new Exception("图片解码失败");
+
+        ByteArrayOutputStream bo = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 85, bo);
+        return bo.toByteArray();
+    }
+
+    // ---------- 保存文章 ----------
 
     void save() {
         String fileName = isNew ? fileField.getText().toString().trim() : name;
