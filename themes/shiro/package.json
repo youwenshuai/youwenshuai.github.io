@@ -1,0 +1,34 @@
+{
+  "name": "hexo-theme-shiro",
+  "version": "1.5.2",
+  "description": "A pure and simple theme for Hexo.",
+  "repository": "https://github.com/Acris/hexo-theme-shiro.git",
+  "homepage": "https://github.com/Acris/hexo-theme-shiro",
+  "bugs": {
+    "url": "https://github.com/Acris/hexo-theme-shiro/issues"
+  },
+  "scripts": {
+    "dev": "tailwindcss -i ./source/css/_tailwind.css -o ./source/css/style.min.css --watch",
+    "build": "node tools/build-assets.js"
+  },
+  "keywords": [
+    "hexo",
+    "theme",
+    "shiro",
+    "tailwind",
+    "clean",
+    "simple"
+  ],
+  "author": "Acris Liu",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "lightningcss": "^1.32.0",
+    "tailwindcss": "^4.3.0",
+    "terser": "^5.48.0"
+  }
+}

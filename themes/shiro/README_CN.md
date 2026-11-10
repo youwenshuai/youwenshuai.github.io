@@ -1,0 +1,382 @@
+# Shiro (白)
+
+**[English](README.md) | 简体中文**
+
+<div style="text-align: center">
+  <img alt="Shiro" src="https://github.com/user-attachments/assets/0040cf16-5971-4888-aad1-d39936cfb346" width="1000" />
+</div>
+
+一个简洁、优雅、健壮的 Hexo 主题，灵感源自留白（余白）。基于 [Nunjucks](https://mozilla.github.io/nunjucks/) 和 [Tailwind CSS](https://tailwindcss.com/) 构建。
+
+由 Acris 倾情打造 ❤️
+
+<div style="text-align: center">
+  <a href="https://github.com/Acris/hexo-theme-shiro/releases/latest" target="_blank"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/Acris/hexo-theme-shiro?logo=github"/></a>
+  <a href="https://www.npmjs.com/package/hexo-theme-shiro" target="_blank"><img alt="NPM Version" src="https://img.shields.io/npm/v/hexo-theme-shiro?logo=npm"/></a>
+</div>
+
+**[在线演示](https://acris.me/2026/03/07/Introducing-Hexo-Theme-Shiro/)**
+
+## 特性
+
+- **简洁美学**：极简设计，注重排版与可读性。
+- **响应式**：完全响应式设计，适配移动端和桌面端。
+- **Tailwind CSS**：现代实用优先的 CSS 框架。
+- **多语言**：支持英语、简体中文（`zh-CN`）、繁体中文（`zh-TW`）、日语（`ja-JP`）和法语（`fr`）。
+- **暗色模式**：优雅的暗色主题，采用暖中性色调，三态切换（系统/亮色/暗色）。
+- **目录**：构建期生成文章侧边栏目录，可配置标题深度；客户端 JavaScript 仅负责折叠和当前章节高亮。
+- **阅读进度条**：页面顶部的朱红色细进度条。
+- **回到顶部**：平滑滚动的回到顶部按钮。
+- **字体加载遮罩**：在品牌标题字体就绪前，用一层主题雾面遮罩盖住页面，配以淡淡的朱红涟漪，随后轻轻淡出，让标题不会出现明显的字体切换。
+- **代码块**：语法高亮，带复制按钮和语言标签。
+- **图片**：构建期为正文图片补充加载、解码、尺寸和优先级属性，文章首图保留 eager 以照顾首屏。LightGallery 资源会提前预取，因此即便是没有悬停的触摸设备也能点击即开。
+- **评论系统**：支持 Disqus 和 giscus（GitHub Discussions）评论系统，接近评论区时按需加载。
+- **Google Analytics**：GA4 支持，非阻塞脚本加载。
+- **RSS**：Atom 订阅支持（需要 [hexo-generator-feed](https://github.com/hexojs/hexo-generator-feed)）。
+- **SEO 友好**：为每个页面输出 meta 描述、Open Graph（含 `article:*`、`og:locale` 与 `og:image` 宽高）与 Twitter Card 标签、canonical 及分页 `rel=prev`/`rel=next` 链接（分页页面的 `<title>` 带页码，避免与第 1 页重复），以及 schema.org JSON-LD（文章页用 `BlogPosting`，首页用 `WebSite`）。
+- **印章**：可选的装饰性朱红印章图标显示在页头，可通过 `seal_text` 自定义印章文字。
+- **站内搜索**：内置基于 [Pagefind](https://pagefind.app/) 的静态站内搜索——`hexo generate` 之后自动生成索引，无需任何外部服务。搜索资源会提前预取并预热，因此即便是没有悬停的触摸设备也能点击即开。
+- **快速**：优化性能，最小化 JavaScript，并在构建期缓存页面分析、补充正文图片加载与尺寸提示。
+
+## 安装
+
+### 安装主题
+
+如果你使用 Hexo 5.0 或更高版本，最简单的安装方式是通过 npm：
+
+```bash
+npm i hexo-theme-shiro
+```
+
+通过 git 安装：
+
+```bash
+git clone -b main --depth=1 https://github.com/Acris/hexo-theme-shiro.git themes/shiro
+```
+
+如果你想启用 RSS，请安装 feed 插件：
+
+```bash
+npm i hexo-generator-feed
+```
+
+### 启用
+
+修改 `_config.yml` 中的主题设置为 `shiro`：
+
+```diff
+_config.yml
+- theme: some-theme
++ theme: shiro
+```
+
+### 🛠️ 更新
+
+要将主题更新到最新版本，请使用与你的安装方式对应的方法：
+
+**npm**
+
+```bash
+npm i hexo-theme-shiro@latest
+```
+
+**Git**
+
+```bash
+cd themes/shiro
+git pull
+```
+
+> **注意：** 升级后，请查看[默认 `_config.yml`](_config.yml) 中是否有新增或变更的选项，并相应更新你的 `_config.shiro.yml`。
+
+## 配置
+
+### 配置文件
+
+在站点根目录创建专用的主题配置文件 `_config.shiro.yml`（Hexo 5.0.0 起支持）。此文件的优先级高于主题的默认配置。
+
+根据你的安装方式，将对应默认配置复制到站点根目录的 `_config.shiro.yml`：
+
+- npm 安装：`node_modules/hexo-theme-shiro/_config.yml`
+- git 安装：`themes/shiro/_config.yml`
+
+```yaml
+# 站点
+site:
+  favicon: /favicon.svg
+  # 站点创建年份；在页脚显示为"起始年–当前年"（省略则仅显示当前年份）
+  # since: 2020
+  # 是否在页头显示印章
+  seal: true
+  # 印章和 favicon 中显示的文字（建议使用单个字符）
+  seal_text: "游"
+  rss:
+    enabled: false
+    path: /atom.xml
+
+# 导航菜单
+# "name" 字段接受任意文本 — 使用你偏好的语言。
+# 示例："Home"（英语）、"首页"（中文）、"ホーム"（日语）
+menu:
+  - name: 首页
+    url: /
+  - name: 归档
+    url: /archives
+  - name: 分类
+    url: /categories
+  - name: 标签
+    url: /tags
+#  - name: 关于
+#    url: /about
+#  - name: GitHub
+#    url: https://github.com/Acris/hexo-theme-shiro
+#    # 在新标签页打开
+#    target: _blank
+
+# 摘要设置
+# 优先级：<!-- more --> 标签 > 自动截断（当 fallback.enabled 为 true 时）> 全文显示。
+# 为了更好的阅读性，推荐在文章中手动添加 <!-- more -->。
+excerpt:
+  # 如果文章有 <!-- more --> 标签，则使用它。
+  # 否则回退到自动截断摘要。
+  fallback:
+    enabled: true
+    # 截断的字符数（非单词数）
+    length: 200
+
+# 目录（TOC）
+toc:
+  enabled: true
+  # 最大标题深度：2 = h2，3 = h2+h3，4 = h2+h3+h4
+  depth: 3
+  # 显示目录的最少标题数
+  min_headings: 3
+
+# 暗色模式
+# 默认主题：system（跟随系统）、light 或 dark
+# 当默认为 "system" 时，切换按钮在三个状态间循环：系统 → 亮色 → 暗色。
+# 当默认为 "light" 或 "dark" 时，切换按钮仅在亮色 ↔ 暗色之间切换（无系统选项）。
+# 当 toggle 为 false 时，主题切换按钮隐藏，始终使用默认主题。
+# 如果禁用切换，建议将默认值设为 "light" 以匹配主题设计。
+dark_mode:
+  default: light
+  toggle: true
+
+# 阅读进度条（页面顶部的朱红色细条）
+progress_bar:
+  enabled: true
+
+# 回到顶部按钮
+back_to_top:
+  enabled: true
+
+# 评论系统
+# 支持的评论服务：disqus、giscus
+# 将 enabled 设为 true 并选择一个评论服务。
+#
+# Disqus：在 https://disqus.com/admin/create/ 注册，
+# 并记下分配给你站点的唯一 shortname（例如 "my-blog-name"）。
+#
+# giscus：基于 GitHub Discussions 的评论系统。
+# 前往 https://giscus.app/ 生成你的配置值。
+# 确保你的仓库是公开的并且已启用 Discussions。
+comments:
+  enabled: false
+  # disqus 或 giscus
+  provider: giscus
+  disqus:
+    shortname: ""
+  giscus:
+    # giscus 脚本 URL（自托管或默认）
+    src: https://giscus.app/client.js
+    # GitHub 仓库（例如 "owner/repo"）
+    repo: ""
+    # 仓库 ID，从 https://giscus.app 获取
+    repo_id: ""
+    # Discussion 分类名称（例如 "Announcements"）
+    category: ""
+    # 分类 ID，从 https://giscus.app 获取
+    category_id: ""
+    # pathname、url、title、og:title、specific、number
+    mapping: pathname
+    # mapping 为 "specific" 或 "number" 时必填
+    term: ""
+    # 1 启用严格标题匹配
+    strict: 0
+    # 1 启用表情回应
+    reactions_enabled: 1
+    # 1 发送讨论元数据
+    emit_metadata: 0
+    # bottom 或 top
+    input_position: bottom
+    # 语言代码（例如 en、zh-CN、ja）
+    lang: en
+    # giscus 主题 CSS URL 或内置主题名（例如 light、dark、preferred_color_scheme）
+    # 默认使用通过 jsDelivr CDN 分发的 Shiro 自定义主题。
+    theme: https://cdn.jsdelivr.net/npm/hexo-theme-shiro@1.5.2/source/css/giscus.min.css
+    # true 启用懒加载（添加 data-loading="lazy"）
+    lazy_loading: false
+
+# 统计分析
+# 目前支持 Google Analytics 4（GA4）。
+# 要获取 GA4 Measurement ID，请前往 https://analytics.google.com/，
+# 创建一个媒体资源，然后在"管理 > 数据流 > 网站 > 衡量 ID"中找到 ID（格式：G-XXXXXXXXXX）。
+analytics:
+  google:
+    enabled: false
+    # 例如 "G-XXXXXXXXXX"
+    id: ""
+
+# 站内搜索，由 Pagefind 提供（https://pagefind.app/）
+# 索引会在 `hexo generate` 之后自动构建并写入 `public/pagefind/`。
+# 强烈建议将 Pagefind 安装为站点级 devDependency：
+# `npm install pagefind --save-dev`
+# 若未安装，钩子会回退到 `npx --yes pagefind`，可能在 `hexo generate`
+# 期间联网下载，明显拖慢构建，或在离线 CI 中失败。
+search:
+  enabled: false
+  # Pagefind 文档根选择器。默认使用 body，以兼容缺少外层 <html> 的生成页；
+  # 若想保持 Pagefind 默认行为，可设为 html。
+  root_selector: body
+  # 强制指定分词语言（默认从 <html lang> 自动检测）。
+  # 仅当 Pagefind 无法正确识别站点语言时才需要覆盖。
+  # force_language: zh
+```
+
+### 创建页面（标签和分类）
+
+由于 Hexo 默认不会生成"所有标签"或"所有分类"页面，如果你想在菜单中使用它们，需要手动创建。
+
+1. 创建页面：
+   ```bash
+   hexo new page tags
+   hexo new page categories
+   ```
+
+2. 修改 `source/tags/index.md`：
+   ```yaml
+   ---
+   title: 标签
+   layout: tag
+   ---
+   ```
+
+3. 修改 `source/categories/index.md`：
+   ```yaml
+   ---
+   title: 分类
+   layout: category
+   ---
+   ```
+
+### 搜索
+
+Shiro 内置基于 [Pagefind](https://pagefind.app/) 的静态站内搜索。索引会在 `hexo generate` 完成后自动生成；发布已生成的输出前，无需再单独运行搜索索引命令。
+
+**npm 安装（强烈推荐）**
+
+为了让构建更快、更稳定、也更适合 CI，请将 Pagefind 作为 devDependency 安装到 **站点根目录**（不是主题目录）：
+
+```bash
+npm install pagefind --save-dev
+```
+
+无论你通过 `npm i hexo-theme-shiro` 安装主题，还是以 `git clone` 方式将主题放在 `themes/shiro/`，都建议这样做。之后 `hexo g` 会自动从站点的 `node_modules` 解析 Pagefind。若没有安装 Pagefind，构建钩子会回退到 `npx --yes pagefind`，可能在 `hexo generate` 期间联网下载，明显拖慢构建，并在离线 CI 中失败。当 `search.enabled: true` 时，索引失败会让 Hexo 生成失败，以便发布前发现搜索不可用。这个 `npx` fallback 只适合作为临时兜底，不应作为日常发布方案。
+
+**配置（`_config.yml` / `_config.shiro.yml`）**
+
+```yaml
+search:
+  enabled: true
+  # Pagefind 文档根选择器。默认使用 body，以兼容缺少外层 <html> 的生成页；
+  # 若想保持 Pagefind 默认行为，可设为 html。
+  root_selector: body
+  # 强制指定分词语言（默认从 <html lang> 自动检测）。
+  # 仅当 Pagefind 无法正确识别站点语言时才需要覆盖。
+  # force_language: zh
+```
+
+将 `search.enabled` 设为 `false` 即可关闭：构建钩子被跳过，搜索按钮也不会渲染。
+
+**本地预览**
+
+该钩子注册在 Hexo 的 `before_exit` 事件上，并对 `generate`（`g`）与 `deploy`（`d`）命令生效。发布时，请先运行 `hexo generate`，确保 `public/pagefind/` 已写入后再上传。`hexo server` 走内存渲染，不会触发该钩子，因此本地预览时不会重建搜索索引。要本地预览搜索，请走真实构建并用静态服务器：
+
+```bash
+hexo clean && hexo g
+npx serve public
+```
+
+## 开发
+
+如果你想修改主题源代码或参与贡献：
+
+### 项目结构
+
+```
+hexo-theme-shiro/
+├── layout/                 # Nunjucks 模板
+│   ├── _layout.njk         # 基础布局
+│   ├── _macro/             # 可复用宏（ui、archive）
+│   ├── _partial/           # 局部模板（head、header、footer、组件、comments/index、统计）
+│   ├── index.njk           # 首页
+│   ├── post.njk            # 文章页
+│   ├── page.njk            # 独立页面
+│   ├── archive.njk         # 归档页
+│   ├── tag.njk             # 标签页
+│   └── category.njk        # 分类页
+├── scripts/
+│   ├── helpers.js          # 自定义 Hexo 辅助函数和生成器（build_toc、clean_description、og_image、favicon_svg 等）
+│   ├── images.js           # after_post_render 图片加载、解码与尺寸优化
+│   └── pagefind.js         # Pagefind 索引钩子
+├── source/
+│   ├── css/_tailwind.css   # 核心 Tailwind CSS 源文件（编译为 style.min.css）
+│   ├── css/_src/*.css      # 可选功能 CSS 源文件，会被 Hexo 忽略
+│   ├── css/*.min.css       # 生成的 CSS 资源，按需加载
+│   ├── js/_src/*.js        # 客户端脚本源文件，会被 Hexo 忽略
+│   └── js/*.min.js         # 生成的客户端脚本与功能 bootstrap
+├── tools/
+│   ├── build-assets.js     # 发布资源构建脚本
+│   └── snippets/           # 构建期注入的 JS 片段
+├── languages/              # i18n YAML 文件（en、zh-CN、zh-TW、ja、fr 等）
+├── _config.yml             # 主题默认配置
+└── package.json
+```
+
+### 快速开始
+
+1. 在主题目录安装依赖：
+   ```bash
+   cd themes/shiro
+   npm install
+   ```
+
+2. 开发时监听 CSS 变更：
+   ```bash
+   npm run dev
+   ```
+
+3. 构建生产环境 CSS 和 JavaScript：
+   ```bash
+   npm run build
+   ```
+
+注意：修改 `_tailwind.css`、`source/css/_src/` 下的可选功能 CSS、`source/js/_src/` 下的文件或 `tools/snippets/` 下的构建期片段后，必须运行 `npm run build` 重新生成 `style.min.css`、功能 `*.min.css` 和 `*.min.js` 资源。
+
+### 添加新语言
+
+1. 在 `languages/` 目录创建新的 YAML 文件（例如 `ko.yml`）。
+2. 复制 `languages/en.yml` 的结构并翻译所有值。
+3. 按同级字母顺序排列所有键，并确保所有顶级命名空间（`clipboard`, `common`, `gallery`, `index`, `nav`, `page`, `search`, `theme`, `toc`）都存在。
+
+## 致谢
+
+感谢 [JetBrains](https://jb.gg/OpenSource?from=hexo-theme-shiro) 提供开源许可证。
+
+<a href="https://jb.gg/OpenSource?from=hexo-theme-shiro">
+  <img alt="IntelliJ IDEA" src="https://resources.jetbrains.com/storage/products/company/brand/logos/IntelliJ_IDEA_icon.png" width="100">
+</a>
+
+## 许可证
+
+[MIT 许可证](LICENSE)

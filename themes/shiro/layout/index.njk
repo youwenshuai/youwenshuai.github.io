@@ -1,0 +1,18 @@
+{% extends "_layout.njk" %}
+{% from "_macro/ui.njk" import divider with context %}
+
+{% block content %}
+    {% if page.posts and page.posts.length > 0 %}
+    {% for post in page.posts.toArray() %}
+        {% include "_partial/components/post-card.njk" %}
+
+        {% if not loop.last %}
+            {{ divider("my-8") }}
+        {% endif %}
+    {% endfor %}
+    {% else %}
+        {% include "_partial/common/empty.njk" %}
+    {% endif %}
+
+    {% include "_partial/common/pagination.njk" %}
+{% endblock %}

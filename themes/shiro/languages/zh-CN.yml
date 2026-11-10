@@ -1,0 +1,44 @@
+clipboard:
+  copied: 已复制
+  copy: 复制代码
+
+common:
+  back_to_top: 回到顶部
+  empty: 这里还没有内容。
+
+gallery:
+  view_image: 查看图片
+  visit_source: 查看原始链接
+
+index:
+  read_more: 阅读更多
+
+nav:
+  archives: 归档
+  categories: 分类
+  menu: 菜单
+  tags: 标签
+
+page:
+  next: 下一页
+  number: 第 %s 页
+  pagination: 分页导航
+  prev: 上一页
+
+search:
+  button: 搜索
+  close: 关闭
+  loading: 加载中…
+  many_results: 找到 [COUNT] 个与 "[SEARCH_TERM]" 相关的结果
+  one_result: 找到 [COUNT] 个与 "[SEARCH_TERM]" 相关的结果
+  placeholder: 搜索文章…
+  unavailable: 搜索暂时不可用。
+  zero_results: 未找到与 "[SEARCH_TERM]" 相关的内容
+
+theme:
+  dark: 深色
+  light: 浅色
+  system: 跟随系统
+
+toc:
+  title: 目录

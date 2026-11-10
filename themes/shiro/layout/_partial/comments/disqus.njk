@@ -1,0 +1,95 @@
+{% set comments_config = theme.comments or {} %}
+{% set disqus_config = disqus if disqus is defined else (comments_config.disqus or {}) %}
+{% set disqus_page_url = page.permalink or url %}
+{% set disqus_page_identifier = page.path or path or disqus_page_url %}
+{% set disqus_shortname = disqus_config.shortname or '' %}
+<div id="disqus_thread" class="mt-10" data-pagefind-ignore></div>
+<script>
+    /* Disqus expects this on the global scope.
+       `colorScheme` is read fresh on every (re)load so the iframe always
+       matches the live `<html data-theme>` state instead of Disqus's flaky
+       text-contrast auto-detection. */
+    window.disqus_config = function () {
+        this.page.url = {{ js_value(disqus_page_url) | safe }};
+        this.page.identifier = {{ js_value(disqus_page_identifier) | safe }}.replace(/\/$/, '');
+        this.colorScheme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+    };
+
+    ;(() => {
+        const d = document, w = window;
+        const disqus_thread = d.getElementById('disqus_thread');
+        if (!disqus_thread) return;
+
+        const SHORTNAME = {{ js_value(disqus_shortname) | safe }};
+        if (!/^[a-z0-9-]+$/i.test(SHORTNAME)) return;
+        const loadCommentsCss = w.__shiroLoadCommentsCss || (() => Promise.resolve());
+        let loaded = false;
+
+        const loadDisqus = () => {
+            if (loaded) return;
+            loaded = true;
+            const s = d.createElement('script');
+            s.src = 'https://' + SHORTNAME + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', Date.now());
+            const appendScript = () => { (d.head || d.body).appendChild(s); };
+            loadCommentsCss().then(appendScript).catch(appendScript);
+        };
+
+        w.__shiroOnNearViewport(disqus_thread, loadDisqus);
+
+        /* Disqus locks in its color scheme at iframe load time.
+           If the user toggles the site theme after Disqus has loaded, defer
+           the reset until the comments container is near the viewport so
+           offscreen comments do not reload during the theme switch. */
+        const root = d.documentElement;
+        let prevDark = root.dataset.theme === 'dark';
+        let resetTimer;
+        let resetObserver;
+        let pendingThemeReset = false;
+
+        const resetDisqusForTheme = () => {
+            if (!loaded || !w.DISQUS || typeof w.DISQUS.reset !== 'function') return;
+            /* Debounce rapid toggles and let any view-transition settle first. */
+            clearTimeout(resetTimer);
+            resetTimer = setTimeout(() => {
+                try {
+                    w.DISQUS.reset({ reload: true, config: w.disqus_config });
+                } catch (_) { /* swallow — Disqus may not be ready yet */ }
+            }, 200);
+        };
+
+        const commentsNearViewport = () => {
+            const rect = disqus_thread.getBoundingClientRect();
+            return rect.top < w.innerHeight + 200 && rect.bottom > -200;
+        };
+
+        const resetWhenCommentsAreNear = () => {
+            pendingThemeReset = true;
+            if (commentsNearViewport() || !('IntersectionObserver' in w)) {
+                pendingThemeReset = false;
+                resetDisqusForTheme();
+                return;
+            }
+            if (resetObserver) return;
+            resetObserver = new IntersectionObserver((entries) => {
+                if (!pendingThemeReset || !entries[0].isIntersecting) return;
+                pendingThemeReset = false;
+                resetObserver.disconnect();
+                resetObserver = null;
+                resetDisqusForTheme();
+            }, { rootMargin: '200px 0px', threshold: 0 });
+            resetObserver.observe(disqus_thread);
+        };
+
+        const themeObserver = new MutationObserver(() => {
+            const isDark = root.dataset.theme === 'dark';
+            /* Ignore unrelated mutations (e.g. transient `theme-transition`). */
+            if (isDark === prevDark) return;
+            prevDark = isDark;
+            if (!loaded) return;
+            resetWhenCommentsAreNear();
+        });
+        themeObserver.observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>

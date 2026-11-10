@@ -1,0 +1,149 @@
+<!doctype html>
+{% from "_macro/ui.njk" import svg_filters, feature_var, feature_i18n with context %}
+{% set site_config = theme.site or {} %}
+{% set toc_config = theme.toc or {} %}
+{% set search_config = theme.search or {} %}
+{% set dark_mode_config = theme.dark_mode or {} %}
+{% set progress_bar_config = theme.progress_bar or {} %}
+{% set back_to_top_config = theme.back_to_top or {} %}
+{% set menu_items = theme.menu or [] %}
+{% set dark_mode_default_raw = dark_mode_config.default | default("light", true) %}
+{% set dark_mode_default = dark_mode_default_raw if dark_mode_default_raw == "system" or dark_mode_default_raw == "dark" else "light" %}
+{% set dark_mode_toggle = dark_mode_config.toggle != false %}
+{% set search_enabled = search_config.enabled %}
+{% set site_seal_enabled = site_config.seal != false %}
+{% set site_favicon = site_config.favicon if site_config.favicon is defined else "/favicon.svg" %}
+{% set config_lang = config.language[0] if config.language is iterable and config.language is not string else config.language %}
+{% set page_lang = page.lang or page.language or config_lang %}
+{% set needs_code = page_has_code(page, theme) %}
+{% set needs_toc = toc_config.enabled != false and (is_post() or is_page()) and should_render_toc(page, toc_config) %}
+{% set needs_lightgallery = (is_post() or is_page()) and has_images(page) %}
+<html lang="{{ page_lang }}" class="h-full scroll-smooth">
+{% include "_partial/common/head.njk" %}
+
+<body class="h-full fog-bg text-slate-800"{% if needs_lightgallery %} data-shiro-lightgallery="true"{% endif %}>
+    <!-- Font-load preloader: covers the title-font swap until preloader.min.js fades it out.
+         data-shiro-font-text lists the title glyphs to wait for. -->
+    <div id="shiroPreloader" class="shiro-preloader" aria-hidden="true"
+        data-shiro-font-text="{{ config.title | default('白夜書簡', true) }}{{ site_config.seal_text | default('游', true) }}白は、余白の名。">
+        <div class="shiro-preloader-ripple" aria-hidden="true">
+            <span class="shiro-preloader-ring"></span>
+            <span class="shiro-preloader-ring"></span>
+        </div>
+    </div>
+    {% if site_seal_enabled %}
+    {{ svg_filters() }}
+    {% endif %}
+
+    {% set needs_progress_bar = progress_bar_config.enabled != false and is_post() %}
+    {% set needs_back_to_top = back_to_top_config.enabled != false and (is_home() or (is_post() and page_looks_long(page))) %}
+
+    {% if needs_progress_bar %}
+    <div id="progressBar" class="progress-bar" aria-hidden="true"></div>
+    {% endif %}
+    {% if needs_back_to_top %}
+    <div id="backToTopSentinel" class="back-to-top-sentinel" aria-hidden="true"></div>
+    {% endif %}
+
+    <div class="min-h-full px-4 pt-14 pb-6 md:pb-5">
+
+        <!-- Paper Card -->
+        <div
+            class="paper relative mx-auto w-full max-w-4xl rounded-xl px-5 sm:px-8 md:px-12 lg:px-14 pt-10 pb-6 md:pt-12 md:pb-8">
+
+            {% include "_partial/common/header.njk" %}
+
+            <!-- Main Content -->
+            <main class="section-divider">
+                {% block content %}{% endblock %}
+            </main>
+
+            {% include "_partial/common/footer.njk" %}
+        </div>
+
+        <!-- Note Text — decorative aside, not part of main content or footer -->
+        <aside class="mt-4 text-center" aria-hidden="true" role="presentation">
+            <p class="site-note font-title text-xs sm:text-sm text-slate-400/70 tracking-note font-light select-none" lang="ja">
+                人呐，不是有了意义才行动，而是在行动的过程中找到意义。
+            </p>
+        </aside>
+    </div>
+
+    {% if needs_back_to_top %}
+    <button id="backToTop" type="button" class="back-to-top" data-visible="false" aria-label="{{ __('common.back_to_top') }}">
+        <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+        </svg>
+    </button>
+    {% endif %}
+
+    <!-- Scripts -->
+    {% set needs_mobile_menu = menu_items.length %}
+    {% if search_enabled or needs_lightgallery or needs_code or needs_mobile_menu %}
+    <script>
+        {% if search_enabled or needs_lightgallery or needs_code %}
+        window.__i18n = window.__i18n || {};
+        {% endif %}
+        {% if search_enabled %}
+        {{ feature_i18n('search', {
+            button: __('search.button'),
+            close: __('search.close'),
+            loading: __('search.loading'),
+            many_results: __('search.many_results'),
+            one_result: __('search.one_result'),
+            placeholder: __('search.placeholder'),
+            unavailable: __('search.unavailable'),
+            zero_results: __('search.zero_results')
+        }) }}
+        {{ feature_var('__pagefindBase', url_for('/pagefind/')) }}
+        {{ feature_var('__searchCss', versioned_url('css/search.min.css')) }}
+        {{ feature_var('__searchScript', versioned_url('js/search.min.js')) }}
+        {% endif %}
+        {% if needs_lightgallery %}
+        {{ feature_i18n('gallery', {
+            view_image: __('gallery.view_image'),
+            visit_source: __('gallery.visit_source')
+        }) }}
+        {{ feature_var('__lightgalleryThemeCss', versioned_url('css/lightgallery.min.css')) }}
+        {{ feature_var('__lightgalleryScript', versioned_url('js/lightgallery.min.js')) }}
+        {% endif %}
+        {% if needs_code %}
+        {{ feature_i18n('clipboard', {
+            copied: __('clipboard.copied'),
+            copy: __('clipboard.copy')
+        }) }}
+        {{ feature_var('__clipboardScript', versioned_url('js/clipboard.min.js')) }}
+        {% endif %}
+        {% if needs_mobile_menu %}
+        {{ feature_var('__mobileMenuScript', versioned_url('js/mobile-menu.min.js')) }}
+        {% endif %}
+    </script>
+    {% endif %}
+    {% if search_enabled %}
+    <script defer src="{{ versioned_url('js/search-bootstrap.min.js') }}"></script>
+    {% endif %}
+    {% if needs_lightgallery %}
+    <script defer src="{{ versioned_url('js/lightgallery-bootstrap.min.js') }}"></script>
+    {% endif %}
+    {% if needs_code %}
+    <script defer src="{{ versioned_url('js/clipboard-bootstrap.min.js') }}"></script>
+    {% endif %}
+    {% if needs_toc %}
+    <script defer src="{{ versioned_url('js/toc.min.js') }}"></script>
+    {% endif %}
+    {% if needs_progress_bar %}
+    <script defer src="{{ versioned_url('js/progress.min.js') }}"></script>
+    {% endif %}
+    {% if needs_back_to_top %}
+    <script defer src="{{ versioned_url('js/back-to-top.min.js') }}"></script>
+    {% endif %}
+    {% if dark_mode_toggle %}
+    <script defer src="{{ versioned_url('js/theme-toggle.min.js') }}"></script>
+    {% endif %}
+    {% if needs_mobile_menu %}
+    <script defer src="{{ versioned_url('js/mobile-menu-bootstrap.min.js') }}"></script>
+    {% endif %}
+
+    {% include "_partial/analytics/google.njk" %}
+</body>
+</html>

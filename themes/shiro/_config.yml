@@ -1,0 +1,142 @@
+# Site
+site:
+  favicon: /favicon.svg
+  # Year the site was created; displayed in footer as "since–current" (omit to show current year only)
+  # since: 2020
+  # Whether to display the seal (stamp) in the header
+  seal: true
+  # Text displayed inside the seal stamp and favicon (single character recommended)
+  seal_text: "游"
+  rss:
+    enabled: false
+    path: /atom.xml
+
+# Navigation menu
+
+menu:
+  - name: 首页
+    url: /
+  - name: 归档
+    url: /archives
+  - name: 分类
+    url: /categories
+  - name: 标签
+    url: /tags
+  - name: 关于
+    url: /about
+
+#  - name: About
+#    url: /about
+#  - name: GitHub
+#    url: https://github.com/Acris/hexo-theme-shiro
+#    # Open in new tab
+#    target: _blank
+
+# Excerpt settings
+excerpt:
+  # If post has <!-- more -->, use it.
+  # For better readability, prefer adding <!-- more --> manually in posts.
+  # Otherwise fallback to auto-truncated excerpt.
+  fallback:
+    enabled: true
+    # Number of characters to truncate (not words)
+    length: 200
+
+# Table of Contents (TOC)
+toc:
+  enabled: true
+  # Max heading depth: 2 = h2, 3 = h2+h3, 4 = h2+h3+h4
+  depth: 3
+  # Minimum number of headings to show TOC
+  min_headings: 3
+
+# Dark mode
+# Default theme: system (follow OS), light, or dark
+# When default is "system", the toggle cycles through 3 states: system → light → dark.
+# When default is "light" or "dark", the toggle switches between light ↔ dark only (no system option).
+# When toggle is false, the theme toggle button is hidden and the default theme is always used.
+# If toggle is disabled, it is recommended to set default to "light" to match the theme's design.
+dark_mode:
+  default: light
+  toggle: true
+
+# Reading progress bar (thin vermilion bar at top of page)
+progress_bar:
+  enabled: true
+
+# Back to top button
+back_to_top:
+  enabled: true
+
+# Comment systems
+# Supported providers: disqus, giscus
+# Set enabled to true and choose a provider.
+#
+# Disqus: register at https://disqus.com/admin/create/ and note the
+# unique shortname assigned to your site (e.g., "my-blog-name").
+#
+# giscus: a comment system powered by GitHub Discussions.
+# Go to https://giscus.app/ to generate your configuration values.
+# Make sure your repository is public and has Discussions enabled.
+comments:
+  enabled: false
+  # disqus or giscus
+  provider: giscus
+  disqus:
+    shortname: ""
+  giscus:
+    # giscus script URL (self-hosted or default)
+    src: https://giscus.app/client.js
+    # GitHub repo (e.g., "owner/repo")
+    repo: ""
+    # Repository ID from https://giscus.app
+    repo_id: ""
+    # Discussion category name (e.g., "Announcements")
+    category: ""
+    # Category ID from https://giscus.app
+    category_id: ""
+    # pathname, url, title, og:title, specific, number
+    mapping: pathname
+    # Required when mapping is "specific" or "number"
+    term: ""
+    # 1 to enable strict title matching
+    strict: 0
+    # 1 to enable reactions
+    reactions_enabled: 1
+    # 1 to emit discussion metadata
+    emit_metadata: 0
+    # bottom or top
+    input_position: bottom
+    # Language code (e.g., en, zh-CN, ja)
+    lang: en
+    # giscus theme CSS URL or built-in theme name (e.g., light, dark, preferred_color_scheme)
+    # Default uses the bundled Shiro custom theme via jsDelivr CDN.
+    theme: https://cdn.jsdelivr.net/npm/hexo-theme-shiro@1.5.2/source/css/giscus.min.css
+    # true to enable lazy loading (adds data-loading="lazy")
+    lazy_loading: false
+
+# Analytics
+# Currently supports Google Analytics 4 (GA4).
+# To get a GA4 Measurement ID, go to https://analytics.google.com/,
+# create a property, then find the ID (format: G-XXXXXXXXXX) under
+# Admin > Data Streams > Web > Measurement ID.
+analytics:
+  google:
+    enabled: false
+    # e.g., "G-XXXXXXXXXX"
+    id: ""
+
+# Site search powered by Pagefind (https://pagefind.app/)
+# Index is built automatically after `hexo generate` and written to `public/pagefind/`.
+# Strongly recommended: install Pagefind as a site-level devDependency:
+# `npm install pagefind --save-dev`
+# Without it the hook falls back to `npx --yes pagefind`, which may download during
+# `hexo generate` and noticeably slow builds or fail in offline CI.
+search:
+  enabled: false
+  # Pagefind document root selector. Defaults to body to tolerate generated pages
+  # without an outer <html> element; set to html to keep Pagefind's default.
+  root_selector: body
+  # Force language for tokenization (auto-detected from <html lang> by default).
+  # Override only if Pagefind fails to detect your site language correctly.
+  # force_language: zh

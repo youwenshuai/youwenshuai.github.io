@@ -1,0 +1,42 @@
+{# Shared article structure for post.njk and page.njk.
+   Optional variables set before include:
+     - article_show_meta: whether to show date/category meta (default: true)
+     - article_extra: extra HTML to insert after tags (e.g. post navigation) #}
+{% from "_macro/ui.njk" import meta, render_tag with context %}
+{% set article_toc_config = toc_config if toc_config is defined else (theme.toc or {}) %}
+{% set article_toc = build_toc(page, article_toc_config) %}
+{% set show_article_meta = article_show_meta if article_show_meta is defined else true %}
+{% set article_extra_html = article_extra if article_extra is defined else "" %}
+
+<article class="py-2">
+    <header class="text-center mb-8">
+        {# data-pagefind-body keeps the title searchable; data-pagefind-meta sets the result title. #}
+        <h1 class="page-title mb-4" data-pagefind-body data-pagefind-meta="title">
+            {{ page.title }}
+        </h1>
+        {% if show_article_meta %}
+        {{ meta(page, true, "mb-4") }}
+        {% endif %}
+    </header>
+
+    {% if article_toc.shouldRender %}
+    {% include "_partial/components/toc.njk" %}
+    {% endif %}
+
+    <div class="prose-shiro" data-pagefind-body>
+        {{ article_toc.content | safe }}
+    </div>
+
+    <!-- Tags -->
+    {% if page.tags and page.tags.length > 0 %}
+    <div class="mt-8 flex flex-wrap gap-2">
+        {% for tag in page.tags.toArray() %}
+        {{ render_tag(tag, false) }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {{ article_extra_html | safe }}
+
+    {% include "_partial/comments/index.njk" %}
+</article>

@@ -1,0 +1,193 @@
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Hexo {{ hexo.version }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {% if needs_lightgallery %}
+    <!-- Warm the CDN connection so the lightbox assets download instantly on first interaction. -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <!-- Prefetch the LightGallery JS/CSS and same-origin wrapper at lowest priority so the lightbox
+         opens instantly on the first tap, even on touch devices with no hover to warm on.
+         crossorigin matches the SRI requests; keep lightgallery@<version> in sync with lightgallery.js. -->
+    <link rel="prefetch" as="script" href="https://cdn.jsdelivr.net/npm/lightgallery@2.9.0/lightgallery.min.js" crossorigin />
+    <link rel="prefetch" as="style" href="https://cdn.jsdelivr.net/npm/lightgallery@2.9.0/css/lightgallery.min.css" crossorigin />
+    <link rel="prefetch" as="script" href="{{ versioned_url('js/lightgallery.min.js') }}" />
+    {% endif %}
+    {% if search_enabled %}
+    <!-- Prefetch the search script/CSS and Pagefind UI assets at lowest priority so the first
+         click (or "/" shortcut) opens the search box instantly, even on touch devices with no hover. -->
+    <link rel="prefetch" as="script" href="{{ versioned_url('js/search.min.js') }}" />
+    <link rel="prefetch" as="style" href="{{ versioned_url('css/search.min.css') }}" />
+    <link rel="prefetch" as="script" href="{{ url_for('/pagefind/pagefind-ui.js') }}" />
+    <link rel="prefetch" as="style" href="{{ url_for('/pagefind/pagefind-ui.css') }}" />
+    {% endif %}
+    {% set google_fonts = google_font_urls(page, config, theme, needs_code) %}
+    {% if google_fonts.length %}
+    <!-- Preload the critical (title + body) font stylesheet so it is fetched at highest
+         priority ahead of the blocking theme script, shrinking the swap window.
+         Kept as a preload (not a stylesheet) here so it does not delay the theme script. -->
+    <link rel="preload" as="style" href="{{ google_fonts[0] | safe }}" />
+    {% endif %}
+    <!-- FOUC prevention: resolve theme before first paint.
+         Flow: read default → build valid states → read localStorage (try/catch for Safari private mode)
+         → validate saved state → set data-theme-state on <html> → resolve effective dark/light
+         → set data-theme and colorScheme. In "system" mode it also keeps following OS
+         light/dark changes live, so the page updates without a reload even when the toggle is hidden.
+         data-cfasync="false" stops Cloudflare Rocket Loader from deferring this past first paint
+         (it must run synchronously for both theme resolution and the preloader skip). -->
+    <script data-cfasync="false">
+    ;(() => {
+        const defaultTheme = {{ js_value(dark_mode_default) | safe }};
+        window.__themeDefault = defaultTheme;
+        const states = defaultTheme === 'system' ? ['system', 'light', 'dark'] : ['light', 'dark'];
+        let saved;
+        try { saved = localStorage.getItem('theme'); } catch (_) {}
+        const state = saved && states.includes(saved) ? saved : defaultTheme;
+        const html = document.documentElement;
+        html.setAttribute('data-theme-state', state);
+        const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const isDark = state === 'dark' || (state !== 'light' && darkQuery.matches);
+        html.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        html.style.colorScheme = isDark ? 'dark' : 'light';
+        if (defaultTheme === 'system') {
+            // Keep following OS light/dark changes while in "system" mode even when the
+            // toggle (and theme-toggle.js) is disabled, so the page updates without a reload.
+            const followSystem = () => {
+                if (html.getAttribute('data-theme-state') !== 'system') return;
+                html.setAttribute('data-theme', darkQuery.matches ? 'dark' : 'light');
+                html.style.colorScheme = darkQuery.matches ? 'dark' : 'light';
+            };
+            if (darkQuery.addEventListener) darkQuery.addEventListener('change', followSystem);
+            else if (darkQuery.addListener) darkQuery.addListener(followSystem);
+        }
+        try {
+            if (sessionStorage.getItem('shiro:title-font-ready') === '1') {
+                html.classList.add('shiro-preloader-done');
+            }
+        } catch (_) {}
+    })();
+    </script>
+    {% for google_fonts_url in google_fonts %}
+    {% if loop.first %}
+    <link rel="stylesheet" href="{{ google_fonts_url | safe }}" />
+    {% else %}
+    <!-- Non-critical (display=optional) font stylesheets load async so they never block first
+         paint or compete with the critical title+body stylesheet above. -->
+    <link rel="preload" as="style" href="{{ google_fonts_url | safe }}" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="{{ google_fonts_url | safe }}" /></noscript>
+    {% endif %}
+    {% endfor %}
+    {# --- SEO Variables --- #}
+    {% set page_title = build_page_title(page, config) %}
+    {% set clean_desc = clean_description(page, config) %}
+    {% set og_img = og_image(page) %}
+    {% set page_author = page.author or config.author %}
+    {% set keywords = page.keywords %}
+    {% if not keywords and page.tags and page.tags.length %}
+        {% set keywords %}{% for tag in page.tags.toArray() %}{{ tag.name }}{% if not loop.last %}, {% endif %}{% endfor %}{% endset %}
+    {% endif %}
+    {% set keywords = keywords or config.keywords %}
+    <title>{{ page_title }}</title>
+
+    <!-- SEO Meta -->
+    {% if clean_desc %}
+    <meta name="description" content="{{ clean_desc }}" />
+    {% endif %}
+    {% if page_author %}
+    <meta name="author" content="{{ page_author }}" />
+    {% endif %}
+    {% if keywords %}
+    <meta name="keywords" content="{{ keywords }}" />
+    {% endif %}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ page_title }}" />
+    {% if clean_desc %}
+    <meta property="og:description" content="{{ clean_desc }}" />
+    {% endif %}
+    <meta property="og:url" content="{{ url }}" />
+    <meta property="og:type" content="{% if is_post() %}article{% else %}website{% endif %}" />
+    <meta property="og:site_name" content="{{ config.title }}" />
+    {% set og_locale_value = og_locale(page, config) %}
+    {% if og_locale_value %}
+    <meta property="og:locale" content="{{ og_locale_value }}" />
+    {% endif %}
+    {% if og_img %}
+    <meta property="og:image" content="{{ og_img }}" />
+    <meta property="og:image:alt" content="{{ page_title }}" />
+    {% set og_img_size = og_image_size(page) %}
+    {% if og_img_size %}
+    <meta property="og:image:width" content="{{ og_img_size.width }}" />
+    <meta property="og:image:height" content="{{ og_img_size.height }}" />
+    {% endif %}
+    {% endif %}
+    {% if is_post() %}
+    {% if page.date %}
+    <meta property="article:published_time" content="{{ date_xml(page.date) }}" />
+    {% endif %}
+    {% if page.updated %}
+    <meta property="article:modified_time" content="{{ date_xml(page.updated) }}" />
+    {% endif %}
+    {% if page_author %}
+    <meta property="article:author" content="{{ page_author }}" />
+    {% endif %}
+    {% if page.tags and page.tags.length %}
+    {% for tag in page.tags.toArray() %}
+    <meta property="article:tag" content="{{ tag.name }}" />
+    {% endfor %}
+    {% endif %}
+    {% endif %}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="{% if og_img %}summary_large_image{% else %}summary{% endif %}" />
+    <meta name="twitter:title" content="{{ page_title }}" />
+    {% if clean_desc %}
+    <meta name="twitter:description" content="{{ clean_desc }}" />
+    {% endif %}
+    {% if og_img %}
+    <meta name="twitter:image" content="{{ og_img }}" />
+    {% endif %}
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ url }}" />
+
+    <!-- Pagination rel hints for paginated list pages (home / archive / tag / category) -->
+    {% if page.total and page.total > 1 %}
+    {% if page.prev %}
+    <link rel="prev" href="{{ full_url_for(page.prev_link or '/') }}" />
+    {% endif %}
+    {% if page.next %}
+    <link rel="next" href="{{ full_url_for(page.next_link or '/') }}" />
+    {% endif %}
+    {% endif %}
+
+    <!-- Structured data (JSON-LD) -->
+    {% set structured_data_nodes = structured_data(page, config) %}
+    {% if structured_data_nodes.length %}
+    <script type="application/ld+json">{{ js_value(structured_data_nodes) | safe }}</script>
+    {% endif %}
+
+    <!-- Favicon -->
+    {% if site_favicon %}
+    <link rel="icon" href="{{ safe_resource_url_for(site_favicon, '/favicon.svg', true) }}" />
+    {% endif %}
+
+    <!-- RSS -->
+    {% set rss_config = site_config.rss or {} %}
+    {% if rss_config.enabled %}
+    <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ safe_resource_url_for(rss_config.path | default('/atom.xml'), '/atom.xml') }}" />
+    {% endif %}
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ versioned_url('css/style.min.css') }}">
+    {% if needs_code %}
+    <link rel="stylesheet" href="{{ versioned_url('css/code.min.css') }}">
+    {% endif %}
+    {% if needs_toc %}
+    <link rel="stylesheet" href="{{ versioned_url('css/toc.min.css') }}">
+    {% endif %}
+    <!-- Preloader script in <head> (defer) so its fetch starts during head parse;
+         data-cfasync="false" stops Cloudflare Rocket Loader from deferring it past first paint. -->
+    <script defer data-cfasync="false" src="{{ versioned_url('js/preloader.min.js') }}"></script>
+</head>
