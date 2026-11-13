@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
     String token, owner, repo, branch, dir;
 
     void loadCfg() {
-        token = prefs.getString("token", "");
+        token = Crypto.getToken(prefs);
         owner = prefs.getString("owner", "youwenshuai");
         repo = prefs.getString("repo", "youwenshuai.github.io");
         branch = prefs.getString("branch", "hexo-source");
@@ -64,6 +64,10 @@ public class MainActivity extends Activity {
         title.setTextSize(22);
         bar.addView(title, new LinearLayout.LayoutParams(0,
                 ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+        Button refresh = new Button(this);
+        refresh.setText("刷新");
+        refresh.setOnClickListener(v -> loadPosts());
+        bar.addView(refresh);
         Button settings = new Button(this);
         settings.setText("设置");
         settings.setOnClickListener(v -> showSettings());
@@ -72,6 +76,7 @@ public class MainActivity extends Activity {
 
         status = new TextView(this);
         status.setPadding(0, (int) (8 * dp), 0, 0);
+        status.setTextSize(13);
         root.addView(status);
 
         Button newBtn = new Button(this);
@@ -137,6 +142,7 @@ public class MainActivity extends Activity {
                     adapter.notifyDataSetChanged();
                     status.setText("共 " + names.size() + " 篇文章（长按可删除）");
                     progress.setVisibility(View.GONE);
+                    checkDeployStatus();
                 });
             } catch (Exception e) {
                 runOnUiThread(() -> {
@@ -144,6 +150,33 @@ public class MainActivity extends Activity {
                     progress.setVisibility(View.GONE);
                     Toast.makeText(this, "检查网络或设置里的 Token", Toast.LENGTH_LONG).show();
                 });
+            }
+        }).start();
+    }
+
+    /** 查询最新一次云端构建（Actions）状态，附加在状态栏后面 */
+    void checkDeployStatus() {
+        final String base = status.getText().toString();
+        new Thread(() -> {
+            try {
+                String url = "https://api.github.com/repos/" + owner + "/" + repo
+                        + "/actions/runs?per_page=1";
+                JSONObject obj = new JSONObject(GitHubApi.request("GET", url, token, null));
+                JSONObject r = obj.getJSONArray("workflow_runs").getJSONObject(0);
+                String st = r.optString("status", "");
+                String cc = r.optString("conclusion", "");
+                String txt;
+                if ("in_progress".equals(st) || "queued".equals(st) || "pending".equals(st)) {
+                    txt = "｜ ☁️ 云端构建中…";
+                } else if ("success".equals(cc)) {
+                    txt = "｜ ✅ 已发布";
+                } else if ("failure".equals(cc)) {
+                    txt = "｜ ❌ 构建失败";
+                } else {
+                    txt = "｜ 云端: " + (cc.isEmpty() ? st : cc);
+                }
+                runOnUiThread(() -> status.setText(base + txt));
+            } catch (Exception ignored) {
             }
         }).start();
     }
@@ -168,6 +201,12 @@ public class MainActivity extends Activity {
                 String url = "https://api.github.com/repos/" + owner + "/" + repo
                         + "/contents/" + GitHubApi.encPath(dir + "/" + name);
                 GitHubApi.request("DELETE", url, token, body);
+                // 本地草稿也一并清理
+                try {
+                    new java.io.File(getFilesDir(), "drafts/" + EditorActivity.sanitize(name) + ".txt")
+                            .delete();
+                } catch (Exception ignored) {
+                }
                 runOnUiThread(() -> {
                     Toast.makeText(this, "已删除，云端将自动重新发布", Toast.LENGTH_SHORT).show();
                     loadPosts();
@@ -187,13 +226,16 @@ public class MainActivity extends Activity {
         box.setPadding(pad, pad, pad, 0);
 
         TextView hint = new TextView(this);
-        hint.setText("需要 GitHub Token（Fine-grained，勾选该仓库的 Contents 读写权限）");
+        hint.setText("需要 GitHub Token（Fine-grained，勾选该仓库的 Contents 读写权限）。Token 将加密保存在本机。");
         hint.setTextSize(12);
         box.addView(hint);
 
         EditText eToken = new EditText(this);
         eToken.setHint("GitHub Token");
-        eToken.setText(prefs.getString("token", ""));
+        eToken.setInputType(android.text.InputType.TYPE_CLASS_TEXT
+                | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        String cur = Crypto.getToken(prefs);
+        if (!cur.isEmpty()) eToken.setText(cur);
         box.addView(eToken);
 
         EditText eOwner = new EditText(this);
@@ -220,8 +262,8 @@ public class MainActivity extends Activity {
                 .setTitle("GitHub 设置")
                 .setView(box)
                 .setPositiveButton("保存", (d, w) -> {
+                    Crypto.saveToken(prefs, eToken.getText().toString().trim());
                     prefs.edit()
-                            .putString("token", eToken.getText().toString().trim())
                             .putString("owner", eOwner.getText().toString().trim())
                             .putString("repo", eRepo.getText().toString().trim())
                             .putString("branch", eBranch.getText().toString().trim())

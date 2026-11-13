@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Typeface;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +28,7 @@ import android.widget.Toast;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -47,6 +51,16 @@ public class EditorActivity extends Activity {
     Uri pendingCameraUri;
     int pendingInsertPos = -1;
 
+    // 草稿相关
+    File draftsDir;
+    String lastDraftFile;
+    final Handler draftHandler = new Handler();
+    Runnable pendingDraftSave;
+
+    static String sanitize(String s) {
+        return s.replaceAll("[\\\\/:*?\"<>|\\s]", "-");
+    }
+
     @Override
     protected void onCreate(Bundle b) {
         super.onCreate(b);
@@ -55,6 +69,8 @@ public class EditorActivity extends Activity {
         sha = getIntent().getStringExtra("sha");
         isNew = (sha == null);
         loadCfg();
+        draftsDir = new File(getFilesDir(), "drafts");
+        if (!draftsDir.exists()) draftsDir.mkdirs();
 
         float dp = getResources().getDisplayMetrics().density;
         int pad = (int) (16 * dp);
@@ -87,6 +103,17 @@ public class EditorActivity extends Activity {
             fileField.setSingleLine(true);
             String today = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
             fileField.setText(today + "-untitled.md");
+            fileField.addTextChangedListener(new TextWatcher() {
+                public void beforeTextChanged(CharSequence s, int a, int c2, int d) {}
+                public void onTextChanged(CharSequence s, int a, int b2, int c2) {}
+                public void afterTextChanged(Editable s) {
+                    // 文件名变了：迁移草稿文件
+                    if (lastDraftFile != null && !lastDraftFile.equals(draftFileName())) {
+                        new File(draftsDir, lastDraftFile).delete();
+                    }
+                    saveDraftDebounced();
+                }
+            });
             root.addView(fileField);
         }
 
@@ -97,6 +124,14 @@ public class EditorActivity extends Activity {
         bodyField.setTypeface(Typeface.MONOSPACE);
         bodyField.setLineSpacing((int) (5 * dp), 1.15f);
         bodyField.setMinLines(6);
+        bodyField.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int a, int c2, int d) {}
+            public void onTextChanged(CharSequence s, int a, int b2, int c2) {}
+            public void afterTextChanged(Editable s) {
+                saveDraftDebounced();
+                saveBtn.setText("保存并上传");
+            }
+        });
         root.addView(bodyField, new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
 
@@ -106,6 +141,30 @@ public class EditorActivity extends Activity {
         webView.setVisibility(View.GONE);
         root.addView(webView, new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
+
+        // Markdown 工具栏
+        LinearLayout md = new LinearLayout(this);
+        md.setOrientation(LinearLayout.HORIZONTAL);
+        String[] labels = {"B", "I", "H2", "引用", "代码", "链接"};
+        View.OnClickListener[] actions = {
+                v -> wrap("**", "**"),
+                v -> wrap("*", "*"),
+                v -> insertLinePrefix("## "),
+                v -> insertLinePrefix("> "),
+                v -> wrap("`", "`"),
+                v -> wrap("[", "](https://)")
+        };
+        for (int i = 0; i < labels.length; i++) {
+            Button btn = new Button(this);
+            btn.setText(labels[i]);
+            btn.setTextSize(12);
+            btn.setPadding((int) (8 * dp), 0, (int) (8 * dp), 0);
+            btn.setMinWidth(0);
+            btn.setOnClickListener(actions[i]);
+            md.addView(btn, new LinearLayout.LayoutParams(0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT, 1f));
+        }
+        root.addView(md);
 
         // 工具行：插图片
         LinearLayout tools = new LinearLayout(this);
@@ -124,23 +183,106 @@ public class EditorActivity extends Activity {
 
         setContentView(root);
 
-        if (!isNew) fetchContent();
+        // 恢复草稿 / 拉取原文
+        if (!isNew) {
+            fetchContent();
+        } else {
+            restoreDraft();
+        }
 
+        // 未保存离开提醒
         bodyField.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int a, int c2, int d) {}
             public void onTextChanged(CharSequence s, int a, int b2, int c2) {}
             public void afterTextChanged(Editable s) {
-                saveBtn.setText("保存并上传（草稿仅保存在手机内存中）");
+                dirty = true;
             }
         });
     }
 
+    boolean dirty = false;
+
+    @Override
+    public void onBackPressed() {
+        if (dirty) {
+            // 草稿已自动保存，直接退出是安全的
+            Toast.makeText(this, "草稿已自动保存到本机", Toast.LENGTH_SHORT).show();
+        }
+        super.onBackPressed();
+    }
+
     void loadCfg() {
-        token = prefs.getString("token", "");
+        token = Crypto.getToken(prefs);
         owner = prefs.getString("owner", "youwenshuai");
         repo = prefs.getString("repo", "youwenshuai.github.io");
         branch = prefs.getString("branch", "hexo-source");
         dir = prefs.getString("dir", "source/_posts");
+    }
+
+    // ---------- 草稿 ----------
+
+    String currentFileName() {
+        if (isNew) {
+            String f = fileField.getText().toString().trim();
+            return f.isEmpty() ? "untitled" : f;
+        }
+        return name;
+    }
+
+    String draftFileName() {
+        return sanitize(currentFileName()) + ".txt";
+    }
+
+    /** 延迟 800ms 防抖保存草稿 */
+    void saveDraftDebounced() {
+        if (previewing) return;
+        if (pendingDraftSave != null) draftHandler.removeCallbacks(pendingDraftSave);
+        pendingDraftSave = () -> {
+            try {
+                JSONObject o = new JSONObject();
+                o.put("name", currentFileName());
+                o.put("body", bodyField.getText().toString());
+                File f = new File(draftsDir, draftFileName());
+                lastDraftFile = f.getName();
+                java.io.FileOutputStream fos = new java.io.FileOutputStream(f);
+                fos.write(o.toString().getBytes(StandardCharsets.UTF_8));
+                fos.close();
+            } catch (Exception ignored) {
+            }
+        };
+        draftHandler.postDelayed(pendingDraftSave, 800);
+    }
+
+    /** 读取本地草稿，有则填入正文 */
+    boolean restoreDraft() {
+        try {
+            File f = new File(draftsDir, draftFileName());
+            if (!f.exists()) return false;
+            java.io.FileInputStream fis = new java.io.FileInputStream(f);
+            ByteArrayOutputStream buf = new ByteArrayOutputStream();
+            byte[] t = new byte[8192];
+            int n;
+            while ((n = fis.read(t)) > 0) buf.write(t, 0, n);
+            fis.close();
+            JSONObject o = new JSONObject(new String(buf.toByteArray(), StandardCharsets.UTF_8));
+            String body = o.optString("body", "");
+            if (!body.trim().isEmpty()) {
+                bodyField.setText(body);
+                lastDraftFile = f.getName();
+                dirty = false;
+                status.setText("已恢复本地草稿（尚未上传的版本）");
+                return true;
+            }
+        } catch (Exception ignored) {
+        }
+        return false;
+    }
+
+    void clearDraft() {
+        try {
+            new File(draftsDir, sanitize(currentFileName()) + ".txt").delete();
+        } catch (Exception ignored) {
+        }
     }
 
     // ---------- 预览 ----------
@@ -181,6 +323,37 @@ public class EditorActivity extends Activity {
         }
     }
 
+    // ---------- Markdown 工具栏 ----------
+
+    /** 包裹选中文本；无选中时插入占位对并定位光标 */
+    void wrap(String before, String after) {
+        Editable e = bodyField.getText();
+        int s = bodyField.getSelectionStart();
+        int t = bodyField.getSelectionEnd();
+        int a = Math.min(s, t), b = Math.max(s, t);
+        if (a >= 0 && b > a) {
+            e.insert(b, after);
+            e.insert(a, before);
+            bodyField.setSelection(a + before.length(), b + before.length());
+        } else {
+            e.insert(a, before + after);
+            bodyField.setSelection(a + before.length());
+        }
+        bodyField.requestFocus();
+    }
+
+    /** 在光标所在行行首插入前缀（标题、引用） */
+    void insertLinePrefix(String prefix) {
+        Editable e = bodyField.getText();
+        int pos = bodyField.getSelectionStart();
+        if (pos < 0) pos = 0;
+        int lineStart = pos;
+        while (lineStart > 0 && e.charAt(lineStart - 1) != '\n') lineStart--;
+        e.insert(lineStart, prefix);
+        bodyField.setSelection(pos + prefix.length());
+        bodyField.requestFocus();
+    }
+
     // ---------- 拉取原文 ----------
 
     void fetchContent() {
@@ -196,8 +369,12 @@ public class EditorActivity extends Activity {
                 String text = new String(data, StandardCharsets.UTF_8);
                 sha = obj.getString("sha");
                 runOnUiThread(() -> {
-                    bodyField.setText(text);
-                    status.setText("已加载，可以开始修改");
+                    boolean hasDraft = restoreDraft();
+                    if (!hasDraft) {
+                        bodyField.setText(text);
+                        status.setText("已加载，可以开始修改");
+                    }
+                    dirty = false;
                 });
             } catch (Exception e) {
                 runOnUiThread(() -> status.setText("拉取失败: " + e.getMessage()));
@@ -236,7 +413,7 @@ public class EditorActivity extends Activity {
     }
 
     @Override
-    protected void onActivityResult(int req, int res, android.content.Intent data) {
+    protected void onActivityResult(int req, int res, Intent data) {
         super.onActivityResult(req, res, data);
         if (res != RESULT_OK) return;
         Uri uri = null;
@@ -251,11 +428,10 @@ public class EditorActivity extends Activity {
 
     /** 当前文章对应的图片目录名（不含扩展名的文件名） */
     String imageSlug() {
-        String fname = isNew ? fileField.getText().toString().trim() : name;
+        String fname = currentFileName();
         if (fname.endsWith(".md")) fname = fname.substring(0, fname.length() - 3);
         if (fname.isEmpty()) fname = "mobile";
-        // 去掉非法字符
-        return fname.replaceAll("[\\\\/:*?\"<>|\\s]", "-");
+        return sanitize(fname);
     }
 
     void uploadImage(Uri uri) {
@@ -297,8 +473,19 @@ public class EditorActivity extends Activity {
         }).start();
     }
 
-    /** 读取图片并压缩到最长边 ≤1600px 的 JPEG（质量 85） */
+    /** 读取图片：按 EXIF 方向校正 → 压缩到最长边 ≤1600px 的 JPEG（质量 85） */
     byte[] readCompressed(Uri uri) throws Exception {
+        int orientation = 1;
+        try {
+            InputStream ein = getContentResolver().openInputStream(uri);
+            if (ein != null) {
+                ExifInterface ex = new ExifInterface(ein);
+                orientation = ex.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
+                ein.close();
+            }
+        } catch (Exception ignored) {
+        }
+
         BitmapFactory.Options o = new BitmapFactory.Options();
         o.inJustDecodeBounds = true;
         InputStream in = getContentResolver().openInputStream(uri);
@@ -316,6 +503,22 @@ public class EditorActivity extends Activity {
         Bitmap bmp = BitmapFactory.decodeStream(in, null, o);
         if (in != null) in.close();
         if (bmp == null) throw new Exception("图片解码失败");
+
+        Matrix m = new Matrix();
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                m.postRotate(90);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                m.postRotate(180);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                m.postRotate(270);
+                break;
+        }
+        if (!m.isIdentity()) {
+            bmp = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), m, true);
+        }
 
         ByteArrayOutputStream bo = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 85, bo);
@@ -361,13 +564,15 @@ public class EditorActivity extends Activity {
                 GitHubApi.request("PUT", url, token, body);
                 runOnUiThread(() -> {
                     saveBtn.setEnabled(true);
+                    clearDraft();
+                    dirty = false;
                     Toast.makeText(this, "已上传！云端正在自动发布", Toast.LENGTH_LONG).show();
                     finish();
                 });
             } catch (Exception e) {
                 runOnUiThread(() -> {
                     saveBtn.setEnabled(true);
-                    status.setText("上传失败: " + e.getMessage());
+                    status.setText("上传失败: " + e.getMessage() + "（草稿已保存在本机，可稍后重试）");
                 });
             }
         }).start();
