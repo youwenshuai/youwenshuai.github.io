@@ -64,7 +64,7 @@ prismjs:
 index_generator:
   path: ''
   per_page: 4
-  order_by: date
+  order_by: -date
 # 目录（TOC）
 toc:
   enabled: true
@@ -112,7 +112,7 @@ meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 ## updated_option supports 'mtime', 'date', 'empty'
-updated_option: 'mtime'
+updated_option: 'date'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
