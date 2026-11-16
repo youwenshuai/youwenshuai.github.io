@@ -128,7 +128,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: shiro
+theme: butterfly
 # 阅读进度条（页面顶部的朱红色细条）
 progress_bar:
   enabled: true

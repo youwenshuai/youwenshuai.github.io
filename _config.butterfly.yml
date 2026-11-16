@@ -1,0 +1,89 @@
+# Butterfly 主题配置（覆盖主题默认值）
+# 文档：https://butterfly.js.org/
+
+# ---- 导航菜单 ----
+menu:
+  首页: / || fas fa-home
+  归档: /archives/ || fas fa-box-archive
+  标签: /tags/ || fas fa-tags
+  分类: /categories/ || fas fa-folder-open
+
+nav:
+  logo:
+  display_title: true
+  fixed: false
+
+# ---- 首页与文章页横幅（用自己的照片，加载快且稳定）----
+index_img: /images/924753321df49e461ecc74ba2f60d702_compress.jpg
+default_top_img: /images/924753321df49e461ecc74ba2f60d702_compress.jpg
+
+# ---- 首页文章卡片 ----
+index_post_content:
+  method: 2
+  length: 120
+
+# ---- 侧边栏（手机端自动折叠到底部）----
+aside:
+  enable: true
+  hide_on_mobile: false
+  display:
+    archive: true
+    tag: true
+    category: true
+  card_author:
+    enable: true
+    description: 无所屌谓 天下兴亡多少事，悠悠，不尽长江滚滚流
+
+# ---- 夜间模式（跟随系统自动切换）----
+darkmode:
+  enable: true
+  button: true
+  autoChangeMode: true
+  start: '20'
+  end: '7'
+
+# ---- 阅读体验 ----
+beautify:
+  enable: true
+  field: site
+  title-prefix-icon: '\f06c'
+  title-prefix-icon-color: '#49b1f5'
+
+# ---- 文章 ----
+post_meta:
+  page: true
+  date_type: created
+  date_format: YYYY-MM-DD
+  categories: true
+  tags: false
+
+toc:
+  enable: true
+  number: false
+  expand_all: false
+
+# ---- 页脚 ----
+footer:
+  owner:
+    enable: true
+    since: 2026
+  custom_text:
+  copyright: true
+
+# ---- 代码块 ----
+highlight_theme: light
+code_font:
+  font_size: 14px
+
+# ---- 图片灯箱（手机上点图放大看）----
+lightbox:
+  enable: true
+  fancybox_css: https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.2.0/dist/fancybox/fancybox.min.css
+  fancybox_js: https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.2.0/dist/fancybox/fancybox.umd.js
+
+# ---- 图片懒加载（手机流量友好）----
+lazyload:
+  enable: true
+  field: site
+  placeholder: /img/loading.gif
+  blur: true

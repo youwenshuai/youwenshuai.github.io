@@ -7,5 +7,10 @@ node_modules/
 # mobile app
 mobile-app/build/
 mobile-app/*.apk
+mobile-app/*.idsig
 mobile-app/release.jks
 .workbuddy/
+
+# 本地验证构建产物
+.build-out/
+_multiconfig.yml
